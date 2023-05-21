@@ -1,0 +1,1048 @@
+SQL> 
+SQL> REM DATE FUNCTIONS : SYSDATE CURRENT_DATE ADD_MONTHS MONTHS_BETWEEN LAST_DAY NEXT_DAY TRUNC ROUND
+SQL> 
+SQL> REM SYSDATE : SERVER DATE AND TIME INFO.
+SQL> 
+SQL> REM CURRENT_DATE : CURRENT/CLIENT/LOCAL MACHINE'S DATE AND TIME
+SQL> 
+SQL> SELECT SYSDATE , CURRENT_DATE FROM DUAL;
+
+SYSDATE             CURRENT_DATE                                                                                                                                                                        
+------------------- -------------------                                                                                                                                                                 
+10-JAN-22 MONDAY    10-JAN-22 MONDAY                                                                                                                                                                    
+
+SQL> CONN SCOTT/TIGER
+Connected.
+SQL> 
+SQL> SELECT SYSDATE , CURRENT_DATE FROM DUAL;
+
+SYSDATE   CURRENT_D                                                                                                                                                                                     
+--------- ---------                                                                                                                                                                                     
+10-JAN-22 10-JAN-22                                                                                                                                                                                     
+
+SQL> REM DEFAULT DATE FORMAT : DD-MON-RR
+SQL> 
+SQL> REM WE CAN CHANGE DATE FORMAT USING ALTER SESSION COMMAND
+SQL> 
+SQL> ALTER SESSION SET NLS_DATE_FORMAT = 'DD-MONTH-RRRR HH24:MI.SS';
+
+Session altered.
+
+SQL> 
+SQL> SELECT SYSDATE , CURRENT_DATE FROM DUAL;
+
+SYSDATE                    CURRENT_DATE                                                                                                                                                                 
+-------------------------- --------------------------                                                                                                                                                   
+10-JANUARY  -2022 19:24.01 10-JANUARY  -2022 19:24.01                                                                                                                                                   
+
+SQL> ALTER SESSION SET NLS_DATE_FORMAT = 'DD-MONTH-RRRR HH:MI.SS AM';
+
+Session altered.
+
+SQL> 
+SQL> SELECT SYSDATE , CURRENT_DATE FROM DUAL;
+
+SYSDATE                       CURRENT_DATE                                                                                                                                                              
+----------------------------- -----------------------------                                                                                                                                             
+10-JANUARY  -2022 07:24.17 PM 10-JANUARY  -2022 07:24.17 PM                                                                                                                                             
+
+SQL> REM DATE HAS 7 PARTS
+SQL> 
+SQL> REM DATE HAS 7 PARTS : CENTURY YEAR MONTH DATE/DAY HOUR MINUTE SECOND
+SQL> 
+SQL> REM DATE HAS 7 PARTS : 20      22   1     10       19   24     17
+SQL> 
+SQL> REM DATE ALLOWS US TO ADD/SUBTRACT ALL ABOVE 7 PARTS/INTERVALS TO/FROM
+SQL> 
+SQL> SELECT SYSDATE , SYSDATE + 3 , SYSDATE - 4 FROM DUAL;
+
+SYSDATE                       SYSDATE+3                     SYSDATE-4                                                                                                                                   
+----------------------------- ----------------------------- -----------------------------                                                                                                               
+10-JANUARY  -2022 07:27.39 PM 13-JANUARY  -2022 07:27.39 PM 06-JANUARY  -2022 07:27.39 PM                                                                                                               
+
+SQL> REM 1 DAY = 24 HOURS
+SQL> 
+SQL> SELECT SYSDATE , SYSDATE + (3/24) , SYSDATE - (4/24) FROM DUAL;
+
+SYSDATE                       SYSDATE+(3/24)                SYSDATE-(4/24)                                                                                                                              
+----------------------------- ----------------------------- -----------------------------                                                                                                               
+10-JANUARY  -2022 07:29.18 PM 10-JANUARY  -2022 10:29.18 PM 10-JANUARY  -2022 03:29.18 PM                                                                                                               
+
+SQL> SELECT SYSDATE , SYSDATE + (3/24) , SYSDATE - (10/24) FROM DUAL;
+
+SYSDATE                       SYSDATE+(3/24)                SYSDATE-(10/24)                                                                                                                             
+----------------------------- ----------------------------- -----------------------------                                                                                                               
+10-JANUARY  -2022 07:29.36 PM 10-JANUARY  -2022 10:29.36 PM 10-JANUARY  -2022 09:29.36 AM                                                                                                               
+
+SQL> SELECT SYSDATE , SYSDATE + (50/24) , SYSDATE - (4/24) FROM DUAL;
+
+SYSDATE                       SYSDATE+(50/24)               SYSDATE-(4/24)                                                                                                                              
+----------------------------- ----------------------------- -----------------------------                                                                                                               
+10-JANUARY  -2022 07:30.33 PM 12-JANUARY  -2022 09:30.33 PM 10-JANUARY  -2022 03:30.33 PM                                                                                                               
+
+SQL> SELECT SYSDATE , SYSDATE + 50 , SYSDATE - 4 FROM DUAL;
+
+SYSDATE                       SYSDATE+50                    SYSDATE-4                                                                                                                                   
+----------------------------- ----------------------------- -----------------------------                                                                                                               
+10-JANUARY  -2022 07:30.43 PM 01-MARCH    -2022 07:30.43 PM 06-JANUARY  -2022 07:30.43 PM                                                                                                               
+
+SQL> REM 1 DAY = 24 * 60 = 1440 MINUTES
+SQL> 
+SQL> SELECT SYSDATE , SYSDATE + (50/(24*60)) , SYSDATE - (4/1440) FROM DUAL;
+
+SYSDATE                       SYSDATE+(50/(24*60))          SYSDATE-(4/1440)                                                                                                                            
+----------------------------- ----------------------------- -----------------------------                                                                                                               
+10-JANUARY  -2022 07:31.33 PM 10-JANUARY  -2022 08:21.33 PM 10-JANUARY  -2022 07:27.33 PM                                                                                                               
+
+SQL> SELECT SYSDATE , SYSDATE + (3/(24*60)) , SYSDATE - (4/1440) FROM DUAL;
+
+SYSDATE                       SYSDATE+(3/(24*60))           SYSDATE-(4/1440)                                                                                                                            
+----------------------------- ----------------------------- -----------------------------                                                                                                               
+10-JANUARY  -2022 07:31.54 PM 10-JANUARY  -2022 07:34.54 PM 10-JANUARY  -2022 07:27.54 PM                                                                                                               
+
+SQL> REM 1 DAY = 24 * 60 * 60 = 86400 SECONDS
+SQL> 
+SQL> SELECT SYSDATE , SYSDATE + (3/(24*60*60)) , SYSDATE - (4/86400) FROM DUAL;
+
+SYSDATE                       SYSDATE+(3/(24*60*60))        SYSDATE-(4/86400)                                                                                                                           
+----------------------------- ----------------------------- -----------------------------                                                                                                               
+10-JANUARY  -2022 07:32.47 PM 10-JANUARY  -2022 07:32.50 PM 10-JANUARY  -2022 07:32.43 PM                                                                                                               
+
+SQL> REM 1 DAY = 24 HOURS = 1440 MINUTES = 86400 SECONDS
+SQL> 
+SQL> REM 1 MONTH = ?? DAYS : 28/29/30/31 DAYS
+SQL> 
+SQL> REM ADD_MONTHS : ADDS/SUBSTRACTS MONTHS/YEARS/CENTURIES
+SQL> 
+SQL> SELECT SYSDATE , ADD_MONTHS(SYSDATE,2) , ADD_MONTHS(SYSDATE,-3) FROM DUAL;
+
+SYSDATE                       ADD_MONTHS(SYSDATE,2)         ADD_MONTHS(SYSDATE,-3)                                                                                                                      
+----------------------------- ----------------------------- -----------------------------                                                                                                               
+10-JANUARY  -2022 07:35.07 PM 10-MARCH    -2022 07:35.07 PM 10-OCTOBER  -2021 07:35.07 PM                                                                                                               
+
+SQL> REM 1 YEAR = 12 MONTHS
+SQL> 
+SQL> SELECT SYSDATE , ADD_MONTHS(SYSDATE,12) , ADD_MONTHS(SYSDATE,-12) FROM DUAL;
+
+SYSDATE                       ADD_MONTHS(SYSDATE,12)        ADD_MONTHS(SYSDATE,-12)                                                                                                                     
+----------------------------- ----------------------------- -----------------------------                                                                                                               
+10-JANUARY  -2022 07:35.59 PM 10-JANUARY  -2023 07:35.59 PM 10-JANUARY  -2021 07:35.59 PM                                                                                                               
+
+SQL> SELECT SYSDATE , ADD_MONTHS(SYSDATE,12*3) , ADD_MONTHS(SYSDATE,-12*5) FROM DUAL;
+
+SYSDATE                       ADD_MONTHS(SYSDATE,12*3)      ADD_MONTHS(SYSDATE,-12*5)                                                                                                                   
+----------------------------- ----------------------------- -----------------------------                                                                                                               
+10-JANUARY  -2022 07:36.46 PM 10-JANUARY  -2025 07:36.46 PM 10-JANUARY  -2017 07:36.46 PM                                                                                                               
+
+SQL> REM 1 CENTURY = 100 YEARS = 1200 MONTHS
+SQL> 
+SQL> SELECT SYSDATE , ADD_MONTHS(SYSDATE,12*100) , ADD_MONTHS(SYSDATE,-12*100) FROM DUAL;
+
+SYSDATE                       ADD_MONTHS(SYSDATE,12*100)    ADD_MONTHS(SYSDATE,-12*100)                                                                                                                 
+----------------------------- ----------------------------- -----------------------------                                                                                                               
+10-JANUARY  -2022 07:37.37 PM 10-JANUARY  -2122 07:37.37 PM 10-JANUARY  -1922 07:37.37 PM                                                                                                               
+
+SQL> SELECT SYSDATE , ADD_MONTHS(SYSDATE,12*100*2) , ADD_MONTHS(SYSDATE,-12*100*4) FROM DUAL;
+
+SYSDATE                       ADD_MONTHS(SYSDATE,12*100*2)  ADD_MONTHS(SYSDATE,-12*100*4)                                                                                                               
+----------------------------- ----------------------------- -----------------------------                                                                                                               
+10-JANUARY  -2022 07:38.00 PM 10-JANUARY  -2222 07:38.00 PM 10-JANUARY  -1622 07:38.00 PM                                                                                                               
+
+SQL> REM 3 HOURS , 45 SECONDS
+SQL> 
+SQL> SELECT SYSDATE , SYSDATE + (3/24) + (45/86400) FROM DUAL;
+
+SYSDATE                       SYSDATE+(3/24)+(45/86400)                                                                                                                                                 
+----------------------------- -----------------------------                                                                                                                                             
+10-JANUARY  -2022 07:39.29 PM 10-JANUARY  -2022 10:40.14 PM                                                                                                                                             
+
+SQL> SELECT SYSDATE , SYSDATE + (3/24) + (45/86400) FROM DUAL;
+
+SYSDATE                       SYSDATE+(3/24)+(45/86400)                                                                                                                                                 
+----------------------------- -----------------------------                                                                                                                                             
+10-JANUARY  -2022 07:39.47 PM 10-JANUARY  -2022 10:40.32 PM                                                                                                                                             
+
+SQL> SELECT SYSDATE , SYSDATE + (3/24) + (45/86400) FROM DUAL;
+
+SYSDATE                       SYSDATE+(3/24)+(45/86400)                                                                                                                                                 
+----------------------------- -----------------------------                                                                                                                                             
+10-JANUARY  -2022 07:40.05 PM 10-JANUARY  -2022 10:40.50 PM                                                                                                                                             
+
+SQL> REM 5 MONTHS , 40 MINUTES
+SQL> 
+SQL> SELECT SYSDATE , ADD_MONTHS(SYSDATE,5) + (40/1440) FROM DUAL;
+
+SYSDATE                       ADD_MONTHS(SYSDATE,5)+(40/144                                                                                                                                             
+----------------------------- -----------------------------                                                                                                                                             
+10-JANUARY  -2022 07:41.03 PM 10-JUNE     -2022 08:21.03 PM                                                                                                                                             
+
+SQL> ADD_MONTHS( SYSDATE, -12*100*23)
+SP2-0734: unknown command beginning "ADD_MONTHS..." - rest of line ignored.
+SQL> SELECT SYSDATE , ADD_MONTHS( SYSDATE, -12*100*23)
+  2  FROM DUAL;
+
+SYSDATE                       ADD_MONTHS(SYSDATE,-12*100*23                                                                                                                                             
+----------------------------- -----------------------------                                                                                                                                             
+10-JANUARY  -2022 07:42.20 PM 10-JANUARY  -0278 07:42.20 PM                                                                                                                                             
+
+SQL> SELECT SYSDATE , ADD_MONTHS( SYSDATE, -12*100*33)
+  2  FROM DUAL;
+
+SYSDATE                       ADD_MONTHS(SYSDATE,-12*100*33                                                                                                                                             
+----------------------------- -----------------------------                                                                                                                                             
+10-JANUARY  -2022 07:42.56 PM 10-JANUARY  -1278 07:42.56 PM                                                                                                                                             
+
+SQL> ALTER SESSION SET NLS_DATE_FORMAT = 'DD-MONTH-RRRRBC';
+
+Session altered.
+
+SQL> SELECT SYSDATE , ADD_MONTHS( SYSDATE, -12*100*33) FROM DUAL;
+
+SYSDATE             ADD_MONTHS(SYSDATE,                                                                                                                                                                 
+------------------- -------------------                                                                                                                                                                 
+10-JANUARY  -2022AD 10-JANUARY  -1278BC                                                                                                                                                                 
+
+SQL> REM AD : ANNOE DOMINI/AFTER DEATH OF CHRIST
+SQL> 
+SQL> REM BC : BEFORE CHRIST
+SQL> 
+SQL> REM DATE FUNCTIONS : SYSDATE CURRENT_DATE ADD_MONTHS MONTHS_BETWEEN LAST_DAY NEXT_DAY TRUNC ROUND
+SQL> 
+SQL> REM DATE -DATE : DAYS
+SQL> 
+SQL> SELECT FIRST_NAME , SYSDATE , HIRE_DATE , SYSDATE - HIRE_DATE DAYS FROM EMPLOYEES;
+
+FIRST_NAME SYSDATE             HIRE_DATE                 DAYS                                                                                                                                           
+---------- ------------------- ------------------- ----------                                                                                                                                           
+Steven     10-JANUARY  -2022AD 17-JULY     -1987AD 12596.8243                                                                                                                                           
+Neena      10-JANUARY  -2022AD 21-SEPTEMBER-1989AD 11799.8243                                                                                                                                           
+Lex        10-JANUARY  -2022AD 13-JANUARY  -1993AD 10589.8243                                                                                                                                           
+Alexander  10-JANUARY  -2022AD 03-JANUARY  -1990AD 11695.8243                                                                                                                                           
+Bruce      10-JANUARY  -2022AD 21-MAY      -1991AD 11192.8243                                                                                                                                           
+Diana      10-JANUARY  -2022AD 07-FEBRUARY -1999AD 8373.82434                                                                                                                                           
+Kevin      10-JANUARY  -2022AD 16-NOVEMBER -1999AD 8091.82434                                                                                                                                           
+Trenna     10-JANUARY  -2022AD 17-OCTOBER  -1995AD 9582.82434                                                                                                                                           
+Curtis     10-JANUARY  -2022AD 29-JANUARY  -1997AD 9112.82434                                                                                                                                           
+Randall    10-JANUARY  -2022AD 15-MARCH    -1998AD 8702.82434                                                                                                                                           
+Peter      10-JANUARY  -2022AD 09-JULY     -1998AD 8586.82434                                                                                                                                           
+Eleni      10-JANUARY  -2022AD 29-JANUARY  -2000AD 8017.82434                                                                                                                                           
+Ellen      10-JANUARY  -2022AD 11-MAY      -1996AD 9375.82434                                                                                                                                           
+Jonathon   10-JANUARY  -2022AD 24-MARCH    -1998AD 8693.82434                                                                                                                                           
+Kimerely   10-JANUARY  -2022AD 24-MAY      -1999AD 8267.82434                                                                                                                                           
+Jennifer   10-JANUARY  -2022AD 17-SEPTEMBER-1987AD 12534.8243                                                                                                                                           
+Michael    10-JANUARY  -2022AD 17-FEBRUARY -1996AD 9459.82434                                                                                                                                           
+Pat        10-JANUARY  -2022AD 17-AUGUST   -1997AD 8912.82434                                                                                                                                           
+Shelley    10-JANUARY  -2022AD 07-JUNE     -1994AD 10079.8243                                                                                                                                           
+William    10-JANUARY  -2022AD 07-JUNE     -1994AD 10079.8243                                                                                                                                           
+
+20 rows selected.
+
+SQL> ALTER SESSION SET NLS_DATE_FORMAT = 'DD-MON-RR HH:MI.SS';
+
+Session altered.
+
+SQL> 
+SQL> SELECT FIRST_NAME , SYSDATE , HIRE_DATE , SYSDATE - HIRE_DATE DAYS FROM EMPLOYEES;
+
+FIRST_NAME SYSDATE            HIRE_DATE                DAYS                                                                                                                                             
+---------- ------------------ ------------------ ----------                                                                                                                                             
+Steven     10-JAN-22 07:47.33 17-JUL-87 12:00.00 12596.8247                                                                                                                                             
+Neena      10-JAN-22 07:47.33 21-SEP-89 12:00.00 11799.8247                                                                                                                                             
+Lex        10-JAN-22 07:47.33 13-JAN-93 12:00.00 10589.8247                                                                                                                                             
+Alexander  10-JAN-22 07:47.33 03-JAN-90 12:00.00 11695.8247                                                                                                                                             
+Bruce      10-JAN-22 07:47.33 21-MAY-91 12:00.00 11192.8247                                                                                                                                             
+Diana      10-JAN-22 07:47.33 07-FEB-99 12:00.00 8373.82469                                                                                                                                             
+Kevin      10-JAN-22 07:47.33 16-NOV-99 12:00.00 8091.82469                                                                                                                                             
+Trenna     10-JAN-22 07:47.33 17-OCT-95 12:00.00 9582.82469                                                                                                                                             
+Curtis     10-JAN-22 07:47.33 29-JAN-97 12:00.00 9112.82469                                                                                                                                             
+Randall    10-JAN-22 07:47.33 15-MAR-98 12:00.00 8702.82469                                                                                                                                             
+Peter      10-JAN-22 07:47.33 09-JUL-98 12:00.00 8586.82469                                                                                                                                             
+Eleni      10-JAN-22 07:47.33 29-JAN-00 12:00.00 8017.82469                                                                                                                                             
+Ellen      10-JAN-22 07:47.33 11-MAY-96 12:00.00 9375.82469                                                                                                                                             
+Jonathon   10-JAN-22 07:47.33 24-MAR-98 12:00.00 8693.82469                                                                                                                                             
+Kimerely   10-JAN-22 07:47.33 24-MAY-99 12:00.00 8267.82469                                                                                                                                             
+Jennifer   10-JAN-22 07:47.33 17-SEP-87 12:00.00 12534.8247                                                                                                                                             
+Michael    10-JAN-22 07:47.33 17-FEB-96 12:00.00 9459.82469                                                                                                                                             
+Pat        10-JAN-22 07:47.33 17-AUG-97 12:00.00 8912.82469                                                                                                                                             
+Shelley    10-JAN-22 07:47.33 07-JUN-94 12:00.00 10079.8247                                                                                                                                             
+William    10-JAN-22 07:47.33 07-JUN-94 12:00.00 10079.8247                                                                                                                                             
+
+20 rows selected.
+
+SQL> SELECT '13-MAR-73' - '15-MAY-71' FROM DUAL;
+SELECT '13-MAR-73' - '15-MAY-71' FROM DUAL
+       *
+ERROR at line 1:
+ORA-01722: invalid number 
+
+
+SQL> SELECT TO_DATE('13-MAR-73') - TO_DATE('15-MAY-71') FROM DUAL;
+
+TO_DATE('13-MAR-73')-TO_DATE('15-MAY-71')                                                                                                                                                               
+-----------------------------------------                                                                                                                                                               
+                                      668                                                                                                                                                               
+
+SQL> SELECT TO_DATE('13-MAR-73') - TO_DATE('15-JAN-71') FROM DUAL;
+
+TO_DATE('13-MAR-73')-TO_DATE('15-JAN-71')                                                                                                                                                               
+-----------------------------------------                                                                                                                                                               
+                                      788                                                                                                                                                               
+
+SQL> SELECT TO_DATE('15-JAN-71') - TO_DATE('13-MAR-73') FROM DUAL;
+
+TO_DATE('15-JAN-71')-TO_DATE('13-MAR-73')                                                                                                                                                               
+-----------------------------------------                                                                                                                                                               
+                                     -788                                                                                                                                                               
+
+SQL> REM LATEST DATE IS CONSIDERED AS BIGGEST/HIGHEST DATE
+SQL> 
+SQL> REM EARLIEST DATE IS CONSIDERED AS  SMALLEST/LOWEST DATE
+SQL> 
+SQL> REM DATE + DATE , DATE * DATE , DATE / DATE : ARE NOT ALLOWED
+SQL> 
+SQL> REM DATE FUNCTIONS : SYSDATE CURRENT_DATE ADD_MONTHS MONTHS_BETWEEN LAST_DAY NEXT_DAY TRUNC ROUND
+SQL> 
+SQL> REM SELECT FIRST_NAME , SYSDATE , HIRE_DATE , TRUNC(SYSDATE - HIRE_DATE) COMPLETED_DAYS FROM EMPLOYEES;
+SQL> 
+SQL> SELECT FIRST_NAME , SYSDATE , HIRE_DATE , TRUNC(SYSDATE - HIRE_DATE) COMPLETED_DAYS FROM EMPLOYEES;
+
+FIRST_NAME SYSDATE            HIRE_DATE          COMPLETED_DAYS                                                                                                                                         
+---------- ------------------ ------------------ --------------                                                                                                                                         
+Steven     10-JAN-22 07:52.28 17-JUL-87 12:00.00          12596                                                                                                                                         
+Neena      10-JAN-22 07:52.28 21-SEP-89 12:00.00          11799                                                                                                                                         
+Lex        10-JAN-22 07:52.28 13-JAN-93 12:00.00          10589                                                                                                                                         
+Alexander  10-JAN-22 07:52.28 03-JAN-90 12:00.00          11695                                                                                                                                         
+Bruce      10-JAN-22 07:52.28 21-MAY-91 12:00.00          11192                                                                                                                                         
+Diana      10-JAN-22 07:52.28 07-FEB-99 12:00.00           8373                                                                                                                                         
+Kevin      10-JAN-22 07:52.28 16-NOV-99 12:00.00           8091                                                                                                                                         
+Trenna     10-JAN-22 07:52.28 17-OCT-95 12:00.00           9582                                                                                                                                         
+Curtis     10-JAN-22 07:52.28 29-JAN-97 12:00.00           9112                                                                                                                                         
+Randall    10-JAN-22 07:52.28 15-MAR-98 12:00.00           8702                                                                                                                                         
+Peter      10-JAN-22 07:52.28 09-JUL-98 12:00.00           8586                                                                                                                                         
+Eleni      10-JAN-22 07:52.28 29-JAN-00 12:00.00           8017                                                                                                                                         
+Ellen      10-JAN-22 07:52.28 11-MAY-96 12:00.00           9375                                                                                                                                         
+Jonathon   10-JAN-22 07:52.28 24-MAR-98 12:00.00           8693                                                                                                                                         
+Kimerely   10-JAN-22 07:52.28 24-MAY-99 12:00.00           8267                                                                                                                                         
+Jennifer   10-JAN-22 07:52.28 17-SEP-87 12:00.00          12534                                                                                                                                         
+Michael    10-JAN-22 07:52.28 17-FEB-96 12:00.00           9459                                                                                                                                         
+Pat        10-JAN-22 07:52.28 17-AUG-97 12:00.00           8912                                                                                                                                         
+Shelley    10-JAN-22 07:52.28 07-JUN-94 12:00.00          10079                                                                                                                                         
+William    10-JAN-22 07:52.28 07-JUN-94 12:00.00          10079                                                                                                                                         
+
+20 rows selected.
+
+SQL> REM DISPLAY FOR HOW MANY WEEKS EACH EMPLOYEE WORKS
+SQL> 
+SQL> REM 1 WEEK = 7 DAYS
+SQL> 
+SQL> SELECT FIRST_NAME , SYSDATE , HIRE_DATE , (SYSDATE - HIRE_DATE)/7 WEEKS FROM EMPLOYEES;
+
+FIRST_NAME SYSDATE            HIRE_DATE               WEEKS                                                                                                                                             
+---------- ------------------ ------------------ ----------                                                                                                                                             
+Steven     10-JAN-22 07:53.14 17-JUL-87 12:00.00 1799.54695                                                                                                                                             
+Neena      10-JAN-22 07:53.14 21-SEP-89 12:00.00  1685.6898                                                                                                                                             
+Lex        10-JAN-22 07:53.14 13-JAN-93 12:00.00 1512.83266                                                                                                                                             
+Alexander  10-JAN-22 07:53.14 03-JAN-90 12:00.00 1670.83266                                                                                                                                             
+Bruce      10-JAN-22 07:53.14 21-MAY-91 12:00.00 1598.97552                                                                                                                                             
+Diana      10-JAN-22 07:53.14 07-FEB-99 12:00.00 1196.26123                                                                                                                                             
+Kevin      10-JAN-22 07:53.14 16-NOV-99 12:00.00 1155.97552                                                                                                                                             
+Trenna     10-JAN-22 07:53.14 17-OCT-95 12:00.00 1368.97552                                                                                                                                             
+Curtis     10-JAN-22 07:53.14 29-JAN-97 12:00.00 1301.83266                                                                                                                                             
+Randall    10-JAN-22 07:53.14 15-MAR-98 12:00.00 1243.26123                                                                                                                                             
+Peter      10-JAN-22 07:53.14 09-JUL-98 12:00.00  1226.6898                                                                                                                                             
+Eleni      10-JAN-22 07:53.14 29-JAN-00 12:00.00 1145.40409                                                                                                                                             
+Ellen      10-JAN-22 07:53.14 11-MAY-96 12:00.00 1339.40409                                                                                                                                             
+Jonathon   10-JAN-22 07:53.14 24-MAR-98 12:00.00 1241.97552                                                                                                                                             
+Kimerely   10-JAN-22 07:53.14 24-MAY-99 12:00.00 1181.11838                                                                                                                                             
+Jennifer   10-JAN-22 07:53.14 17-SEP-87 12:00.00  1790.6898                                                                                                                                             
+Michael    10-JAN-22 07:53.14 17-FEB-96 12:00.00 1351.40409                                                                                                                                             
+Pat        10-JAN-22 07:53.14 17-AUG-97 12:00.00 1273.26123                                                                                                                                             
+Shelley    10-JAN-22 07:53.14 07-JUN-94 12:00.00 1439.97552                                                                                                                                             
+William    10-JAN-22 07:53.14 07-JUN-94 12:00.00 1439.97552                                                                                                                                             
+
+20 rows selected.
+
+SQL> SELECT FIRST_NAME , SYSDATE , HIRE_DATE , TRUNC((SYSDATE - HIRE_DATE)/7) WEEKS FROM EMPLOYEES;
+
+FIRST_NAME SYSDATE            HIRE_DATE               WEEKS                                                                                                                                             
+---------- ------------------ ------------------ ----------                                                                                                                                             
+Steven     10-JAN-22 07:53.26 17-JUL-87 12:00.00       1799                                                                                                                                             
+Neena      10-JAN-22 07:53.26 21-SEP-89 12:00.00       1685                                                                                                                                             
+Lex        10-JAN-22 07:53.26 13-JAN-93 12:00.00       1512                                                                                                                                             
+Alexander  10-JAN-22 07:53.26 03-JAN-90 12:00.00       1670                                                                                                                                             
+Bruce      10-JAN-22 07:53.26 21-MAY-91 12:00.00       1598                                                                                                                                             
+Diana      10-JAN-22 07:53.26 07-FEB-99 12:00.00       1196                                                                                                                                             
+Kevin      10-JAN-22 07:53.26 16-NOV-99 12:00.00       1155                                                                                                                                             
+Trenna     10-JAN-22 07:53.26 17-OCT-95 12:00.00       1368                                                                                                                                             
+Curtis     10-JAN-22 07:53.26 29-JAN-97 12:00.00       1301                                                                                                                                             
+Randall    10-JAN-22 07:53.26 15-MAR-98 12:00.00       1243                                                                                                                                             
+Peter      10-JAN-22 07:53.26 09-JUL-98 12:00.00       1226                                                                                                                                             
+Eleni      10-JAN-22 07:53.26 29-JAN-00 12:00.00       1145                                                                                                                                             
+Ellen      10-JAN-22 07:53.26 11-MAY-96 12:00.00       1339                                                                                                                                             
+Jonathon   10-JAN-22 07:53.26 24-MAR-98 12:00.00       1241                                                                                                                                             
+Kimerely   10-JAN-22 07:53.26 24-MAY-99 12:00.00       1181                                                                                                                                             
+Jennifer   10-JAN-22 07:53.26 17-SEP-87 12:00.00       1790                                                                                                                                             
+Michael    10-JAN-22 07:53.26 17-FEB-96 12:00.00       1351                                                                                                                                             
+Pat        10-JAN-22 07:53.26 17-AUG-97 12:00.00       1273                                                                                                                                             
+Shelley    10-JAN-22 07:53.26 07-JUN-94 12:00.00       1439                                                                                                                                             
+William    10-JAN-22 07:53.26 07-JUN-94 12:00.00       1439                                                                                                                                             
+
+20 rows selected.
+
+SQL> SELECT FIRST_NAME , SYSDATE , HIRE_DATE , TRUNC((SYSDATE - HIRE_DATE)/7) COMPLETED_WEEKS FROM EMPLOYEES;
+
+FIRST_NAME SYSDATE            HIRE_DATE          COMPLETED_WEEKS                                                                                                                                        
+---------- ------------------ ------------------ ---------------                                                                                                                                        
+Steven     10-JAN-22 07:53.38 17-JUL-87 12:00.00            1799                                                                                                                                        
+Neena      10-JAN-22 07:53.38 21-SEP-89 12:00.00            1685                                                                                                                                        
+Lex        10-JAN-22 07:53.38 13-JAN-93 12:00.00            1512                                                                                                                                        
+Alexander  10-JAN-22 07:53.38 03-JAN-90 12:00.00            1670                                                                                                                                        
+Bruce      10-JAN-22 07:53.38 21-MAY-91 12:00.00            1598                                                                                                                                        
+Diana      10-JAN-22 07:53.38 07-FEB-99 12:00.00            1196                                                                                                                                        
+Kevin      10-JAN-22 07:53.38 16-NOV-99 12:00.00            1155                                                                                                                                        
+Trenna     10-JAN-22 07:53.38 17-OCT-95 12:00.00            1368                                                                                                                                        
+Curtis     10-JAN-22 07:53.38 29-JAN-97 12:00.00            1301                                                                                                                                        
+Randall    10-JAN-22 07:53.38 15-MAR-98 12:00.00            1243                                                                                                                                        
+Peter      10-JAN-22 07:53.38 09-JUL-98 12:00.00            1226                                                                                                                                        
+Eleni      10-JAN-22 07:53.38 29-JAN-00 12:00.00            1145                                                                                                                                        
+Ellen      10-JAN-22 07:53.38 11-MAY-96 12:00.00            1339                                                                                                                                        
+Jonathon   10-JAN-22 07:53.38 24-MAR-98 12:00.00            1241                                                                                                                                        
+Kimerely   10-JAN-22 07:53.38 24-MAY-99 12:00.00            1181                                                                                                                                        
+Jennifer   10-JAN-22 07:53.38 17-SEP-87 12:00.00            1790                                                                                                                                        
+Michael    10-JAN-22 07:53.38 17-FEB-96 12:00.00            1351                                                                                                                                        
+Pat        10-JAN-22 07:53.38 17-AUG-97 12:00.00            1273                                                                                                                                        
+Shelley    10-JAN-22 07:53.38 07-JUN-94 12:00.00            1439                                                                                                                                        
+William    10-JAN-22 07:53.38 07-JUN-94 12:00.00            1439                                                                                                                                        
+
+20 rows selected.
+
+SQL> REM DISPLAY FOR HOW MANY MONTHS EACH EMPLOYEE WORKS
+SQL> 
+SQL> REM MONTHS_BETWEEN : IT WILL RETURN NO. OF MONTHS BETWEEN TWO DATES
+SQL> 
+SQL> SELECT FIRST_NAME , SYSDATE , HIRE_DATE , MONTHS_BETWEEN(SYSDATE,HIRE_DATE) MONTHS FROM EMPLOYEES;
+
+FIRST_NAME SYSDATE            HIRE_DATE              MONTHS                                                                                                                                             
+---------- ------------------ ------------------ ----------                                                                                                                                             
+Steven     10-JAN-22 07:54.36 17-JUL-87 12:00.00 413.800954                                                                                                                                             
+Neena      10-JAN-22 07:54.36 21-SEP-89 12:00.00 387.671922                                                                                                                                             
+Lex        10-JAN-22 07:54.36 13-JAN-93 12:00.00 347.929987                                                                                                                                             
+Alexander  10-JAN-22 07:54.36 03-JAN-90 12:00.00 384.252567                                                                                                                                             
+Bruce      10-JAN-22 07:54.36 21-MAY-91 12:00.00 367.671922                                                                                                                                             
+Diana      10-JAN-22 07:54.36 07-FEB-99 12:00.00 275.123535                                                                                                                                             
+Kevin      10-JAN-22 07:54.36 16-NOV-99 12:00.00 265.833212                                                                                                                                             
+Trenna     10-JAN-22 07:54.36 17-OCT-95 12:00.00 314.800954                                                                                                                                             
+Curtis     10-JAN-22 07:54.36 29-JAN-97 12:00.00 299.413858                                                                                                                                             
+Randall    10-JAN-22 07:54.36 15-MAR-98 12:00.00  285.86547                                                                                                                                             
+Peter      10-JAN-22 07:54.36 09-JUL-98 12:00.00 282.059019                                                                                                                                             
+Eleni      10-JAN-22 07:54.36 29-JAN-00 12:00.00 263.413858                                                                                                                                             
+Ellen      10-JAN-22 07:54.36 11-MAY-96 12:00.00 307.994503                                                                                                                                             
+Jonathon   10-JAN-22 07:54.36 24-MAR-98 12:00.00 285.575148                                                                                                                                             
+Kimerely   10-JAN-22 07:54.36 24-MAY-99 12:00.00 271.575148                                                                                                                                             
+Jennifer   10-JAN-22 07:54.36 17-SEP-87 12:00.00 411.800954                                                                                                                                             
+Michael    10-JAN-22 07:54.36 17-FEB-96 12:00.00 310.800954                                                                                                                                             
+Pat        10-JAN-22 07:54.36 17-AUG-97 12:00.00 292.800954                                                                                                                                             
+Shelley    10-JAN-22 07:54.36 07-JUN-94 12:00.00 331.123535                                                                                                                                             
+William    10-JAN-22 07:54.36 07-JUN-94 12:00.00 331.123535                                                                                                                                             
+
+20 rows selected.
+
+SQL> SELECT FIRST_NAME , SYSDATE-3 , HIRE_DATE , MONTHS_BETWEEN(SYSDATE-3,HIRE_DATE) MONTHS FROM EMPLOYEES;
+
+FIRST_NAME SYSDATE-3          HIRE_DATE              MONTHS                                                                                                                                             
+---------- ------------------ ------------------ ----------                                                                                                                                             
+Steven     07-JAN-22 07:55.15 17-JUL-87 12:00.00 413.704195                                                                                                                                             
+Neena      07-JAN-22 07:55.15 21-SEP-89 12:00.00 387.575162                                                                                                                                             
+Lex        07-JAN-22 07:55.15 13-JAN-93 12:00.00 347.833227                                                                                                                                             
+Alexander  07-JAN-22 07:55.15 03-JAN-90 12:00.00 384.155808                                                                                                                                             
+Bruce      07-JAN-22 07:55.15 21-MAY-91 12:00.00 367.575162                                                                                                                                             
+Diana      07-JAN-22 07:55.15 07-FEB-99 12:00.00        275                                                                                                                                             
+Kevin      07-JAN-22 07:55.15 16-NOV-99 12:00.00 265.736453                                                                                                                                             
+Trenna     07-JAN-22 07:55.15 17-OCT-95 12:00.00 314.704195                                                                                                                                             
+Curtis     07-JAN-22 07:55.15 29-JAN-97 12:00.00 299.317098                                                                                                                                             
+Randall    07-JAN-22 07:55.15 15-MAR-98 12:00.00 285.768711                                                                                                                                             
+Peter      07-JAN-22 07:55.15 09-JUL-98 12:00.00 281.962259                                                                                                                                             
+Eleni      07-JAN-22 07:55.15 29-JAN-00 12:00.00 263.317098                                                                                                                                             
+Ellen      07-JAN-22 07:55.15 11-MAY-96 12:00.00 307.897743                                                                                                                                             
+Jonathon   07-JAN-22 07:55.15 24-MAR-98 12:00.00 285.478388                                                                                                                                             
+Kimerely   07-JAN-22 07:55.15 24-MAY-99 12:00.00 271.478388                                                                                                                                             
+Jennifer   07-JAN-22 07:55.15 17-SEP-87 12:00.00 411.704195                                                                                                                                             
+Michael    07-JAN-22 07:55.15 17-FEB-96 12:00.00 310.704195                                                                                                                                             
+Pat        07-JAN-22 07:55.15 17-AUG-97 12:00.00 292.704195                                                                                                                                             
+Shelley    07-JAN-22 07:55.15 07-JUN-94 12:00.00        331                                                                                                                                             
+William    07-JAN-22 07:55.15 07-JUN-94 12:00.00        331                                                                                                                                             
+
+20 rows selected.
+
+SQL> SELECT FIRST_NAME , SYSDATE , HIRE_DATE , TRUNC(MONTHS_BETWEEN(SYSDATE,HIRE_DATE)) COMPLETED_MONTHS FROM EMPLOYEES;
+
+FIRST_NAME SYSDATE            HIRE_DATE          COMPLETED_MONTHS                                                                                                                                       
+---------- ------------------ ------------------ ----------------                                                                                                                                       
+Steven     10-JAN-22 07:55.50 17-JUL-87 12:00.00              413                                                                                                                                       
+Neena      10-JAN-22 07:55.50 21-SEP-89 12:00.00              387                                                                                                                                       
+Lex        10-JAN-22 07:55.50 13-JAN-93 12:00.00              347                                                                                                                                       
+Alexander  10-JAN-22 07:55.50 03-JAN-90 12:00.00              384                                                                                                                                       
+Bruce      10-JAN-22 07:55.50 21-MAY-91 12:00.00              367                                                                                                                                       
+Diana      10-JAN-22 07:55.50 07-FEB-99 12:00.00              275                                                                                                                                       
+Kevin      10-JAN-22 07:55.50 16-NOV-99 12:00.00              265                                                                                                                                       
+Trenna     10-JAN-22 07:55.50 17-OCT-95 12:00.00              314                                                                                                                                       
+Curtis     10-JAN-22 07:55.50 29-JAN-97 12:00.00              299                                                                                                                                       
+Randall    10-JAN-22 07:55.50 15-MAR-98 12:00.00              285                                                                                                                                       
+Peter      10-JAN-22 07:55.50 09-JUL-98 12:00.00              282                                                                                                                                       
+Eleni      10-JAN-22 07:55.50 29-JAN-00 12:00.00              263                                                                                                                                       
+Ellen      10-JAN-22 07:55.50 11-MAY-96 12:00.00              307                                                                                                                                       
+Jonathon   10-JAN-22 07:55.50 24-MAR-98 12:00.00              285                                                                                                                                       
+Kimerely   10-JAN-22 07:55.50 24-MAY-99 12:00.00              271                                                                                                                                       
+Jennifer   10-JAN-22 07:55.50 17-SEP-87 12:00.00              411                                                                                                                                       
+Michael    10-JAN-22 07:55.50 17-FEB-96 12:00.00              310                                                                                                                                       
+Pat        10-JAN-22 07:55.50 17-AUG-97 12:00.00              292                                                                                                                                       
+Shelley    10-JAN-22 07:55.50 07-JUN-94 12:00.00              331                                                                                                                                       
+William    10-JAN-22 07:55.50 07-JUN-94 12:00.00              331                                                                                                                                       
+
+20 rows selected.
+
+SQL> REM DISPLAY FOR HOW MANY YEARS EACH EMPLOYEE WORKS
+SQL> 
+SQL> REM 1 YEAR = 12 MONTHS
+SQL> 
+SQL> SELECT FIRST_NAME , SYSDATE-3 , HIRE_DATE , MONTHS_BETWEEN(SYSDATE-3,HIRE_DATE)/12 YEARS FROM EMPLOYEES;
+
+FIRST_NAME SYSDATE-3          HIRE_DATE               YEARS                                                                                                                                             
+---------- ------------------ ------------------ ----------                                                                                                                                             
+Steven     07-JAN-22 07:56.44 17-JUL-87 12:00.00 34.4753523                                                                                                                                             
+Neena      07-JAN-22 07:56.44 21-SEP-89 12:00.00  32.297933                                                                                                                                             
+Lex        07-JAN-22 07:56.44 13-JAN-93 12:00.00  28.986105                                                                                                                                             
+Alexander  07-JAN-22 07:56.44 03-JAN-90 12:00.00 32.0129867                                                                                                                                             
+Bruce      07-JAN-22 07:56.44 21-MAY-91 12:00.00 30.6312663                                                                                                                                             
+Diana      07-JAN-22 07:56.44 07-FEB-99 12:00.00 22.9166667                                                                                                                                             
+Kevin      07-JAN-22 07:56.44 16-NOV-99 12:00.00 22.1447072                                                                                                                                             
+Trenna     07-JAN-22 07:56.44 17-OCT-95 12:00.00 26.2253523                                                                                                                                             
+Curtis     07-JAN-22 07:56.44 29-JAN-97 12:00.00 24.9430943                                                                                                                                             
+Randall    07-JAN-22 07:56.44 15-MAR-98 12:00.00  23.814062                                                                                                                                             
+Peter      07-JAN-22 07:56.44 09-JUL-98 12:00.00 23.4968577                                                                                                                                             
+Eleni      07-JAN-22 07:56.44 29-JAN-00 12:00.00 21.9430943                                                                                                                                             
+Ellen      07-JAN-22 07:56.44 11-MAY-96 12:00.00  25.658148                                                                                                                                             
+Jonathon   07-JAN-22 07:56.44 24-MAR-98 12:00.00 23.7898685                                                                                                                                             
+Kimerely   07-JAN-22 07:56.44 24-MAY-99 12:00.00 22.6232018                                                                                                                                             
+Jennifer   07-JAN-22 07:56.44 17-SEP-87 12:00.00 34.3086857                                                                                                                                             
+Michael    07-JAN-22 07:56.44 17-FEB-96 12:00.00  25.892019                                                                                                                                             
+Pat        07-JAN-22 07:56.44 17-AUG-97 12:00.00  24.392019                                                                                                                                             
+Shelley    07-JAN-22 07:56.44 07-JUN-94 12:00.00 27.5833333                                                                                                                                             
+William    07-JAN-22 07:56.44 07-JUN-94 12:00.00 27.5833333                                                                                                                                             
+
+20 rows selected.
+
+SQL> SELECT FIRST_NAME , SYSDATE-3 , HIRE_DATE , TRUNC(MONTHS_BETWEEN(SYSDATE-3,HIRE_DATE)/12) COMPLETED_YEARS FROM EMPLOYEES;
+
+FIRST_NAME SYSDATE-3          HIRE_DATE          COMPLETED_YEARS                                                                                                                                        
+---------- ------------------ ------------------ ---------------                                                                                                                                        
+Steven     07-JAN-22 07:56.59 17-JUL-87 12:00.00              34                                                                                                                                        
+Neena      07-JAN-22 07:56.59 21-SEP-89 12:00.00              32                                                                                                                                        
+Lex        07-JAN-22 07:56.59 13-JAN-93 12:00.00              28                                                                                                                                        
+Alexander  07-JAN-22 07:56.59 03-JAN-90 12:00.00              32                                                                                                                                        
+Bruce      07-JAN-22 07:56.59 21-MAY-91 12:00.00              30                                                                                                                                        
+Diana      07-JAN-22 07:56.59 07-FEB-99 12:00.00              22                                                                                                                                        
+Kevin      07-JAN-22 07:56.59 16-NOV-99 12:00.00              22                                                                                                                                        
+Trenna     07-JAN-22 07:56.59 17-OCT-95 12:00.00              26                                                                                                                                        
+Curtis     07-JAN-22 07:56.59 29-JAN-97 12:00.00              24                                                                                                                                        
+Randall    07-JAN-22 07:56.59 15-MAR-98 12:00.00              23                                                                                                                                        
+Peter      07-JAN-22 07:56.59 09-JUL-98 12:00.00              23                                                                                                                                        
+Eleni      07-JAN-22 07:56.59 29-JAN-00 12:00.00              21                                                                                                                                        
+Ellen      07-JAN-22 07:56.59 11-MAY-96 12:00.00              25                                                                                                                                        
+Jonathon   07-JAN-22 07:56.59 24-MAR-98 12:00.00              23                                                                                                                                        
+Kimerely   07-JAN-22 07:56.59 24-MAY-99 12:00.00              22                                                                                                                                        
+Jennifer   07-JAN-22 07:56.59 17-SEP-87 12:00.00              34                                                                                                                                        
+Michael    07-JAN-22 07:56.59 17-FEB-96 12:00.00              25                                                                                                                                        
+Pat        07-JAN-22 07:56.59 17-AUG-97 12:00.00              24                                                                                                                                        
+Shelley    07-JAN-22 07:56.59 07-JUN-94 12:00.00              27                                                                                                                                        
+William    07-JAN-22 07:56.59 07-JUN-94 12:00.00              27                                                                                                                                        
+
+20 rows selected.
+
+SQL> REM SYSDATE , CURRENT_DATE , ADD_MONTHS , MONTHS_BETWEEN
+SQL> 
+SQL> REM LAST_DAY , NEXT_DAY , TRUNC , ROUND
+SQL> 
+SQL> REM LAST_DAY WILL RETURN LAST DATE OF INPUT DATE
+SQL> 
+SQL> SELECT SYSDATE , LAST_DAY(SYSDATE) FROM DUAL;
+
+SYSDATE            LAST_DAY(SYSDATE)                                                                                                                                                                    
+------------------ ------------------                                                                                                                                                                   
+10-JAN-22 07:58.32 31-JAN-22 07:58.32                                                                                                                                                                   
+
+SQL> SELECT HIRE_DATE , LAST_DAY(HIRE_DATE) FROM DUAL;
+SELECT HIRE_DATE , LAST_DAY(HIRE_DATE) FROM DUAL
+                            *
+ERROR at line 1:
+ORA-00904: "HIRE_DATE": invalid identifier 
+
+
+SQL> SELECT HIRE_DATE , LAST_DAY(HIRE_DATE) FROM EMPLOYEES;
+
+HIRE_DATE          LAST_DAY(HIRE_DATE                                                                                                                                                                   
+------------------ ------------------                                                                                                                                                                   
+17-JUL-87 12:00.00 31-JUL-87 12:00.00                                                                                                                                                                   
+21-SEP-89 12:00.00 30-SEP-89 12:00.00                                                                                                                                                                   
+13-JAN-93 12:00.00 31-JAN-93 12:00.00                                                                                                                                                                   
+03-JAN-90 12:00.00 31-JAN-90 12:00.00                                                                                                                                                                   
+21-MAY-91 12:00.00 31-MAY-91 12:00.00                                                                                                                                                                   
+07-FEB-99 12:00.00 28-FEB-99 12:00.00                                                                                                                                                                   
+16-NOV-99 12:00.00 30-NOV-99 12:00.00                                                                                                                                                                   
+17-OCT-95 12:00.00 31-OCT-95 12:00.00                                                                                                                                                                   
+29-JAN-97 12:00.00 31-JAN-97 12:00.00                                                                                                                                                                   
+15-MAR-98 12:00.00 31-MAR-98 12:00.00                                                                                                                                                                   
+09-JUL-98 12:00.00 31-JUL-98 12:00.00                                                                                                                                                                   
+29-JAN-00 12:00.00 31-JAN-00 12:00.00                                                                                                                                                                   
+11-MAY-96 12:00.00 31-MAY-96 12:00.00                                                                                                                                                                   
+24-MAR-98 12:00.00 31-MAR-98 12:00.00                                                                                                                                                                   
+24-MAY-99 12:00.00 31-MAY-99 12:00.00                                                                                                                                                                   
+17-SEP-87 12:00.00 30-SEP-87 12:00.00                                                                                                                                                                   
+17-FEB-96 12:00.00 29-FEB-96 12:00.00                                                                                                                                                                   
+17-AUG-97 12:00.00 31-AUG-97 12:00.00                                                                                                                                                                   
+07-JUN-94 12:00.00 30-JUN-94 12:00.00                                                                                                                                                                   
+07-JUN-94 12:00.00 30-JUN-94 12:00.00                                                                                                                                                                   
+
+20 rows selected.
+
+SQL> REM COMPANY PAYS ON LAST DATE OF EACH MONTH
+SQL> 
+SQL> REM FIND FIRST SALARY DATE FOR EACH EMPLOYEE
+SQL> 
+SQL> SELECT HIRE_DATE , LAST_DAY(HIRE_DATE) "FIRST_SALARY_DATE" FROM EMPLOYEES;
+
+HIRE_DATE          FIRST_SALARY_DATE                                                                                                                                                                    
+------------------ ------------------                                                                                                                                                                   
+17-JUL-87 12:00.00 31-JUL-87 12:00.00                                                                                                                                                                   
+21-SEP-89 12:00.00 30-SEP-89 12:00.00                                                                                                                                                                   
+13-JAN-93 12:00.00 31-JAN-93 12:00.00                                                                                                                                                                   
+03-JAN-90 12:00.00 31-JAN-90 12:00.00                                                                                                                                                                   
+21-MAY-91 12:00.00 31-MAY-91 12:00.00                                                                                                                                                                   
+07-FEB-99 12:00.00 28-FEB-99 12:00.00                                                                                                                                                                   
+16-NOV-99 12:00.00 30-NOV-99 12:00.00                                                                                                                                                                   
+17-OCT-95 12:00.00 31-OCT-95 12:00.00                                                                                                                                                                   
+29-JAN-97 12:00.00 31-JAN-97 12:00.00                                                                                                                                                                   
+15-MAR-98 12:00.00 31-MAR-98 12:00.00                                                                                                                                                                   
+09-JUL-98 12:00.00 31-JUL-98 12:00.00                                                                                                                                                                   
+29-JAN-00 12:00.00 31-JAN-00 12:00.00                                                                                                                                                                   
+11-MAY-96 12:00.00 31-MAY-96 12:00.00                                                                                                                                                                   
+24-MAR-98 12:00.00 31-MAR-98 12:00.00                                                                                                                                                                   
+24-MAY-99 12:00.00 31-MAY-99 12:00.00                                                                                                                                                                   
+17-SEP-87 12:00.00 30-SEP-87 12:00.00                                                                                                                                                                   
+17-FEB-96 12:00.00 29-FEB-96 12:00.00                                                                                                                                                                   
+17-AUG-97 12:00.00 31-AUG-97 12:00.00                                                                                                                                                                   
+07-JUN-94 12:00.00 30-JUN-94 12:00.00                                                                                                                                                                   
+07-JUN-94 12:00.00 30-JUN-94 12:00.00                                                                                                                                                                   
+
+20 rows selected.
+
+SQL> REM COMPANY PAYS ON 1ST DATE OF NEXT MONTH
+SQL> 
+SQL> REM COMPANY PAYS ON 7TH DATE OF NEXT MONTH
+SQL> 
+SQL> 
+SQL> REM COMPANY PAYS ON 1ST DATE OF NEXT MONTH
+SQL> 
+SQL> SELECT HIRE_DATE , LAST_DAY(HIRE_DATE)+1 FIRST_SALARY_DATE FROM EMPLOYEES;
+
+HIRE_DATE          FIRST_SALARY_DATE                                                                                                                                                                    
+------------------ ------------------                                                                                                                                                                   
+17-JUL-87 12:00.00 01-AUG-87 12:00.00                                                                                                                                                                   
+21-SEP-89 12:00.00 01-OCT-89 12:00.00                                                                                                                                                                   
+13-JAN-93 12:00.00 01-FEB-93 12:00.00                                                                                                                                                                   
+03-JAN-90 12:00.00 01-FEB-90 12:00.00                                                                                                                                                                   
+21-MAY-91 12:00.00 01-JUN-91 12:00.00                                                                                                                                                                   
+07-FEB-99 12:00.00 01-MAR-99 12:00.00                                                                                                                                                                   
+16-NOV-99 12:00.00 01-DEC-99 12:00.00                                                                                                                                                                   
+17-OCT-95 12:00.00 01-NOV-95 12:00.00                                                                                                                                                                   
+29-JAN-97 12:00.00 01-FEB-97 12:00.00                                                                                                                                                                   
+15-MAR-98 12:00.00 01-APR-98 12:00.00                                                                                                                                                                   
+09-JUL-98 12:00.00 01-AUG-98 12:00.00                                                                                                                                                                   
+29-JAN-00 12:00.00 01-FEB-00 12:00.00                                                                                                                                                                   
+11-MAY-96 12:00.00 01-JUN-96 12:00.00                                                                                                                                                                   
+24-MAR-98 12:00.00 01-APR-98 12:00.00                                                                                                                                                                   
+24-MAY-99 12:00.00 01-JUN-99 12:00.00                                                                                                                                                                   
+17-SEP-87 12:00.00 01-OCT-87 12:00.00                                                                                                                                                                   
+17-FEB-96 12:00.00 01-MAR-96 12:00.00                                                                                                                                                                   
+17-AUG-97 12:00.00 01-SEP-97 12:00.00                                                                                                                                                                   
+07-JUN-94 12:00.00 01-JUL-94 12:00.00                                                                                                                                                                   
+07-JUN-94 12:00.00 01-JUL-94 12:00.00                                                                                                                                                                   
+
+20 rows selected.
+
+SQL> REM COMPANY PAYS ON 7TH DATE OF NEXT MONTH
+SQL> 
+SQL> SELECT HIRE_DATE , LAST_DAY(HIRE_DATE)+7 FIRST_SALARY_DATE FROM EMPLOYEES;
+
+HIRE_DATE          FIRST_SALARY_DATE                                                                                                                                                                    
+------------------ ------------------                                                                                                                                                                   
+17-JUL-87 12:00.00 07-AUG-87 12:00.00                                                                                                                                                                   
+21-SEP-89 12:00.00 07-OCT-89 12:00.00                                                                                                                                                                   
+13-JAN-93 12:00.00 07-FEB-93 12:00.00                                                                                                                                                                   
+03-JAN-90 12:00.00 07-FEB-90 12:00.00                                                                                                                                                                   
+21-MAY-91 12:00.00 07-JUN-91 12:00.00                                                                                                                                                                   
+07-FEB-99 12:00.00 07-MAR-99 12:00.00                                                                                                                                                                   
+16-NOV-99 12:00.00 07-DEC-99 12:00.00                                                                                                                                                                   
+17-OCT-95 12:00.00 07-NOV-95 12:00.00                                                                                                                                                                   
+29-JAN-97 12:00.00 07-FEB-97 12:00.00                                                                                                                                                                   
+15-MAR-98 12:00.00 07-APR-98 12:00.00                                                                                                                                                                   
+09-JUL-98 12:00.00 07-AUG-98 12:00.00                                                                                                                                                                   
+29-JAN-00 12:00.00 07-FEB-00 12:00.00                                                                                                                                                                   
+11-MAY-96 12:00.00 07-JUN-96 12:00.00                                                                                                                                                                   
+24-MAR-98 12:00.00 07-APR-98 12:00.00                                                                                                                                                                   
+24-MAY-99 12:00.00 07-JUN-99 12:00.00                                                                                                                                                                   
+17-SEP-87 12:00.00 07-OCT-87 12:00.00                                                                                                                                                                   
+17-FEB-96 12:00.00 07-MAR-96 12:00.00                                                                                                                                                                   
+17-AUG-97 12:00.00 07-SEP-97 12:00.00                                                                                                                                                                   
+07-JUN-94 12:00.00 07-JUL-94 12:00.00                                                                                                                                                                   
+07-JUN-94 12:00.00 07-JUL-94 12:00.00                                                                                                                                                                   
+
+20 rows selected.
+
+SQL> REM NEXT_DAY :
+SQL> 
+SQL> SELECT SYSDATE , NEXT_DAY(SYSDATE,'FRIDAY') FROM DUAL;
+
+SYSDATE            NEXT_DAY(SYSDATE,'                                                                                                                                                                   
+------------------ ------------------                                                                                                                                                                   
+10-JAN-22 08:17.14 14-JAN-22 08:17.14                                                                                                                                                                   
+
+SQL> 
+SQL> SELECT SYSDATE , NEXT_DAY(SYSDATE,'FRI') FROM DUAL;
+
+SYSDATE            NEXT_DAY(SYSDATE,'                                                                                                                                                                   
+------------------ ------------------                                                                                                                                                                   
+10-JAN-22 08:18.00 14-JAN-22 08:18.00                                                                                                                                                                   
+
+SQL> SELECT SYSDATE , NEXT_DAY(SYSDATE,'fri') FROM DUAL;
+
+SYSDATE            NEXT_DAY(SYSDATE,'                                                                                                                                                                   
+------------------ ------------------                                                                                                                                                                   
+10-JAN-22 08:18.05 14-JAN-22 08:18.05                                                                                                                                                                   
+
+SQL> SELECT SYSDATE , NEXT_DAY(SYSDATE,'friDAY') FROM DUAL;
+
+SYSDATE            NEXT_DAY(SYSDATE,'                                                                                                                                                                   
+------------------ ------------------                                                                                                                                                                   
+10-JAN-22 08:18.08 14-JAN-22 08:18.08                                                                                                                                                                   
+
+SQL> REM COMPANY PAYS ON EVERY TUESDAY
+SQL> 
+SQL> REM FIND FIRST SALARY DATE
+SQL> 
+SQL> REM FIND SECOND SALARY DATE
+SQL> 
+SQL> ALTER SESSION SET NLS_DATE_FORMAT = 'DD-MON-RR DAY';
+
+Session altered.
+
+SQL> 
+SQL> SELECT HIRE_DATE , NEXT_DAY(HIRE_DATE,'TUE') FROM EMPLOYEES;
+
+HIRE_DATE           NEXT_DAY(HIRE_DATE,                                                                                                                                                                 
+------------------- -------------------                                                                                                                                                                 
+17-JUL-87 FRIDAY    21-JUL-87 TUESDAY                                                                                                                                                                   
+21-SEP-89 THURSDAY  26-SEP-89 TUESDAY                                                                                                                                                                   
+13-JAN-93 WEDNESDAY 19-JAN-93 TUESDAY                                                                                                                                                                   
+03-JAN-90 WEDNESDAY 09-JAN-90 TUESDAY                                                                                                                                                                   
+21-MAY-91 TUESDAY   28-MAY-91 TUESDAY                                                                                                                                                                   
+07-FEB-99 SUNDAY    09-FEB-99 TUESDAY                                                                                                                                                                   
+16-NOV-99 TUESDAY   23-NOV-99 TUESDAY                                                                                                                                                                   
+17-OCT-95 TUESDAY   24-OCT-95 TUESDAY                                                                                                                                                                   
+29-JAN-97 WEDNESDAY 04-FEB-97 TUESDAY                                                                                                                                                                   
+15-MAR-98 SUNDAY    17-MAR-98 TUESDAY                                                                                                                                                                   
+09-JUL-98 THURSDAY  14-JUL-98 TUESDAY                                                                                                                                                                   
+29-JAN-00 SATURDAY  01-FEB-00 TUESDAY                                                                                                                                                                   
+11-MAY-96 SATURDAY  14-MAY-96 TUESDAY                                                                                                                                                                   
+24-MAR-98 TUESDAY   31-MAR-98 TUESDAY                                                                                                                                                                   
+24-MAY-99 MONDAY    25-MAY-99 TUESDAY                                                                                                                                                                   
+17-SEP-87 THURSDAY  22-SEP-87 TUESDAY                                                                                                                                                                   
+17-FEB-96 SATURDAY  20-FEB-96 TUESDAY                                                                                                                                                                   
+17-AUG-97 SUNDAY    19-AUG-97 TUESDAY                                                                                                                                                                   
+07-JUN-94 TUESDAY   14-JUN-94 TUESDAY                                                                                                                                                                   
+07-JUN-94 TUESDAY   14-JUN-94 TUESDAY                                                                                                                                                                   
+
+20 rows selected.
+
+SQL> SELECT HIRE_DATE , NEXT_DAY(HIRE_DATE,'TUE')+7 SECOND_SALARY_DATE FROM EMPLOYEES;
+
+HIRE_DATE           SECOND_SALARY_DATE                                                                                                                                                                  
+------------------- -------------------                                                                                                                                                                 
+17-JUL-87 FRIDAY    28-JUL-87 TUESDAY                                                                                                                                                                   
+21-SEP-89 THURSDAY  03-OCT-89 TUESDAY                                                                                                                                                                   
+13-JAN-93 WEDNESDAY 26-JAN-93 TUESDAY                                                                                                                                                                   
+03-JAN-90 WEDNESDAY 16-JAN-90 TUESDAY                                                                                                                                                                   
+21-MAY-91 TUESDAY   04-JUN-91 TUESDAY                                                                                                                                                                   
+07-FEB-99 SUNDAY    16-FEB-99 TUESDAY                                                                                                                                                                   
+16-NOV-99 TUESDAY   30-NOV-99 TUESDAY                                                                                                                                                                   
+17-OCT-95 TUESDAY   31-OCT-95 TUESDAY                                                                                                                                                                   
+29-JAN-97 WEDNESDAY 11-FEB-97 TUESDAY                                                                                                                                                                   
+15-MAR-98 SUNDAY    24-MAR-98 TUESDAY                                                                                                                                                                   
+09-JUL-98 THURSDAY  21-JUL-98 TUESDAY                                                                                                                                                                   
+29-JAN-00 SATURDAY  08-FEB-00 TUESDAY                                                                                                                                                                   
+11-MAY-96 SATURDAY  21-MAY-96 TUESDAY                                                                                                                                                                   
+24-MAR-98 TUESDAY   07-APR-98 TUESDAY                                                                                                                                                                   
+24-MAY-99 MONDAY    01-JUN-99 TUESDAY                                                                                                                                                                   
+17-SEP-87 THURSDAY  29-SEP-87 TUESDAY                                                                                                                                                                   
+17-FEB-96 SATURDAY  27-FEB-96 TUESDAY                                                                                                                                                                   
+17-AUG-97 SUNDAY    26-AUG-97 TUESDAY                                                                                                                                                                   
+07-JUN-94 TUESDAY   21-JUN-94 TUESDAY                                                                                                                                                                   
+07-JUN-94 TUESDAY   21-JUN-94 TUESDAY                                                                                                                                                                   
+
+20 rows selected.
+
+SQL> REM TRUNC DATE : 1 MONTH 2 Q/QUARTER 3 YEAR
+SQL> 
+SQL> REM TRUNC DATE WITH MONTH : IT WILL RETURN FIRST DATE OF SAME MONTH
+SQL> 
+SQL> SELECT HIRE_DATE , TRUNC(HIRE_DATE,'MONTH') FROM EMPLOYEES;
+
+HIRE_DATE           TRUNC(HIRE_DATE,'MO                                                                                                                                                                 
+------------------- -------------------                                                                                                                                                                 
+17-JUL-87 FRIDAY    01-JUL-87 WEDNESDAY                                                                                                                                                                 
+21-SEP-89 THURSDAY  01-SEP-89 FRIDAY                                                                                                                                                                    
+13-JAN-93 WEDNESDAY 01-JAN-93 FRIDAY                                                                                                                                                                    
+03-JAN-90 WEDNESDAY 01-JAN-90 MONDAY                                                                                                                                                                    
+21-MAY-91 TUESDAY   01-MAY-91 WEDNESDAY                                                                                                                                                                 
+07-FEB-99 SUNDAY    01-FEB-99 MONDAY                                                                                                                                                                    
+16-NOV-99 TUESDAY   01-NOV-99 MONDAY                                                                                                                                                                    
+17-OCT-95 TUESDAY   01-OCT-95 SUNDAY                                                                                                                                                                    
+29-JAN-97 WEDNESDAY 01-JAN-97 WEDNESDAY                                                                                                                                                                 
+15-MAR-98 SUNDAY    01-MAR-98 SUNDAY                                                                                                                                                                    
+09-JUL-98 THURSDAY  01-JUL-98 WEDNESDAY                                                                                                                                                                 
+29-JAN-00 SATURDAY  01-JAN-00 SATURDAY                                                                                                                                                                  
+11-MAY-96 SATURDAY  01-MAY-96 WEDNESDAY                                                                                                                                                                 
+24-MAR-98 TUESDAY   01-MAR-98 SUNDAY                                                                                                                                                                    
+24-MAY-99 MONDAY    01-MAY-99 SATURDAY                                                                                                                                                                  
+17-SEP-87 THURSDAY  01-SEP-87 TUESDAY                                                                                                                                                                   
+17-FEB-96 SATURDAY  01-FEB-96 THURSDAY                                                                                                                                                                  
+17-AUG-97 SUNDAY    01-AUG-97 FRIDAY                                                                                                                                                                    
+07-JUN-94 TUESDAY   01-JUN-94 WEDNESDAY                                                                                                                                                                 
+07-JUN-94 TUESDAY   01-JUN-94 WEDNESDAY                                                                                                                                                                 
+
+20 rows selected.
+
+SQL> REM 1 YEAR = 4 QUARTERS
+SQL> 
+SQL> REM Q1 : 01-JAN TO 31-MAR
+SQL> 
+SQL> REM Q2 : 01-APR TO 30-JUN
+SQL> 
+SQL> REM Q3 : 01-JUL TO 30-SEP
+SQL> 
+SQL> REM Q4 : 01-OCT TO 31-DEC
+SQL> 
+SQL> REM TRUNC DATE WITH Q/QUARTER : IT WILL RETURN FIRST DATE OF SAME QUARTER
+SQL> 
+SQL> SELECT HIRE_dATE , TRUNC(HIRE_DATE,'Q') FROM EMPLOYEES;
+
+HIRE_DATE           TRUNC(HIRE_DATE,'Q'                                                                                                                                                                 
+------------------- -------------------                                                                                                                                                                 
+17-JUL-87 FRIDAY    01-JUL-87 WEDNESDAY                                                                                                                                                                 
+21-SEP-89 THURSDAY  01-JUL-89 SATURDAY                                                                                                                                                                  
+13-JAN-93 WEDNESDAY 01-JAN-93 FRIDAY                                                                                                                                                                    
+03-JAN-90 WEDNESDAY 01-JAN-90 MONDAY                                                                                                                                                                    
+21-MAY-91 TUESDAY   01-APR-91 MONDAY                                                                                                                                                                    
+07-FEB-99 SUNDAY    01-JAN-99 FRIDAY                                                                                                                                                                    
+16-NOV-99 TUESDAY   01-OCT-99 FRIDAY                                                                                                                                                                    
+17-OCT-95 TUESDAY   01-OCT-95 SUNDAY                                                                                                                                                                    
+29-JAN-97 WEDNESDAY 01-JAN-97 WEDNESDAY                                                                                                                                                                 
+15-MAR-98 SUNDAY    01-JAN-98 THURSDAY                                                                                                                                                                  
+09-JUL-98 THURSDAY  01-JUL-98 WEDNESDAY                                                                                                                                                                 
+29-JAN-00 SATURDAY  01-JAN-00 SATURDAY                                                                                                                                                                  
+11-MAY-96 SATURDAY  01-APR-96 MONDAY                                                                                                                                                                    
+24-MAR-98 TUESDAY   01-JAN-98 THURSDAY                                                                                                                                                                  
+24-MAY-99 MONDAY    01-APR-99 THURSDAY                                                                                                                                                                  
+17-SEP-87 THURSDAY  01-JUL-87 WEDNESDAY                                                                                                                                                                 
+17-FEB-96 SATURDAY  01-JAN-96 MONDAY                                                                                                                                                                    
+17-AUG-97 SUNDAY    01-JUL-97 TUESDAY                                                                                                                                                                   
+07-JUN-94 TUESDAY   01-APR-94 FRIDAY                                                                                                                                                                    
+07-JUN-94 TUESDAY   01-APR-94 FRIDAY                                                                                                                                                                    
+
+20 rows selected.
+
+SQL> 
+SQL> REM TRUNC DATE WITH YEAR : IT WILL RETURN FIRST DATE OF SAME YEAR
+SQL> 
+SQL> SELECT HIRE_DATE , TRUNC(HIRE_DATE,'YEAR
+  2  
+SQL> SELECT HIRE_DATE , TRUNC(HIRE_DATE,'YEAR') FROM EMPLOYEES;
+
+HIRE_DATE           TRUNC(HIRE_DATE,'YE                                                                                                                                                                 
+------------------- -------------------                                                                                                                                                                 
+17-JUL-87 FRIDAY    01-JAN-87 THURSDAY                                                                                                                                                                  
+21-SEP-89 THURSDAY  01-JAN-89 SUNDAY                                                                                                                                                                    
+13-JAN-93 WEDNESDAY 01-JAN-93 FRIDAY                                                                                                                                                                    
+03-JAN-90 WEDNESDAY 01-JAN-90 MONDAY                                                                                                                                                                    
+21-MAY-91 TUESDAY   01-JAN-91 TUESDAY                                                                                                                                                                   
+07-FEB-99 SUNDAY    01-JAN-99 FRIDAY                                                                                                                                                                    
+16-NOV-99 TUESDAY   01-JAN-99 FRIDAY                                                                                                                                                                    
+17-OCT-95 TUESDAY   01-JAN-95 SUNDAY                                                                                                                                                                    
+29-JAN-97 WEDNESDAY 01-JAN-97 WEDNESDAY                                                                                                                                                                 
+15-MAR-98 SUNDAY    01-JAN-98 THURSDAY                                                                                                                                                                  
+09-JUL-98 THURSDAY  01-JAN-98 THURSDAY                                                                                                                                                                  
+29-JAN-00 SATURDAY  01-JAN-00 SATURDAY                                                                                                                                                                  
+11-MAY-96 SATURDAY  01-JAN-96 MONDAY                                                                                                                                                                    
+24-MAR-98 TUESDAY   01-JAN-98 THURSDAY                                                                                                                                                                  
+24-MAY-99 MONDAY    01-JAN-99 FRIDAY                                                                                                                                                                    
+17-SEP-87 THURSDAY  01-JAN-87 THURSDAY                                                                                                                                                                  
+17-FEB-96 SATURDAY  01-JAN-96 MONDAY                                                                                                                                                                    
+17-AUG-97 SUNDAY    01-JAN-97 WEDNESDAY                                                                                                                                                                 
+07-JUN-94 TUESDAY   01-JAN-94 SATURDAY                                                                                                                                                                  
+07-JUN-94 TUESDAY   01-JAN-94 SATURDAY                                                                                                                                                                  
+
+20 rows selected.
+
+SQL> REM ROUND DATE WITH : MONTH , Q , YEAR
+SQL> 
+SQL> REM ROUND DATE WITH MONTH :
+SQL> 
+SQL> REM 1 MONTH = ?? DAYS 28/29/30/31
+SQL> 
+SQL> REM FIRST HALF : 1 - 15
+SQL> 
+SQL> REM SECOND HALD : 16 - ?? 28/29/30/31
+SQL> 
+SQL> REM IF DATE FALLS IN FIRST HALF, IT WILL RETURN SAME MONTH'S FIRST, BUT IF DATE FALLS IN SECOND HALF, IT WILL RETURN NEXT MONTH'S FIRST DATE
+SQL> 
+SQL> SELECT HIRE_DATE , ROUND(HIRE_DATE,'MONTH') FROM EMPLOYEES;
+
+HIRE_DATE           ROUND(HIRE_DATE,'MO                                                                                                                                                                 
+------------------- -------------------                                                                                                                                                                 
+17-JUL-87 FRIDAY    01-AUG-87 SATURDAY                                                                                                                                                                  
+21-SEP-89 THURSDAY  01-OCT-89 SUNDAY                                                                                                                                                                    
+13-JAN-93 WEDNESDAY 01-JAN-93 FRIDAY                                                                                                                                                                    
+03-JAN-90 WEDNESDAY 01-JAN-90 MONDAY                                                                                                                                                                    
+21-MAY-91 TUESDAY   01-JUN-91 SATURDAY                                                                                                                                                                  
+07-FEB-99 SUNDAY    01-FEB-99 MONDAY                                                                                                                                                                    
+16-NOV-99 TUESDAY   01-DEC-99 WEDNESDAY                                                                                                                                                                 
+17-OCT-95 TUESDAY   01-NOV-95 WEDNESDAY                                                                                                                                                                 
+29-JAN-97 WEDNESDAY 01-FEB-97 SATURDAY                                                                                                                                                                  
+15-MAR-98 SUNDAY    01-MAR-98 SUNDAY                                                                                                                                                                    
+09-JUL-98 THURSDAY  01-JUL-98 WEDNESDAY                                                                                                                                                                 
+29-JAN-00 SATURDAY  01-FEB-00 TUESDAY                                                                                                                                                                   
+11-MAY-96 SATURDAY  01-MAY-96 WEDNESDAY                                                                                                                                                                 
+24-MAR-98 TUESDAY   01-APR-98 WEDNESDAY                                                                                                                                                                 
+24-MAY-99 MONDAY    01-JUN-99 TUESDAY                                                                                                                                                                   
+17-SEP-87 THURSDAY  01-OCT-87 THURSDAY                                                                                                                                                                  
+17-FEB-96 SATURDAY  01-MAR-96 FRIDAY                                                                                                                                                                    
+17-AUG-97 SUNDAY    01-SEP-97 MONDAY                                                                                                                                                                    
+07-JUN-94 TUESDAY   01-JUN-94 WEDNESDAY                                                                                                                                                                 
+07-JUN-94 TUESDAY   01-JUN-94 WEDNESDAY                                                                                                                                                                 
+
+20 rows selected.
+
+SQL> REM TRUNC DATE WITH Q/QUARTER
+SQL> 
+SQL> REM Q1 : 01-JAN TO 31-MAR : FIRST HALF : 01-JAN TO 15-FEB , SECOND HALF : 16-FEB TO 31-MAR
+SQL> 
+SQL> REM Q2 : 01-APR TO 30-JUN : FIRST HALF : 01-APR TO 15-MAY , SECOND HALF : 16-MAY TO 30-JUN
+SQL> 
+SQL> REM Q3 : 01-JUL TO 30-SEP : FIRST HALF : 01-JUL TO 15-AUG , SECOND HALF : 16-AUG TO 30-SEP
+SQL> 
+SQL> REM Q4 : 01-OCT TO 31-DEC : FIRST HALF : 01-OCT TO 15-NOV , SECOND HALF : 16-NOV TO 31-DEC
+SQL> 
+SQL> 
+SQL> REM IF DATE FALLS IN FIRST HALF, IT WILL RETURN SAME QUARTER'S FIRST, BUT IF DATE FALLS IN SECOND HALF, IT WILL RETURN NEXT QUARTER'S FIRST DATE
+SQL> 
+SQL> 
+SQL> SELECT HIRE_DATE , ROUND(HIRE_DATE,'Q') FROM EMPLOYEES;
+
+HIRE_DATE           ROUND(HIRE_DATE,'Q'                                                                                                                                                                 
+------------------- -------------------                                                                                                                                                                 
+17-JUL-87 FRIDAY    01-JUL-87 WEDNESDAY                                                                                                                                                                 
+21-SEP-89 THURSDAY  01-OCT-89 SUNDAY                                                                                                                                                                    
+13-JAN-93 WEDNESDAY 01-JAN-93 FRIDAY                                                                                                                                                                    
+03-JAN-90 WEDNESDAY 01-JAN-90 MONDAY                                                                                                                                                                    
+21-MAY-91 TUESDAY   01-JUL-91 MONDAY                                                                                                                                                                    
+07-FEB-99 SUNDAY    01-JAN-99 FRIDAY                                                                                                                                                                    
+16-NOV-99 TUESDAY   01-JAN-00 SATURDAY                                                                                                                                                                  
+17-OCT-95 TUESDAY   01-OCT-95 SUNDAY                                                                                                                                                                    
+29-JAN-97 WEDNESDAY 01-JAN-97 WEDNESDAY                                                                                                                                                                 
+15-MAR-98 SUNDAY    01-APR-98 WEDNESDAY                                                                                                                                                                 
+09-JUL-98 THURSDAY  01-JUL-98 WEDNESDAY                                                                                                                                                                 
+29-JAN-00 SATURDAY  01-JAN-00 SATURDAY                                                                                                                                                                  
+11-MAY-96 SATURDAY  01-APR-96 MONDAY                                                                                                                                                                    
+24-MAR-98 TUESDAY   01-APR-98 WEDNESDAY                                                                                                                                                                 
+24-MAY-99 MONDAY    01-JUL-99 THURSDAY                                                                                                                                                                  
+17-SEP-87 THURSDAY  01-OCT-87 THURSDAY                                                                                                                                                                  
+17-FEB-96 SATURDAY  01-APR-96 MONDAY                                                                                                                                                                    
+17-AUG-97 SUNDAY    01-OCT-97 WEDNESDAY                                                                                                                                                                 
+07-JUN-94 TUESDAY   01-JUL-94 FRIDAY                                                                                                                                                                    
+07-JUN-94 TUESDAY   01-JUL-94 FRIDAY                                                                                                                                                                    
+
+20 rows selected.
+
+SQL> REM ROUND DATE WITH YEAR :
+SQL> 
+SQL> REM 1 YEAR = 12 MONTHS
+SQL> 
+SQL> REM FIRST HALF : 01-JAN TO 30-JUN
+SQL> 
+SQL> REM SECOND HALF : 01-JUL TO 31-DEC
+SQL> 
+SQL> REM IF DATE FALLS IN FIRST HALF, IT WILL RETURN SAME YEAR'S FIRST, BUT IF DATE FALLS IN SECOND HALF, IT WILL RETURN NEXT YEAR'S FIRST DATE
+SQL> 
+SQL> SELECT FIRST_NAME , HIRE_DATE , ROUND(HIRE_DATE,'YEAR') FROM EMPLOYEES;
+
+FIRST_NAME HIRE_DATE           ROUND(HIRE_DATE,'YE                                                                                                                                                      
+---------- ------------------- -------------------                                                                                                                                                      
+Steven     17-JUL-87 FRIDAY    01-JAN-88 FRIDAY                                                                                                                                                         
+Neena      21-SEP-89 THURSDAY  01-JAN-90 MONDAY                                                                                                                                                         
+Lex        13-JAN-93 WEDNESDAY 01-JAN-93 FRIDAY                                                                                                                                                         
+Alexander  03-JAN-90 WEDNESDAY 01-JAN-90 MONDAY                                                                                                                                                         
+Bruce      21-MAY-91 TUESDAY   01-JAN-91 TUESDAY                                                                                                                                                        
+Diana      07-FEB-99 SUNDAY    01-JAN-99 FRIDAY                                                                                                                                                         
+Kevin      16-NOV-99 TUESDAY   01-JAN-00 SATURDAY                                                                                                                                                       
+Trenna     17-OCT-95 TUESDAY   01-JAN-96 MONDAY                                                                                                                                                         
+Curtis     29-JAN-97 WEDNESDAY 01-JAN-97 WEDNESDAY                                                                                                                                                      
+Randall    15-MAR-98 SUNDAY    01-JAN-98 THURSDAY                                                                                                                                                       
+Peter      09-JUL-98 THURSDAY  01-JAN-99 FRIDAY                                                                                                                                                         
+Eleni      29-JAN-00 SATURDAY  01-JAN-00 SATURDAY                                                                                                                                                       
+Ellen      11-MAY-96 SATURDAY  01-JAN-96 MONDAY                                                                                                                                                         
+Jonathon   24-MAR-98 TUESDAY   01-JAN-98 THURSDAY                                                                                                                                                       
+Kimerely   24-MAY-99 MONDAY    01-JAN-99 FRIDAY                                                                                                                                                         
+Jennifer   17-SEP-87 THURSDAY  01-JAN-88 FRIDAY                                                                                                                                                         
+Michael    17-FEB-96 SATURDAY  01-JAN-96 MONDAY                                                                                                                                                         
+Pat        17-AUG-97 SUNDAY    01-JAN-98 THURSDAY                                                                                                                                                       
+Shelley    07-JUN-94 TUESDAY   01-JAN-94 SATURDAY                                                                                                                                                       
+William    07-JUN-94 TUESDAY   01-JAN-94 SATURDAY                                                                                                                                                       
+
+20 rows selected.
+
+SQL> REM HOW TO FIND LAST DATE OF QUARTER
+SQL> 
+SQL> SELECT HIRE_DATE , TRUNC(ADD_MONTHS(HIRE_DATE,3),'Q')-1 LAST_DATE_OF_QUARTER FROM EMPLOYEES;
+
+HIRE_DATE           LAST_DATE_OF_QUARTE                                                                                                                                                                 
+------------------- -------------------                                                                                                                                                                 
+17-JUL-87 FRIDAY    30-SEP-87 WEDNESDAY                                                                                                                                                                 
+21-SEP-89 THURSDAY  30-SEP-89 SATURDAY                                                                                                                                                                  
+13-JAN-93 WEDNESDAY 31-MAR-93 WEDNESDAY                                                                                                                                                                 
+03-JAN-90 WEDNESDAY 31-MAR-90 SATURDAY                                                                                                                                                                  
+21-MAY-91 TUESDAY   30-JUN-91 SUNDAY                                                                                                                                                                    
+07-FEB-99 SUNDAY    31-MAR-99 WEDNESDAY                                                                                                                                                                 
+16-NOV-99 TUESDAY   31-DEC-99 FRIDAY                                                                                                                                                                    
+17-OCT-95 TUESDAY   31-DEC-95 SUNDAY                                                                                                                                                                    
+29-JAN-97 WEDNESDAY 31-MAR-97 MONDAY                                                                                                                                                                    
+15-MAR-98 SUNDAY    31-MAR-98 TUESDAY                                                                                                                                                                   
+09-JUL-98 THURSDAY  30-SEP-98 WEDNESDAY                                                                                                                                                                 
+29-JAN-00 SATURDAY  31-MAR-00 FRIDAY                                                                                                                                                                    
+11-MAY-96 SATURDAY  30-JUN-96 SUNDAY                                                                                                                                                                    
+24-MAR-98 TUESDAY   31-MAR-98 TUESDAY                                                                                                                                                                   
+24-MAY-99 MONDAY    30-JUN-99 WEDNESDAY                                                                                                                                                                 
+17-SEP-87 THURSDAY  30-SEP-87 WEDNESDAY                                                                                                                                                                 
+17-FEB-96 SATURDAY  31-MAR-96 SUNDAY                                                                                                                                                                    
+17-AUG-97 SUNDAY    30-SEP-97 TUESDAY                                                                                                                                                                   
+07-JUN-94 TUESDAY   30-JUN-94 THURSDAY                                                                                                                                                                  
+07-JUN-94 TUESDAY   30-JUN-94 THURSDAY                                                                                                                                                                  
+
+20 rows selected.
+
+SQL> REM DATE ARITHMETIC
+SQL> 
+SQL> REM DATE FUNCTIONS : SYSDATE CURRENT_DATE ADD_MONTHS MONTHS_BETWEEN LAST_DAY NEXT_DAY TRUNC ROUND
+SQL> 
+SQL> REM CHARACTER 14 , NUMBER 7 , DATE 8
+SQL> 
+SQL> SPOOL OFF

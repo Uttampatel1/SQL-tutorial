@@ -1,0 +1,1452 @@
+SQL> 
+SQL> CL SCR
+
+SQL> REM 4 CONVERSION 5 GENERAL
+SQL> 
+SQL> REM TYPES OF GENERAL FUNCTIONS : 1 NULL RELATED FUNCTIONS 2 CONDITIONAL FUNCTION
+SQL> 
+SQL> REM LIST OF NULL RELATED FUNCTIONS : NVL NVL2 NULLIF COALESCR
+SQL> 
+SQL> REM LIST OF CONDITIONAL FUNCTIONS : DECODE , CASE ... WHEN ... THEN ... , CASE WHEN ... THEN ...
+SQL> 
+SQL> 
+SQL> REM NVL : NULL VALUE LOCATOR
+SQL> 
+SQL> REM NVL : TO REPLACE NULL VALUE WITH ANOTHER VALUE
+SQL> 
+SQL> REM DATA TYPES OF BOTH ARGUMENTS SHOULD MATCH
+SQL> 
+SQL> SELECT FIRST_NAME , COMMISSION_PCT , NVL(COMMISSION_PCT,0) FROM EMPLOYEES;
+
+FIRST_NAME COMMISSION_PCT NVL(COMMISSION_PCT,0)                                                                                                                                                         
+---------- -------------- ---------------------                                                                                                                                                         
+Steven                                        0                                                                                                                                                         
+Neena                                         0                                                                                                                                                         
+Lex                                           0                                                                                                                                                         
+Alexander                                     0                                                                                                                                                         
+Bruce                                         0                                                                                                                                                         
+Diana                                         0                                                                                                                                                         
+Kevin                                         0                                                                                                                                                         
+Trenna                                        0                                                                                                                                                         
+Curtis                                        0                                                                                                                                                         
+Randall                                       0                                                                                                                                                         
+Peter                                         0                                                                                                                                                         
+Eleni                  .2                    .2                                                                                                                                                         
+Ellen                  .3                    .3                                                                                                                                                         
+Jonathon               .3                    .3                                                                                                                                                         
+Kimerely              .15                   .15                                                                                                                                                         
+Jennifer                                      0                                                                                                                                                         
+Michael                                       0                                                                                                                                                         
+Pat                                           0                                                                                                                                                         
+Shelley                                       0                                                                                                                                                         
+William                                       0                                                                                                                                                         
+
+20 rows selected.
+
+SQL> SELECT FIRST_NAME , COMMISSION_PCT , NVL(COMMISSION_PCT,0) NEW_COMM_PCT FROM EMPLOYEES;
+
+FIRST_NAME COMMISSION_PCT NEW_COMM_PCT                                                                                                                                                                  
+---------- -------------- ------------                                                                                                                                                                  
+Steven                               0                                                                                                                                                                  
+Neena                                0                                                                                                                                                                  
+Lex                                  0                                                                                                                                                                  
+Alexander                            0                                                                                                                                                                  
+Bruce                                0                                                                                                                                                                  
+Diana                                0                                                                                                                                                                  
+Kevin                                0                                                                                                                                                                  
+Trenna                               0                                                                                                                                                                  
+Curtis                               0                                                                                                                                                                  
+Randall                              0                                                                                                                                                                  
+Peter                                0                                                                                                                                                                  
+Eleni                  .2           .2                                                                                                                                                                  
+Ellen                  .3           .3                                                                                                                                                                  
+Jonathon               .3           .3                                                                                                                                                                  
+Kimerely              .15          .15                                                                                                                                                                  
+Jennifer                             0                                                                                                                                                                  
+Michael                              0                                                                                                                                                                  
+Pat                                  0                                                                                                                                                                  
+Shelley                              0                                                                                                                                                                  
+William                              0                                                                                                                                                                  
+
+20 rows selected.
+
+SQL> SELECT FIRST_NAME , COMMISSION_PCT , NVL(COMMISSION_PCT,.10) NEW_COMM_PCT FROM EMPLOYEES;
+
+FIRST_NAME COMMISSION_PCT NEW_COMM_PCT                                                                                                                                                                  
+---------- -------------- ------------                                                                                                                                                                  
+Steven                              .1                                                                                                                                                                  
+Neena                               .1                                                                                                                                                                  
+Lex                                 .1                                                                                                                                                                  
+Alexander                           .1                                                                                                                                                                  
+Bruce                               .1                                                                                                                                                                  
+Diana                               .1                                                                                                                                                                  
+Kevin                               .1                                                                                                                                                                  
+Trenna                              .1                                                                                                                                                                  
+Curtis                              .1                                                                                                                                                                  
+Randall                             .1                                                                                                                                                                  
+Peter                               .1                                                                                                                                                                  
+Eleni                  .2           .2                                                                                                                                                                  
+Ellen                  .3           .3                                                                                                                                                                  
+Jonathon               .3           .3                                                                                                                                                                  
+Kimerely              .15          .15                                                                                                                                                                  
+Jennifer                            .1                                                                                                                                                                  
+Michael                             .1                                                                                                                                                                  
+Pat                                 .1                                                                                                                                                                  
+Shelley                             .1                                                                                                                                                                  
+William                             .1                                                                                                                                                                  
+
+20 rows selected.
+
+SQL> SELECT FIRST_NAME , COMMISSION_PCT , NVL(COMMISSION_PCT,'NA') NEW_COMM_PCT FROM EMPLOYEES;
+SELECT FIRST_NAME , COMMISSION_PCT , NVL(COMMISSION_PCT,'NA') NEW_COMM_PCT FROM EMPLOYEES
+                                                        *
+ERROR at line 1:
+ORA-01722: invalid number 
+
+
+SQL> SELECT FIRST_NAME , COMMISSION_PCT , NVL(TO_CHAR(COMMISSION_PCT),'NA') NEW_COMM_PCT FROM EMPLOYEES;
+
+FIRST_NAME COMMISSION_PCT NEW_COMM_PCT                                                                                                                                                                  
+---------- -------------- ----------------------------------------                                                                                                                                      
+Steven                    NA                                                                                                                                                                            
+Neena                     NA                                                                                                                                                                            
+Lex                       NA                                                                                                                                                                            
+Alexander                 NA                                                                                                                                                                            
+Bruce                     NA                                                                                                                                                                            
+Diana                     NA                                                                                                                                                                            
+Kevin                     NA                                                                                                                                                                            
+Trenna                    NA                                                                                                                                                                            
+Curtis                    NA                                                                                                                                                                            
+Randall                   NA                                                                                                                                                                            
+Peter                     NA                                                                                                                                                                            
+Eleni                  .2 .2                                                                                                                                                                            
+Ellen                  .3 .3                                                                                                                                                                            
+Jonathon               .3 .3                                                                                                                                                                            
+Kimerely              .15 .15                                                                                                                                                                           
+Jennifer                  NA                                                                                                                                                                            
+Michael                   NA                                                                                                                                                                            
+Pat                       NA                                                                                                                                                                            
+Shelley                   NA                                                                                                                                                                            
+William                   NA                                                                                                                                                                            
+
+20 rows selected.
+
+SQL> REM NVL2 : IT IS USED TO REPLACE NULL AS WELL AS NON-NULL VALUE
+SQL> 
+SQL> REM NULL : .10 , NON-NULL : +.10
+SQL> 
+SQL> SELECT FIRST_NAME , NVL2(COMMISSION_PCT , COMMISSION_PCT+.10  , .10) NEW_COMM_PCT FROM EMPLOYEES;
+
+FIRST_NAME NEW_COMM_PCT                                                                                                                                                                                 
+---------- ------------                                                                                                                                                                                 
+Steven               .1                                                                                                                                                                                 
+Neena                .1                                                                                                                                                                                 
+Lex                  .1                                                                                                                                                                                 
+Alexander            .1                                                                                                                                                                                 
+Bruce                .1                                                                                                                                                                                 
+Diana                .1                                                                                                                                                                                 
+Kevin                .1                                                                                                                                                                                 
+Trenna               .1                                                                                                                                                                                 
+Curtis               .1                                                                                                                                                                                 
+Randall              .1                                                                                                                                                                                 
+Peter                .1                                                                                                                                                                                 
+Eleni                .3                                                                                                                                                                                 
+Ellen                .4                                                                                                                                                                                 
+Jonathon             .4                                                                                                                                                                                 
+Kimerely            .25                                                                                                                                                                                 
+Jennifer             .1                                                                                                                                                                                 
+Michael              .1                                                                                                                                                                                 
+Pat                  .1                                                                                                                                                                                 
+Shelley              .1                                                                                                                                                                                 
+William              .1                                                                                                                                                                                 
+
+20 rows selected.
+
+SQL> SELECT FIRST_NAME , COMMISSION_PCT , NVL2(COMMISSION_PCT , COMMISSION_PCT+.10  , .10) NEW_COMM_PCT FROM EMPLOYEES;
+
+FIRST_NAME COMMISSION_PCT NEW_COMM_PCT                                                                                                                                                                  
+---------- -------------- ------------                                                                                                                                                                  
+Steven                              .1                                                                                                                                                                  
+Neena                               .1                                                                                                                                                                  
+Lex                                 .1                                                                                                                                                                  
+Alexander                           .1                                                                                                                                                                  
+Bruce                               .1                                                                                                                                                                  
+Diana                               .1                                                                                                                                                                  
+Kevin                               .1                                                                                                                                                                  
+Trenna                              .1                                                                                                                                                                  
+Curtis                              .1                                                                                                                                                                  
+Randall                             .1                                                                                                                                                                  
+Peter                               .1                                                                                                                                                                  
+Eleni                  .2           .3                                                                                                                                                                  
+Ellen                  .3           .4                                                                                                                                                                  
+Jonathon               .3           .4                                                                                                                                                                  
+Kimerely              .15          .25                                                                                                                                                                  
+Jennifer                            .1                                                                                                                                                                  
+Michael                             .1                                                                                                                                                                  
+Pat                                 .1                                                                                                                                                                  
+Shelley                             .1                                                                                                                                                                  
+William                             .1                                                                                                                                                                  
+
+20 rows selected.
+
+SQL> REM NULL : NO , NON-NULL : YES
+SQL> 
+SQL> SELECT FIRST_NAME , COMMISSION_PCT , NVL2(COMMISSION_PCT , 'YES'  , 'NO') NEW_COMM_PCT FROM EMPLOYEES;
+
+FIRST_NAME COMMISSION_PCT NEW                                                                                                                                                                           
+---------- -------------- ---                                                                                                                                                                           
+Steven                    NO                                                                                                                                                                            
+Neena                     NO                                                                                                                                                                            
+Lex                       NO                                                                                                                                                                            
+Alexander                 NO                                                                                                                                                                            
+Bruce                     NO                                                                                                                                                                            
+Diana                     NO                                                                                                                                                                            
+Kevin                     NO                                                                                                                                                                            
+Trenna                    NO                                                                                                                                                                            
+Curtis                    NO                                                                                                                                                                            
+Randall                   NO                                                                                                                                                                            
+Peter                     NO                                                                                                                                                                            
+Eleni                  .2 YES                                                                                                                                                                           
+Ellen                  .3 YES                                                                                                                                                                           
+Jonathon               .3 YES                                                                                                                                                                           
+Kimerely              .15 YES                                                                                                                                                                           
+Jennifer                  NO                                                                                                                                                                            
+Michael                   NO                                                                                                                                                                            
+Pat                       NO                                                                                                                                                                            
+Shelley                   NO                                                                                                                                                                            
+William                   NO                                                                                                                                                                            
+
+20 rows selected.
+
+SQL> SELECT FIRST_NAME , COMMISSION_PCT , NVL2(COMMISSION_PCT , 'YES'  , 0) NEW_COMM_PCT FROM EMPLOYEES;
+
+FIRST_NAME COMMISSION_PCT NEW                                                                                                                                                                           
+---------- -------------- ---                                                                                                                                                                           
+Steven                    0                                                                                                                                                                             
+Neena                     0                                                                                                                                                                             
+Lex                       0                                                                                                                                                                             
+Alexander                 0                                                                                                                                                                             
+Bruce                     0                                                                                                                                                                             
+Diana                     0                                                                                                                                                                             
+Kevin                     0                                                                                                                                                                             
+Trenna                    0                                                                                                                                                                             
+Curtis                    0                                                                                                                                                                             
+Randall                   0                                                                                                                                                                             
+Peter                     0                                                                                                                                                                             
+Eleni                  .2 YES                                                                                                                                                                           
+Ellen                  .3 YES                                                                                                                                                                           
+Jonathon               .3 YES                                                                                                                                                                           
+Kimerely              .15 YES                                                                                                                                                                           
+Jennifer                  0                                                                                                                                                                             
+Michael                   0                                                                                                                                                                             
+Pat                       0                                                                                                                                                                             
+Shelley                   0                                                                                                                                                                             
+William                   0                                                                                                                                                                             
+
+20 rows selected.
+
+SQL> SELECT FIRST_NAME , COMMISSION_PCT , NVL2(COMMISSION_PCT , 0  , 'NO') NEW_COMM_PCT FROM EMPLOYEES;
+SELECT FIRST_NAME , COMMISSION_PCT , NVL2(COMMISSION_PCT , 0  , 'NO') NEW_COMM_PCT FROM EMPLOYEES
+                                                                *
+ERROR at line 1:
+ORA-01722: invalid number 
+
+
+SQL> SELECT FIRST_NAME , COMMISSION_PCT , NVL2(COMMISSION_PCT , TO_CHAR(0) , 'NO') NEW_COMM_PCT FROM EMPLOYEES;
+
+FIRST_NAME COMMISSION_PCT NE                                                                                                                                                                            
+---------- -------------- --                                                                                                                                                                            
+Steven                    NO                                                                                                                                                                            
+Neena                     NO                                                                                                                                                                            
+Lex                       NO                                                                                                                                                                            
+Alexander                 NO                                                                                                                                                                            
+Bruce                     NO                                                                                                                                                                            
+Diana                     NO                                                                                                                                                                            
+Kevin                     NO                                                                                                                                                                            
+Trenna                    NO                                                                                                                                                                            
+Curtis                    NO                                                                                                                                                                            
+Randall                   NO                                                                                                                                                                            
+Peter                     NO                                                                                                                                                                            
+Eleni                  .2 0                                                                                                                                                                             
+Ellen                  .3 0                                                                                                                                                                             
+Jonathon               .3 0                                                                                                                                                                             
+Kimerely              .15 0                                                                                                                                                                             
+Jennifer                  NO                                                                                                                                                                            
+Michael                   NO                                                                                                                                                                            
+Pat                       NO                                                                                                                                                                            
+Shelley                   NO                                                                                                                                                                            
+William                   NO                                                                                                                                                                            
+
+20 rows selected.
+
+SQL> SELECT FIRST_NAME , COMMISSION_PCT , NVL2(COMMISSION_PCT , COMMISSION_PCT+.10 , 'NO') NEW_COMM_PCT FROM EMPLOYEES;
+SELECT FIRST_NAME , COMMISSION_PCT , NVL2(COMMISSION_PCT , COMMISSION_PCT+.10 , 'NO') NEW_COMM_PCT FROM EMPLOYEES
+                                                                                *
+ERROR at line 1:
+ORA-01722: invalid number 
+
+
+SQL> SELECT FIRST_NAME , COMMISSION_PCT , NVL2(COMMISSION_PCT , TO_CHAR(COMMISSION_PCT)+.10 , 'NO') NEW_COMM_PCT FROM EMPLOYEES;
+SELECT FIRST_NAME , COMMISSION_PCT , NVL2(COMMISSION_PCT , TO_CHAR(COMMISSION_PCT)+.10 , 'NO') NEW_COMM_PCT FROM EMPLOYEES
+                                                                                         *
+ERROR at line 1:
+ORA-01722: invalid number 
+
+
+SQL> SELECT FIRST_NAME , COMMISSION_PCT , NVL2(COMMISSION_PCT , TO_CHAR(COMMISSION_PCT+.10) , 'NO') NEW_COMM_PCT FROM EMPLOYEES;
+
+FIRST_NAME COMMISSION_PCT NEW_COMM_PCT                                                                                                                                                                  
+---------- -------------- ----------------------------------------                                                                                                                                      
+Steven                    NO                                                                                                                                                                            
+Neena                     NO                                                                                                                                                                            
+Lex                       NO                                                                                                                                                                            
+Alexander                 NO                                                                                                                                                                            
+Bruce                     NO                                                                                                                                                                            
+Diana                     NO                                                                                                                                                                            
+Kevin                     NO                                                                                                                                                                            
+Trenna                    NO                                                                                                                                                                            
+Curtis                    NO                                                                                                                                                                            
+Randall                   NO                                                                                                                                                                            
+Peter                     NO                                                                                                                                                                            
+Eleni                  .2 .3                                                                                                                                                                            
+Ellen                  .3 .4                                                                                                                                                                            
+Jonathon               .3 .4                                                                                                                                                                            
+Kimerely              .15 .25                                                                                                                                                                           
+Jennifer                  NO                                                                                                                                                                            
+Michael                   NO                                                                                                                                                                            
+Pat                       NO                                                                                                                                                                            
+Shelley                   NO                                                                                                                                                                            
+William                   NO                                                                                                                                                                            
+
+20 rows selected.
+
+SQL> REM NULLIF : IT TAKES TWO ARGUMENTS, IT BOTH ARGUMENTS ARE IDENTICAL, IT WILL RETURN NULL.
+SQL> 
+SQL> REM IF BOTH ARGUMENTS ARE NOT IDENTICAL, IT WILL RETURN FIRST ARGUMENT.
+SQL> 
+SQL> SELECT FIRST_NAME , LAST_NAME , SUBSTR(FIRST_NAME,2,1) , SUBSTR(LAST_NAME,2,1) FROM EMPLOYEES;
+
+FIRST_NAME LAST_NAME  SUBS SUBS                                                                                                                                                                         
+---------- ---------- ---- ----                                                                                                                                                                         
+Steven     King       t    i                                                                                                                                                                            
+Neena      Kochhar    e    o                                                                                                                                                                            
+Lex        De Haan    e    e                                                                                                                                                                            
+Alexander  Hunold     l    u                                                                                                                                                                            
+Bruce      Ernst      r    r                                                                                                                                                                            
+Diana      Lorentz    i    o                                                                                                                                                                            
+Kevin      Mourgos    e    o                                                                                                                                                                            
+Trenna     Rajs       r    a                                                                                                                                                                            
+Curtis     Davies     u    a                                                                                                                                                                            
+Randall    Matos      a    a                                                                                                                                                                            
+Peter      Vargas     e    a                                                                                                                                                                            
+Eleni      Zlotkey    l    l                                                                                                                                                                            
+Ellen      Abel       l    b                                                                                                                                                                            
+Jonathon   Taylor     o    a                                                                                                                                                                            
+Kimerely   Grant      i    r                                                                                                                                                                            
+Jennifer   Whalen     e    h                                                                                                                                                                            
+Michael    Hartstein  i    a                                                                                                                                                                            
+Pat        Fay        a    a                                                                                                                                                                            
+Shelley    Higgins    h    i                                                                                                                                                                            
+William    Gietz      i    i                                                                                                                                                                            
+
+20 rows selected.
+
+SQL> SELECT FIRST_NAME , LAST_NAME , SUBSTR(FIRST_NAME,2,1) , SUBSTR(LAST_NAME,2,1) ,
+  2  NULLIF(SUBSTR(FIRST_NAME,2,1) , SUBSTR(LAST_NAME,2,1)) FROM EMPLOYEES;
+
+FIRST_NAME LAST_NAME  SUBS SUBS NULL                                                                                                                                                                    
+---------- ---------- ---- ---- ----                                                                                                                                                                    
+Steven     King       t    i    t                                                                                                                                                                       
+Neena      Kochhar    e    o    e                                                                                                                                                                       
+Lex        De Haan    e    e                                                                                                                                                                            
+Alexander  Hunold     l    u    l                                                                                                                                                                       
+Bruce      Ernst      r    r                                                                                                                                                                            
+Diana      Lorentz    i    o    i                                                                                                                                                                       
+Kevin      Mourgos    e    o    e                                                                                                                                                                       
+Trenna     Rajs       r    a    r                                                                                                                                                                       
+Curtis     Davies     u    a    u                                                                                                                                                                       
+Randall    Matos      a    a                                                                                                                                                                            
+Peter      Vargas     e    a    e                                                                                                                                                                       
+Eleni      Zlotkey    l    l                                                                                                                                                                            
+Ellen      Abel       l    b    l                                                                                                                                                                       
+Jonathon   Taylor     o    a    o                                                                                                                                                                       
+Kimerely   Grant      i    r    i                                                                                                                                                                       
+Jennifer   Whalen     e    h    e                                                                                                                                                                       
+Michael    Hartstein  i    a    i                                                                                                                                                                       
+Pat        Fay        a    a                                                                                                                                                                            
+Shelley    Higgins    h    i    h                                                                                                                                                                       
+William    Gietz      i    i                                                                                                                                                                            
+
+20 rows selected.
+
+SQL> SELECT FIRST_NAME , LAST_NAME , SUBSTR(FIRST_NAME,2,1) , SUBSTR(LAST_NAME,2,1) ,
+  2  NULLIF(SUBSTR(LAST_NAME,2,1) , SUBSTR(FIRST_NAME,2,1)) FROM EMPLOYEES;
+
+FIRST_NAME LAST_NAME  SUBS SUBS NULL                                                                                                                                                                    
+---------- ---------- ---- ---- ----                                                                                                                                                                    
+Steven     King       t    i    i                                                                                                                                                                       
+Neena      Kochhar    e    o    o                                                                                                                                                                       
+Lex        De Haan    e    e                                                                                                                                                                            
+Alexander  Hunold     l    u    u                                                                                                                                                                       
+Bruce      Ernst      r    r                                                                                                                                                                            
+Diana      Lorentz    i    o    o                                                                                                                                                                       
+Kevin      Mourgos    e    o    o                                                                                                                                                                       
+Trenna     Rajs       r    a    a                                                                                                                                                                       
+Curtis     Davies     u    a    a                                                                                                                                                                       
+Randall    Matos      a    a                                                                                                                                                                            
+Peter      Vargas     e    a    a                                                                                                                                                                       
+Eleni      Zlotkey    l    l                                                                                                                                                                            
+Ellen      Abel       l    b    b                                                                                                                                                                       
+Jonathon   Taylor     o    a    a                                                                                                                                                                       
+Kimerely   Grant      i    r    r                                                                                                                                                                       
+Jennifer   Whalen     e    h    h                                                                                                                                                                       
+Michael    Hartstein  i    a    a                                                                                                                                                                       
+Pat        Fay        a    a                                                                                                                                                                            
+Shelley    Higgins    h    i    i                                                                                                                                                                       
+William    Gietz      i    i                                                                                                                                                                            
+
+20 rows selected.
+
+SQL> REM COALESCE : IT TAKES INFINITE ARGUMENTS.
+SQL> 
+SQL> REM IT CHECKS FROM LEFT TO RIGHT.
+SQL> 
+SQL> REM IT WILL RETURN FIRST NON-NULL VALUE FROM THE LIST.
+SQL> 
+SQL> SELECT * FROM CONTACTNO;
+
+NAME                     MOBILE     OPHONE     RPHONE                                                                                                                                                   
+-------------------- ---------- ---------- ----------                                                                                                                                                   
+AMIT                 1234567890 9876543210 1122334455                                                                                                                                                   
+BIREN                6644882244            9876452316                                                                                                                                                   
+CHETAN                          2277554488                                                                                                                                                              
+DHIREN                                     6789054123                                                                                                                                                   
+EKTA                                                                                                                                                                                                    
+
+SQL> SELECT NAME , COALESCR(MOBILE,OPHONE,RPHONE) CONTACTNO FROM CONTACTNO;
+SELECT NAME , COALESCR(MOBILE,OPHONE,RPHONE) CONTACTNO FROM CONTACTNO
+              *
+ERROR at line 1:
+ORA-00904: "COALESCR": invalid identifier 
+
+
+SQL> SELECT NAME , COALESCE(MOBILE,OPHONE,RPHONE) CONTACTNO FROM CONTACTNO;
+
+NAME                  CONTACTNO                                                                                                                                                                         
+-------------------- ----------                                                                                                                                                                         
+AMIT                 1234567890                                                                                                                                                                         
+BIREN                6644882244                                                                                                                                                                         
+CHETAN               2277554488                                                                                                                                                                         
+DHIREN               6789054123                                                                                                                                                                         
+EKTA                                                                                                                                                                                                    
+
+SQL> SELECT NAME , COALESCE(MOBILE,OPHONE,RPHONE,1800600300) CONTACTNO FROM CONTACTNO;
+
+NAME                  CONTACTNO                                                                                                                                                                         
+-------------------- ----------                                                                                                                                                                         
+AMIT                 1234567890                                                                                                                                                                         
+BIREN                6644882244                                                                                                                                                                         
+CHETAN               2277554488                                                                                                                                                                         
+DHIREN               6789054123                                                                                                                                                                         
+EKTA                 1800600300                                                                                                                                                                         
+
+SQL> SELECT NAME , COALESCE(OPHONE,MOBILE,RPHONE,1800600300) CONTACTNO FROM CONTACTNO;
+
+NAME                  CONTACTNO                                                                                                                                                                         
+-------------------- ----------                                                                                                                                                                         
+AMIT                 9876543210                                                                                                                                                                         
+BIREN                6644882244                                                                                                                                                                         
+CHETAN               2277554488                                                                                                                                                                         
+DHIREN               6789054123                                                                                                                                                                         
+EKTA                 1800600300                                                                                                                                                                         
+
+SQL> REM CONDITIONAL FUNCTIONS : 1 DECODE 2 CASE ... WHEN ... THEN ... 3 CASE WHEN ... THEN ...
+SQL> 
+SQL> REM INCREMENT : +1200
+SQL> 
+SQL> SELECT FIRST_NAME , SALARY , SALARY + 1200 NEW_SALARY FROM EMPLOYEES;
+
+FIRST_NAME     SALARY NEW_SALARY                                                                                                                                                                        
+---------- ---------- ----------                                                                                                                                                                        
+Steven          24000      25200                                                                                                                                                                        
+Neena           17000      18200                                                                                                                                                                        
+Lex             17000      18200                                                                                                                                                                        
+Alexander        9000      10200                                                                                                                                                                        
+Bruce            6000       7200                                                                                                                                                                        
+Diana            4200       5400                                                                                                                                                                        
+Kevin            5800       7000                                                                                                                                                                        
+Trenna           3500       4700                                                                                                                                                                        
+Curtis           3100       4300                                                                                                                                                                        
+Randall          2600       3800                                                                                                                                                                        
+Peter            2500       3700                                                                                                                                                                        
+Eleni           10500      11700                                                                                                                                                                        
+Ellen           11000      12200                                                                                                                                                                        
+Jonathon         8600       9800                                                                                                                                                                        
+Kimerely         7000       8200                                                                                                                                                                        
+Jennifer         4400       5600                                                                                                                                                                        
+Michael         13000      14200                                                                                                                                                                        
+Pat              6000       7200                                                                                                                                                                        
+Shelley         12000      13200                                                                                                                                                                        
+William          8300       9500                                                                                                                                                                        
+
+20 rows selected.
+
+SQL> REM INCREMENT : 20%
+SQL> 
+SQL> SELECT FIRST_NAME , SALARY , SALARY * 1.2 NEW_SALARY FROM EMPLOYEES;
+
+FIRST_NAME     SALARY NEW_SALARY                                                                                                                                                                        
+---------- ---------- ----------                                                                                                                                                                        
+Steven          24000      28800                                                                                                                                                                        
+Neena           17000      20400                                                                                                                                                                        
+Lex             17000      20400                                                                                                                                                                        
+Alexander        9000      10800                                                                                                                                                                        
+Bruce            6000       7200                                                                                                                                                                        
+Diana            4200       5040                                                                                                                                                                        
+Kevin            5800       6960                                                                                                                                                                        
+Trenna           3500       4200                                                                                                                                                                        
+Curtis           3100       3720                                                                                                                                                                        
+Randall          2600       3120                                                                                                                                                                        
+Peter            2500       3000                                                                                                                                                                        
+Eleni           10500      12600                                                                                                                                                                        
+Ellen           11000      13200                                                                                                                                                                        
+Jonathon         8600      10320                                                                                                                                                                        
+Kimerely         7000       8400                                                                                                                                                                        
+Jennifer         4400       5280                                                                                                                                                                        
+Michael         13000      15600                                                                                                                                                                        
+Pat              6000       7200                                                                                                                                                                        
+Shelley         12000      14400                                                                                                                                                                        
+William          8300       9960                                                                                                                                                                        
+
+20 rows selected.
+
+SQL> REM INCREMENT DEPARTMENT_ID WISE : 20 +1200 , 50 +900 , 60 +600 , 110 +300 , REMAINING +500
+SQL> 
+SQL> SELECT FIRST_NAME , DEPARTMENT_ID , SALARY ,
+  2  DECODE( DEPARTMENT_ID , 20 , SALARY + 1200
+  3                        , 50 , SALARY + 900
+  4                        , 60 , SALARY + 600
+  5                        , 110 , SALARY + 300   , SALARY + 500) NEW_SALARY
+  6  FROM EMPLOYEES;
+
+FIRST_NAME DEPARTMENT_ID     SALARY NEW_SALARY                                                                                                                                                          
+---------- ------------- ---------- ----------                                                                                                                                                          
+Steven                90      24000      24500                                                                                                                                                          
+Neena                 90      17000      17500                                                                                                                                                          
+Lex                   90      17000      17500                                                                                                                                                          
+Alexander             60       9000       9600                                                                                                                                                          
+Bruce                 60       6000       6600                                                                                                                                                          
+Diana                 60       4200       4800                                                                                                                                                          
+Kevin                 50       5800       6700                                                                                                                                                          
+Trenna                50       3500       4400                                                                                                                                                          
+Curtis                50       3100       4000                                                                                                                                                          
+Randall               50       2600       3500                                                                                                                                                          
+Peter                 50       2500       3400                                                                                                                                                          
+Eleni                 80      10500      11000                                                                                                                                                          
+Ellen                 80      11000      11500                                                                                                                                                          
+Jonathon              80       8600       9100                                                                                                                                                          
+Kimerely                       7000       7500                                                                                                                                                          
+Jennifer              10       4400       4900                                                                                                                                                          
+Michael               20      13000      14200                                                                                                                                                          
+Pat                   20       6000       7200                                                                                                                                                          
+Shelley              110      12000      12300                                                                                                                                                          
+William              110       8300       8600                                                                                                                                                          
+
+20 rows selected.
+
+SQL> REM INCREMENT DEPARTMENT_ID WISE : 20 +1200 , 50 +900 , 60 +600 , 110 +300 , REMAINING NO INCREMENT
+SQL> 
+SQL> SELECT FIRST_NAME , DEPARTMENT_ID , SALARY ,
+  2  DECODE( DEPARTMENT_ID , 20 , SALARY + 1200
+  3                        , 50 , SALARY + 900
+  4                        , 60 , SALARY + 600
+  5                        , 110 , SALARY + 300) NEW_SALARY
+  6  
+SQL> SELECT FIRST_NAME , DEPARTMENT_ID , SALARY ,
+  2  DECODE( DEPARTMENT_ID , 20 , SALARY + 1200
+  3                        , 50 , SALARY + 900
+  4                        , 60 , SALARY + 600
+  5                        , 110 , SALARY + 300) NEW_SALARY
+  6  FROM EMPLOYEES;
+
+FIRST_NAME DEPARTMENT_ID     SALARY NEW_SALARY                                                                                                                                                          
+---------- ------------- ---------- ----------                                                                                                                                                          
+Steven                90      24000                                                                                                                                                                     
+Neena                 90      17000                                                                                                                                                                     
+Lex                   90      17000                                                                                                                                                                     
+Alexander             60       9000       9600                                                                                                                                                          
+Bruce                 60       6000       6600                                                                                                                                                          
+Diana                 60       4200       4800                                                                                                                                                          
+Kevin                 50       5800       6700                                                                                                                                                          
+Trenna                50       3500       4400                                                                                                                                                          
+Curtis                50       3100       4000                                                                                                                                                          
+Randall               50       2600       3500                                                                                                                                                          
+Peter                 50       2500       3400                                                                                                                                                          
+Eleni                 80      10500                                                                                                                                                                     
+Ellen                 80      11000                                                                                                                                                                     
+Jonathon              80       8600                                                                                                                                                                     
+Kimerely                       7000                                                                                                                                                                     
+Jennifer              10       4400                                                                                                                                                                     
+Michael               20      13000      14200                                                                                                                                                          
+Pat                   20       6000       7200                                                                                                                                                          
+Shelley              110      12000      12300                                                                                                                                                          
+William              110       8300       8600                                                                                                                                                          
+
+20 rows selected.
+
+SQL> SELECT FIRST_NAME , DEPARTMENT_ID , SALARY ,
+  2  DECODE( DEPARTMENT_ID , 20 , SALARY + 1200
+  3                        , 50 , SALARY + 900
+  4                        , 60 , SALARY + 600
+  5                        , 110 , SALARY + 300 , SALARY) NEW_SALARY
+  6  FROM EMPLOYEES;
+
+FIRST_NAME DEPARTMENT_ID     SALARY NEW_SALARY                                                                                                                                                          
+---------- ------------- ---------- ----------                                                                                                                                                          
+Steven                90      24000      24000                                                                                                                                                          
+Neena                 90      17000      17000                                                                                                                                                          
+Lex                   90      17000      17000                                                                                                                                                          
+Alexander             60       9000       9600                                                                                                                                                          
+Bruce                 60       6000       6600                                                                                                                                                          
+Diana                 60       4200       4800                                                                                                                                                          
+Kevin                 50       5800       6700                                                                                                                                                          
+Trenna                50       3500       4400                                                                                                                                                          
+Curtis                50       3100       4000                                                                                                                                                          
+Randall               50       2600       3500                                                                                                                                                          
+Peter                 50       2500       3400                                                                                                                                                          
+Eleni                 80      10500      10500                                                                                                                                                          
+Ellen                 80      11000      11000                                                                                                                                                          
+Jonathon              80       8600       8600                                                                                                                                                          
+Kimerely                       7000       7000                                                                                                                                                          
+Jennifer              10       4400       4400                                                                                                                                                          
+Michael               20      13000      14200                                                                                                                                                          
+Pat                   20       6000       7200                                                                                                                                                          
+Shelley              110      12000      12300                                                                                                                                                          
+William              110       8300       8600                                                                                                                                                          
+
+20 rows selected.
+
+SQL> REM INCREMENT DEPARTMENT_ID WISE : 20 +1200 , 50 +900 , 60 +600 , 110 +300 , REMAINING +500
+SQL> 
+SQL> REM CASE ... WHEN ... THEN ...
+SQL> 
+SQL> SELECT FIRST_NAME , DEPARTMENT_ID , SALARY ,
+  2  CASE DEPARTMENT_ID WHEN 20 THEN SALARY + 1200
+  3                     WHEN 50 THEN SALARY + 900
+  4                     WHEN 60 THEN SALARY + 600
+  5                     WHEN 110 THEN SALARY + 300 ELSE SALARY END NEW_SALARY
+  6  FROM EMPLOYEES;
+
+FIRST_NAME DEPARTMENT_ID     SALARY NEW_SALARY                                                                                                                                                          
+---------- ------------- ---------- ----------                                                                                                                                                          
+Steven                90      24000      24000                                                                                                                                                          
+Neena                 90      17000      17000                                                                                                                                                          
+Lex                   90      17000      17000                                                                                                                                                          
+Alexander             60       9000       9600                                                                                                                                                          
+Bruce                 60       6000       6600                                                                                                                                                          
+Diana                 60       4200       4800                                                                                                                                                          
+Kevin                 50       5800       6700                                                                                                                                                          
+Trenna                50       3500       4400                                                                                                                                                          
+Curtis                50       3100       4000                                                                                                                                                          
+Randall               50       2600       3500                                                                                                                                                          
+Peter                 50       2500       3400                                                                                                                                                          
+Eleni                 80      10500      10500                                                                                                                                                          
+Ellen                 80      11000      11000                                                                                                                                                          
+Jonathon              80       8600       8600                                                                                                                                                          
+Kimerely                       7000       7000                                                                                                                                                          
+Jennifer              10       4400       4400                                                                                                                                                          
+Michael               20      13000      14200                                                                                                                                                          
+Pat                   20       6000       7200                                                                                                                                                          
+Shelley              110      12000      12300                                                                                                                                                          
+William              110       8300       8600                                                                                                                                                          
+
+20 rows selected.
+
+SQL> REM INCREMENT DEPARTMENT_ID WISE : 20 +1200 , 50 +900 , 60 +600 , 110 +300 , REMAINING NO INCREMENT
+SQL> 
+SQL> SELECT FIRST_NAME , DEPARTMENT_ID , SALARY ,
+  2  CASE DEPARTMENT_ID WHEN 20 THEN SALARY + 1200
+  3                     WHEN 50 THEN SALARY + 900
+  4                     WHEN 60 THEN SALARY + 600
+  5                     WHEN 110 THEN SALARY + 300 ELSE SALARY + 500 END NEW_SALARY
+  6  FROM EMPLOYEES;
+
+FIRST_NAME DEPARTMENT_ID     SALARY NEW_SALARY                                                                                                                                                          
+---------- ------------- ---------- ----------                                                                                                                                                          
+Steven                90      24000      24500                                                                                                                                                          
+Neena                 90      17000      17500                                                                                                                                                          
+Lex                   90      17000      17500                                                                                                                                                          
+Alexander             60       9000       9600                                                                                                                                                          
+Bruce                 60       6000       6600                                                                                                                                                          
+Diana                 60       4200       4800                                                                                                                                                          
+Kevin                 50       5800       6700                                                                                                                                                          
+Trenna                50       3500       4400                                                                                                                                                          
+Curtis                50       3100       4000                                                                                                                                                          
+Randall               50       2600       3500                                                                                                                                                          
+Peter                 50       2500       3400                                                                                                                                                          
+Eleni                 80      10500      11000                                                                                                                                                          
+Ellen                 80      11000      11500                                                                                                                                                          
+Jonathon              80       8600       9100                                                                                                                                                          
+Kimerely                       7000       7500                                                                                                                                                          
+Jennifer              10       4400       4900                                                                                                                                                          
+Michael               20      13000      14200                                                                                                                                                          
+Pat                   20       6000       7200                                                                                                                                                          
+Shelley              110      12000      12300                                                                                                                                                          
+William              110       8300       8600                                                                                                                                                          
+
+20 rows selected.
+
+SQL> REM INCREMENT DEPARTMENT_ID WISE : 20 +1200 , 50 +900 , 60 +600 , 110 +300 , REMAINING NO INCREMENT
+SQL> 
+SQL> SELECT FIRST_NAME , DEPARTMENT_ID , SALARY ,
+  2  CASE DEPARTMENT_ID WHEN 20 THEN SALARY + 1200
+  3                     WHEN 50 THEN SALARY + 900
+  4                     WHEN 60 THEN SALARY + 600
+  5                     WHEN 110 THEN SALARY + 300 ELSE SALARY END NEW_SALARY
+  6  FROM EMPLOYEES;
+
+FIRST_NAME DEPARTMENT_ID     SALARY NEW_SALARY                                                                                                                                                          
+---------- ------------- ---------- ----------                                                                                                                                                          
+Steven                90      24000      24000                                                                                                                                                          
+Neena                 90      17000      17000                                                                                                                                                          
+Lex                   90      17000      17000                                                                                                                                                          
+Alexander             60       9000       9600                                                                                                                                                          
+Bruce                 60       6000       6600                                                                                                                                                          
+Diana                 60       4200       4800                                                                                                                                                          
+Kevin                 50       5800       6700                                                                                                                                                          
+Trenna                50       3500       4400                                                                                                                                                          
+Curtis                50       3100       4000                                                                                                                                                          
+Randall               50       2600       3500                                                                                                                                                          
+Peter                 50       2500       3400                                                                                                                                                          
+Eleni                 80      10500      10500                                                                                                                                                          
+Ellen                 80      11000      11000                                                                                                                                                          
+Jonathon              80       8600       8600                                                                                                                                                          
+Kimerely                       7000       7000                                                                                                                                                          
+Jennifer              10       4400       4400                                                                                                                                                          
+Michael               20      13000      14200                                                                                                                                                          
+Pat                   20       6000       7200                                                                                                                                                          
+Shelley              110      12000      12300                                                                                                                                                          
+William              110       8300       8600                                                                                                                                                          
+
+20 rows selected.
+
+SQL> SELECT FIRST_NAME , DEPARTMENT_ID , SALARY ,
+  2  CASE DEPARTMENT_ID WHEN 20 THEN SALARY + 1200
+  3                     WHEN 50 THEN SALARY + 900
+  4                     WHEN 60 THEN SALARY + 600
+  5                     WHEN 110 THEN SALARY + 300 END NEW_SALARY
+  6  FROM EMPLOYEES;
+
+FIRST_NAME DEPARTMENT_ID     SALARY NEW_SALARY                                                                                                                                                          
+---------- ------------- ---------- ----------                                                                                                                                                          
+Steven                90      24000                                                                                                                                                                     
+Neena                 90      17000                                                                                                                                                                     
+Lex                   90      17000                                                                                                                                                                     
+Alexander             60       9000       9600                                                                                                                                                          
+Bruce                 60       6000       6600                                                                                                                                                          
+Diana                 60       4200       4800                                                                                                                                                          
+Kevin                 50       5800       6700                                                                                                                                                          
+Trenna                50       3500       4400                                                                                                                                                          
+Curtis                50       3100       4000                                                                                                                                                          
+Randall               50       2600       3500                                                                                                                                                          
+Peter                 50       2500       3400                                                                                                                                                          
+Eleni                 80      10500                                                                                                                                                                     
+Ellen                 80      11000                                                                                                                                                                     
+Jonathon              80       8600                                                                                                                                                                     
+Kimerely                       7000                                                                                                                                                                     
+Jennifer              10       4400                                                                                                                                                                     
+Michael               20      13000      14200                                                                                                                                                          
+Pat                   20       6000       7200                                                                                                                                                          
+Shelley              110      12000      12300                                                                                                                                                          
+William              110       8300       8600                                                                                                                                                          
+
+20 rows selected.
+
+SQL> SELECT DEPARTMENT_ID , JOB_ID , FIRST_NAME FROM EMPLOYEES;
+
+DEPARTMENT_ID JOB_ID     FIRST_NAME                                                                                                                                                                     
+------------- ---------- ----------                                                                                                                                                                     
+           90 AD_PRES    Steven                                                                                                                                                                         
+           90 AD_VP      Neena                                                                                                                                                                          
+           90 AD_VP      Lex                                                                                                                                                                            
+           60 IT_PROG    Alexander                                                                                                                                                                      
+           60 IT_PROG    Bruce                                                                                                                                                                          
+           60 IT_PROG    Diana                                                                                                                                                                          
+           50 ST_MAN     Kevin                                                                                                                                                                          
+           50 ST_CLERK   Trenna                                                                                                                                                                         
+           50 ST_CLERK   Curtis                                                                                                                                                                         
+           50 ST_CLERK   Randall                                                                                                                                                                        
+           50 ST_CLERK   Peter                                                                                                                                                                          
+           80 SA_MAN     Eleni                                                                                                                                                                          
+           80 SA_REP     Ellen                                                                                                                                                                          
+           80 SA_REP     Jonathon                                                                                                                                                                       
+              SA_REP     Kimerely                                                                                                                                                                       
+           10 AD_ASST    Jennifer                                                                                                                                                                       
+           20 MK_MAN     Michael                                                                                                                                                                        
+           20 MK_REP     Pat                                                                                                                                                                            
+          110 AC_MGR     Shelley                                                                                                                                                                        
+          110 AC_ACCOUNT William                                                                                                                                                                        
+
+20 rows selected.
+
+SQL> REM 90 AD_PRES +1000 , 90 AD_VP +1200 , 50 ST_MAN +500 , 50 ST_CLERK +600 , REMAINING +750
+SQL> 
+SQL> SELECT DEPARTMENT_ID , JOB_ID , FIRST_NAME ,
+  2  DECODE( DEPARTMENT_ID||JOB_ID , '90AD_PRES' , SALARY + 1000
+  3                                , '90AD_VP'   , SALARY + 1200
+  4                                , '50ST_MAN'  , SALARY + 500
+  5                                , '50ST_CLERK', SALARY + 600   , SALARY + 750) NEW_SALARY
+  6  FROM EMPLOYEES;
+
+DEPARTMENT_ID JOB_ID     FIRST_NAME NEW_SALARY                                                                                                                                                          
+------------- ---------- ---------- ----------                                                                                                                                                          
+           90 AD_PRES    Steven          25000                                                                                                                                                          
+           90 AD_VP      Neena           18200                                                                                                                                                          
+           90 AD_VP      Lex             18200                                                                                                                                                          
+           60 IT_PROG    Alexander        9750                                                                                                                                                          
+           60 IT_PROG    Bruce            6750                                                                                                                                                          
+           60 IT_PROG    Diana            4950                                                                                                                                                          
+           50 ST_MAN     Kevin            6300                                                                                                                                                          
+           50 ST_CLERK   Trenna           4100                                                                                                                                                          
+           50 ST_CLERK   Curtis           3700                                                                                                                                                          
+           50 ST_CLERK   Randall          3200                                                                                                                                                          
+           50 ST_CLERK   Peter            3100                                                                                                                                                          
+           80 SA_MAN     Eleni           11250                                                                                                                                                          
+           80 SA_REP     Ellen           11750                                                                                                                                                          
+           80 SA_REP     Jonathon         9350                                                                                                                                                          
+              SA_REP     Kimerely         7750                                                                                                                                                          
+           10 AD_ASST    Jennifer         5150                                                                                                                                                          
+           20 MK_MAN     Michael         13750                                                                                                                                                          
+           20 MK_REP     Pat              6750                                                                                                                                                          
+          110 AC_MGR     Shelley         12750                                                                                                                                                          
+          110 AC_ACCOUNT William          9050                                                                                                                                                          
+
+20 rows selected.
+
+SQL> SELECT DEPARTMENT_ID , JOB_ID , FIRST_NAME , SALARY ,
+  2  DECODE( DEPARTMENT_ID||JOB_ID , '90AD_PRES' , SALARY + 1000
+  3                                , '90AD_VP'   , SALARY + 1200
+  4                                , '50ST_MAN'  , SALARY + 500
+  5                                , '50ST_CLERK', SALARY + 600   , SALARY + 750) NEW_SALARY
+  6  FROM EMPLOYEES;
+
+DEPARTMENT_ID JOB_ID     FIRST_NAME     SALARY NEW_SALARY                                                                                                                                               
+------------- ---------- ---------- ---------- ----------                                                                                                                                               
+           90 AD_PRES    Steven          24000      25000                                                                                                                                               
+           90 AD_VP      Neena           17000      18200                                                                                                                                               
+           90 AD_VP      Lex             17000      18200                                                                                                                                               
+           60 IT_PROG    Alexander        9000       9750                                                                                                                                               
+           60 IT_PROG    Bruce            6000       6750                                                                                                                                               
+           60 IT_PROG    Diana            4200       4950                                                                                                                                               
+           50 ST_MAN     Kevin            5800       6300                                                                                                                                               
+           50 ST_CLERK   Trenna           3500       4100                                                                                                                                               
+           50 ST_CLERK   Curtis           3100       3700                                                                                                                                               
+           50 ST_CLERK   Randall          2600       3200                                                                                                                                               
+           50 ST_CLERK   Peter            2500       3100                                                                                                                                               
+           80 SA_MAN     Eleni           10500      11250                                                                                                                                               
+           80 SA_REP     Ellen           11000      11750                                                                                                                                               
+           80 SA_REP     Jonathon         8600       9350                                                                                                                                               
+              SA_REP     Kimerely         7000       7750                                                                                                                                               
+           10 AD_ASST    Jennifer         4400       5150                                                                                                                                               
+           20 MK_MAN     Michael         13000      13750                                                                                                                                               
+           20 MK_REP     Pat              6000       6750                                                                                                                                               
+          110 AC_MGR     Shelley         12000      12750                                                                                                                                               
+          110 AC_ACCOUNT William          8300       9050                                                                                                                                               
+
+20 rows selected.
+
+SQL> REM 90 AD_PRES +1000 , 90 AD_VP +1200 , 50 ST_MAN +500 , 50 ST_CLERK +600 , REMAINING +750
+SQL> 
+SQL> SELECT DEPARTMENT_ID , JOB_ID , FIRST_NAME , SALARY ,
+  2  CASE DEPARTMENT_ID||JOB_ID WHEN '90AD_PRES' THEN SALARY + 1000
+  3                             WHEN '90AD_VP'   THEN SALARY + 1200
+  4                             WHEN '50ST_MAN'  THEN SALARY + 500
+  5                             WHEN '50ST_CLERK' THEN SALARY + 600  ELSE SALARY + 750 END NEW_SALARY
+  6  FROM EMPLOYEES;
+
+DEPARTMENT_ID JOB_ID     FIRST_NAME     SALARY NEW_SALARY                                                                                                                                               
+------------- ---------- ---------- ---------- ----------                                                                                                                                               
+           90 AD_PRES    Steven          24000      25000                                                                                                                                               
+           90 AD_VP      Neena           17000      18200                                                                                                                                               
+           90 AD_VP      Lex             17000      18200                                                                                                                                               
+           60 IT_PROG    Alexander        9000       9750                                                                                                                                               
+           60 IT_PROG    Bruce            6000       6750                                                                                                                                               
+           60 IT_PROG    Diana            4200       4950                                                                                                                                               
+           50 ST_MAN     Kevin            5800       6300                                                                                                                                               
+           50 ST_CLERK   Trenna           3500       4100                                                                                                                                               
+           50 ST_CLERK   Curtis           3100       3700                                                                                                                                               
+           50 ST_CLERK   Randall          2600       3200                                                                                                                                               
+           50 ST_CLERK   Peter            2500       3100                                                                                                                                               
+           80 SA_MAN     Eleni           10500      11250                                                                                                                                               
+           80 SA_REP     Ellen           11000      11750                                                                                                                                               
+           80 SA_REP     Jonathon         8600       9350                                                                                                                                               
+              SA_REP     Kimerely         7000       7750                                                                                                                                               
+           10 AD_ASST    Jennifer         4400       5150                                                                                                                                               
+           20 MK_MAN     Michael         13000      13750                                                                                                                                               
+           20 MK_REP     Pat              6000       6750                                                                                                                                               
+          110 AC_MGR     Shelley         12000      12750                                                                                                                                               
+          110 AC_ACCOUNT William          8300       9050                                                                                                                                               
+
+20 rows selected.
+
+SQL> REM CASE WHEN ... THEN ...
+SQL> 
+SQL> REM CASE WHEN CONDITION THEN ACTION WHEN CONDITION THEN ACTION ELSE ACTION END
+SQL> 
+SQL> REM WHERE : CONDITION
+SQL> 
+SQL> REM SALARY RANGE INCREMENT : 0-6000 +1200 , 6001-9000 +1500 , 9001-13000 +1800 , REMAINING +2000
+SQL> 
+SQL> SELECT FIRST_NAME , SALARY ,
+  2  CASE WHEN SALARY BETWEEN       0 AND  6000  THEN SALARY + 1200
+  3       WHEN SALARY BETWEEN  6001   AND  9000  THEN SALARY + 1500
+  4       WHEN SALARY BETWEEN  9001   AND 13000  THEN SALARY + 1800 ELSE SALARY + 2000 END NEW_SALARY
+  5  FROM EMPLOYEES
+  6  ORDER BY 2;
+
+FIRST_NAME     SALARY NEW_SALARY                                                                                                                                                                        
+---------- ---------- ----------                                                                                                                                                                        
+Peter            2500       3700                                                                                                                                                                        
+Randall          2600       3800                                                                                                                                                                        
+Curtis           3100       4300                                                                                                                                                                        
+Trenna           3500       4700                                                                                                                                                                        
+Diana            4200       5400                                                                                                                                                                        
+Jennifer         4400       5600                                                                                                                                                                        
+Kevin            5800       7000                                                                                                                                                                        
+Bruce            6000       7200                                                                                                                                                                        
+Pat              6000       7200                                                                                                                                                                        
+Kimerely         7000       8500                                                                                                                                                                        
+William          8300       9800                                                                                                                                                                        
+Jonathon         8600      10100                                                                                                                                                                        
+Alexander        9000      10500                                                                                                                                                                        
+Eleni           10500      12300                                                                                                                                                                        
+Ellen           11000      12800                                                                                                                                                                        
+Shelley         12000      13800                                                                                                                                                                        
+Michael         13000      14800                                                                                                                                                                        
+Neena           17000      19000                                                                                                                                                                        
+Lex             17000      19000                                                                                                                                                                        
+Steven          24000      26000                                                                                                                                                                        
+
+20 rows selected.
+
+SQL> REM 90 AD_PRES +1000 , 90 AD_VP +1200 , 50 ST_MAN +500 , 50 ST_CLERK +600 , REMAINING +750
+SQL> 
+SQL> SELECT FIRST_NAME , JOB_ID , SALARY ,
+  2  CASE WHEN (DEPARTMENT_ID,JOB_ID) IN ((90,'AD_PRES')) THEN SALARY + 1000
+  3       WHEN (DEPARTMENT_ID,JOB_ID) IN ((90,'AD_VP')) THEN SALARY + 1200
+  4       WHEN (DEPARTMENT_ID,JOB_ID) IN ((50,'ST_CLERK')) THEN SALARY + 500
+  5       WHEN (DEPARTMENT_ID,JOB_ID) IN ((50,'ST_MAN')) THEN SALARY + 500
+  6  ELSE SALARY + 750 END NEW_SALARY
+  7  FROM EMPLOYEES
+  8  
+SQL> 
+SQL> SELECT FIRST_NAME , JOB_ID , SALARY ,
+  2  CASE WHEN (DEPARTMENT_ID,JOB_ID) IN ((90,'AD_PRES')) THEN SALARY + 1000
+  3       WHEN (DEPARTMENT_ID,JOB_ID) IN ((90,'AD_VP')) THEN SALARY + 1200
+  4       WHEN (DEPARTMENT_ID,JOB_ID) IN ((50,'ST_CLERK')) THEN SALARY + 600
+  5       WHEN (DEPARTMENT_ID,JOB_ID) IN ((50,'ST_MAN')) THEN SALARY + 500
+  6  ELSE SALARY + 750 END NEW_SALARY
+  7  FROM EMPLOYEES;
+
+FIRST_NAME JOB_ID         SALARY NEW_SALARY                                                                                                                                                             
+---------- ---------- ---------- ----------                                                                                                                                                             
+Steven     AD_PRES         24000      25000                                                                                                                                                             
+Neena      AD_VP           17000      18200                                                                                                                                                             
+Lex        AD_VP           17000      18200                                                                                                                                                             
+Alexander  IT_PROG          9000       9750                                                                                                                                                             
+Bruce      IT_PROG          6000       6750                                                                                                                                                             
+Diana      IT_PROG          4200       4950                                                                                                                                                             
+Kevin      ST_MAN           5800       6300                                                                                                                                                             
+Trenna     ST_CLERK         3500       4100                                                                                                                                                             
+Curtis     ST_CLERK         3100       3700                                                                                                                                                             
+Randall    ST_CLERK         2600       3200                                                                                                                                                             
+Peter      ST_CLERK         2500       3100                                                                                                                                                             
+Eleni      SA_MAN          10500      11250                                                                                                                                                             
+Ellen      SA_REP          11000      11750                                                                                                                                                             
+Jonathon   SA_REP           8600       9350                                                                                                                                                             
+Kimerely   SA_REP           7000       7750                                                                                                                                                             
+Jennifer   AD_ASST          4400       5150                                                                                                                                                             
+Michael    MK_MAN          13000      13750                                                                                                                                                             
+Pat        MK_REP           6000       6750                                                                                                                                                             
+Shelley    AC_MGR          12000      12750                                                                                                                                                             
+William    AC_ACCOUNT       8300       9050                                                                                                                                                             
+
+20 rows selected.
+
+SQL> SELECT FIRST_NAME , JOB_ID , SALARY ,
+  2  CASE WHEN DEPARTMENT_ID = 90 THEN CASE WHEN JOB_ID = 'AD_PRES' THEN SALARY + 1000 ELSE SALARY + 1200 END
+  3       WHEN DEPARTMENT_ID = 50 THEN CASE WHEN JOB_ID = 'ST_MAN' THEN SALARY + 500 ELSE SALARY + 600 END
+  4  ELSE SALARY + 750 END NEW_SALARY
+  5  FROM EMPLOYEES;
+
+FIRST_NAME JOB_ID         SALARY NEW_SALARY                                                                                                                                                             
+---------- ---------- ---------- ----------                                                                                                                                                             
+Steven     AD_PRES         24000      25000                                                                                                                                                             
+Neena      AD_VP           17000      18200                                                                                                                                                             
+Lex        AD_VP           17000      18200                                                                                                                                                             
+Alexander  IT_PROG          9000       9750                                                                                                                                                             
+Bruce      IT_PROG          6000       6750                                                                                                                                                             
+Diana      IT_PROG          4200       4950                                                                                                                                                             
+Kevin      ST_MAN           5800       6300                                                                                                                                                             
+Trenna     ST_CLERK         3500       4100                                                                                                                                                             
+Curtis     ST_CLERK         3100       3700                                                                                                                                                             
+Randall    ST_CLERK         2600       3200                                                                                                                                                             
+Peter      ST_CLERK         2500       3100                                                                                                                                                             
+Eleni      SA_MAN          10500      11250                                                                                                                                                             
+Ellen      SA_REP          11000      11750                                                                                                                                                             
+Jonathon   SA_REP           8600       9350                                                                                                                                                             
+Kimerely   SA_REP           7000       7750                                                                                                                                                             
+Jennifer   AD_ASST          4400       5150                                                                                                                                                             
+Michael    MK_MAN          13000      13750                                                                                                                                                             
+Pat        MK_REP           6000       6750                                                                                                                                                             
+Shelley    AC_MGR          12000      12750                                                                                                                                                             
+William    AC_ACCOUNT       8300       9050                                                                                                                                                             
+
+20 rows selected.
+
+SQL> REM CONVERSION FUNCTION : 1 TO_NUMBER 2 TO_DATE 3 TO_CHAR
+SQL> 
+SQL> REM TO_NUMBER : WILL CONVERT CHARACER VALUE INTO NUMBER TYPE
+SQL> 
+SQL> REM TO_DATE : WILL CONVERT CHARACTER VALUE INTO DATE TYPE
+SQL> 
+SQL> REM TO_CHAR : WILL CONVERT NUMBER/DATE VALUE TO CHARACTER TYPE
+SQL> 
+SQL> 
+SQL> 
+SQL> REM TO_NUMBER PURPOSE : 1 FOR CALCULATION 2 FOR COMPARISON
+SQL> 
+SQL> REM TO_DATE PURPOSE : 1 FOR CALCULATION 2 FOR COMPARISON
+SQL> 
+SQL> REM TO_CHAR PURPOSE : TO DISPLAY NUMBER/DATE VALUE IN NON-DEFAULT/USER DEFINED FORMAT
+SQL> 
+SQL> 
+SQL> 
+SQL> REM TO_NUMBER PURPOSE : 1 FOR CALCULATION 2 FOR COMPARISON
+SQL> 
+SQL> REM FOR CALCULATION
+SQL> 
+SQL> SELECT 345 + 50 FROM DUAL;
+
+    345+50                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+       395                                                                                                                                                                                              
+
+SQL> SELECT 345 + '50' FROM DUAL;
+
+  345+'50'                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+       395                                                                                                                                                                                              
+
+SQL> REM IN ABOVE CASE CHARACTER VALUE CONVERTED IMPLICITLY/AUTOMATICALLY INTO NUMBER BEFORE CALCULATION
+SQL> 
+SQL> SELECT 345 + '50.45' FROM DUAL;
+
+345+'50.45'                                                                                                                                                                                             
+-----------                                                                                                                                                                                             
+     395.45                                                                                                                                                                                             
+
+SQL> SELECT 345 + '1050.45' FROM DUAL;
+
+345+'1050.45'                                                                                                                                                                                           
+-------------                                                                                                                                                                                           
+      1395.45                                                                                                                                                                                           
+
+SQL> SELECT 345 + '1,050.45' FROM DUAL;
+SELECT 345 + '1,050.45' FROM DUAL
+             *
+ERROR at line 1:
+ORA-01722: invalid number 
+
+
+SQL> SELECT 345 + '$1050.45' FROM DUAL;
+SELECT 345 + '$1050.45' FROM DUAL
+             *
+ERROR at line 1:
+ORA-01722: invalid number 
+
+
+SQL> SELECT 345 + '$1,050.45' FROM DUAL;
+SELECT 345 + '$1,050.45' FROM DUAL
+             *
+ERROR at line 1:
+ORA-01722: invalid number 
+
+
+SQL> SELECT 12,345 + 50 FROM DUAL;
+
+        12     345+50                                                                                                                                                                                   
+---------- ----------                                                                                                                                                                                   
+        12        395                                                                                                                                                                                   
+
+SQL> SELECT '12,345' + 50 FROM DUAL;
+SELECT '12,345' + 50 FROM DUAL
+       *
+ERROR at line 1:
+ORA-01722: invalid number 
+
+
+SQL> SELECT (12,345) + 50 FROM DUAL;
+SELECT (12,345) + 50 FROM DUAL
+          *
+ERROR at line 1:
+ORA-00907: missing right parenthesis 
+
+
+SQL> SELECT 345 + '1,050.45' FROM DUAL;
+SELECT 345 + '1,050.45' FROM DUAL
+             *
+ERROR at line 1:
+ORA-01722: invalid number 
+
+
+SQL> SELECT 345 + '$1050.45' FROM DUAL;
+SELECT 345 + '$1050.45' FROM DUAL
+             *
+ERROR at line 1:
+ORA-01722: invalid number 
+
+
+SQL> SELECT 345 + TO_NUMBER('1,050.45') FROM DUAL;
+SELECT 345 + TO_NUMBER('1,050.45') FROM DUAL
+                       *
+ERROR at line 1:
+ORA-01722: invalid number 
+
+
+SQL> SELECT 345 + TO_NUMBER('1,050.45','9,999.99') FROM DUAL;
+
+345+TO_NUMBER('1,050.45','9,999.99')                                                                                                                                                                    
+------------------------------------                                                                                                                                                                    
+                             1395.45                                                                                                                                                                    
+
+SQL> SELECT 345 + TO_CHAR(TO_NUMBER('1,050.45','9,999.99'),'9,999.99') FROM DUAL;
+SELECT 345 + TO_CHAR(TO_NUMBER('1,050.45','9,999.99'),'9,999.99') FROM DUAL
+             *
+ERROR at line 1:
+ORA-01722: invalid number 
+
+
+SQL> SELECT TO_CHAR(345 + TO_NUMBER('1,050.45','9,999.99'),'9,999.99') FROM DUAL;
+
+TO_CHAR(3                                                                                                                                                                                               
+---------                                                                                                                                                                                               
+ 1,395.45                                                                                                                                                                                               
+
+SQL> SELECT 345 + '$1050.45' FROM DUAL;
+SELECT 345 + '$1050.45' FROM DUAL
+             *
+ERROR at line 1:
+ORA-01722: invalid number 
+
+
+SQL> SELECT 345 + TO_NUMBER('$1050.45','$9999.99') FROM DUAL;
+
+345+TO_NUMBER('$1050.45','$9999.99')                                                                                                                                                                    
+------------------------------------                                                                                                                                                                    
+                             1395.45                                                                                                                                                                    
+
+SQL> REM TO_NUMBER : FOR COMPARISON
+SQL> 
+SQL> SELECT FIRST_NAME , SALARY FROM EMPLOYEES WHERE SALARY > 10000;
+
+FIRST_NAME     SALARY                                                                                                                                                                                   
+---------- ----------                                                                                                                                                                                   
+Steven          24000                                                                                                                                                                                   
+Neena           17000                                                                                                                                                                                   
+Lex             17000                                                                                                                                                                                   
+Eleni           10500                                                                                                                                                                                   
+Ellen           11000                                                                                                                                                                                   
+Michael         13000                                                                                                                                                                                   
+Shelley         12000                                                                                                                                                                                   
+
+7 rows selected.
+
+SQL> SELECT FIRST_NAME , SALARY FROM EMPLOYEES WHERE SALARY > '10000';
+
+FIRST_NAME     SALARY                                                                                                                                                                                   
+---------- ----------                                                                                                                                                                                   
+Steven          24000                                                                                                                                                                                   
+Neena           17000                                                                                                                                                                                   
+Lex             17000                                                                                                                                                                                   
+Eleni           10500                                                                                                                                                                                   
+Ellen           11000                                                                                                                                                                                   
+Michael         13000                                                                                                                                                                                   
+Shelley         12000                                                                                                                                                                                   
+
+7 rows selected.
+
+SQL> SELECT FIRST_NAME , SALARY FROM EMPLOYEES WHERE SALARY > '10000.00';
+
+FIRST_NAME     SALARY                                                                                                                                                                                   
+---------- ----------                                                                                                                                                                                   
+Steven          24000                                                                                                                                                                                   
+Neena           17000                                                                                                                                                                                   
+Lex             17000                                                                                                                                                                                   
+Eleni           10500                                                                                                                                                                                   
+Ellen           11000                                                                                                                                                                                   
+Michael         13000                                                                                                                                                                                   
+Shelley         12000                                                                                                                                                                                   
+
+7 rows selected.
+
+SQL> SELECT FIRST_NAME , SALARY FROM EMPLOYEES WHERE SALARY > '10,000.00';
+SELECT FIRST_NAME , SALARY FROM EMPLOYEES WHERE SALARY > '10,000.00'
+                                                         *
+ERROR at line 1:
+ORA-01722: invalid number 
+
+
+SQL> SELECT FIRST_NAME , SALARY FROM EMPLOYEES WHERE SALARY > '$10000.00';
+SELECT FIRST_NAME , SALARY FROM EMPLOYEES WHERE SALARY > '$10000.00'
+                                                         *
+ERROR at line 1:
+ORA-01722: invalid number 
+
+
+SQL> SELECT FIRST_NAME , SALARY FROM EMPLOYEES WHERE SALARY > '$10,000.00';
+SELECT FIRST_NAME , SALARY FROM EMPLOYEES WHERE SALARY > '$10,000.00'
+                                                         *
+ERROR at line 1:
+ORA-01722: invalid number 
+
+
+SQL> SELECT FIRST_NAME , SALARY FROM EMPLOYEES WHERE SALARY > TO_NUMBER('10,000.00');
+SELECT FIRST_NAME , SALARY FROM EMPLOYEES WHERE SALARY > TO_NUMBER('10,000.00')
+                                                                   *
+ERROR at line 1:
+ORA-01722: invalid number 
+
+
+SQL> SELECT FIRST_NAME , SALARY FROM EMPLOYEES WHERE SALARY > TO_NUMBER('10,000.00','99,999.99');
+
+FIRST_NAME     SALARY                                                                                                                                                                                   
+---------- ----------                                                                                                                                                                                   
+Steven          24000                                                                                                                                                                                   
+Neena           17000                                                                                                                                                                                   
+Lex             17000                                                                                                                                                                                   
+Eleni           10500                                                                                                                                                                                   
+Ellen           11000                                                                                                                                                                                   
+Michael         13000                                                                                                                                                                                   
+Shelley         12000                                                                                                                                                                                   
+
+7 rows selected.
+
+SQL> SELECT FIRST_NAME , SALARY FROM EMPLOYEES WHERE SALARY > TO_NUMBER('$10000.00','$99999.99');
+
+FIRST_NAME     SALARY                                                                                                                                                                                   
+---------- ----------                                                                                                                                                                                   
+Steven          24000                                                                                                                                                                                   
+Neena           17000                                                                                                                                                                                   
+Lex             17000                                                                                                                                                                                   
+Eleni           10500                                                                                                                                                                                   
+Ellen           11000                                                                                                                                                                                   
+Michael         13000                                                                                                                                                                                   
+Shelley         12000                                                                                                                                                                                   
+
+7 rows selected.
+
+SQL> SELECT FIRST_NAME , SALARY FROM EMPLOYEES WHERE SALARY > TO_NUMBER('$10,000.00','$99,999.99');
+
+FIRST_NAME     SALARY                                                                                                                                                                                   
+---------- ----------                                                                                                                                                                                   
+Steven          24000                                                                                                                                                                                   
+Neena           17000                                                                                                                                                                                   
+Lex             17000                                                                                                                                                                                   
+Eleni           10500                                                                                                                                                                                   
+Ellen           11000                                                                                                                                                                                   
+Michael         13000                                                                                                                                                                                   
+Shelley         12000                                                                                                                                                                                   
+
+7 rows selected.
+
+SQL> REM TO_DATE : FOR CALCULATION
+SQL> 
+SQL> SELECT SYSDATE , HIRE_DATE , SYSDATE - HIRE_DATE DAYS_WORKED FROM EMPLOYEES;
+
+SYSDATE   HIRE_DATE DAYS_WORKED                                                                                                                                                                         
+--------- --------- -----------                                                                                                                                                                         
+03-JAN-22 17-JUL-87  12589.8583                                                                                                                                                                         
+03-JAN-22 21-SEP-89  11792.8583                                                                                                                                                                         
+03-JAN-22 13-JAN-93  10582.8583                                                                                                                                                                         
+03-JAN-22 03-JAN-90  11688.8583                                                                                                                                                                         
+03-JAN-22 21-MAY-91  11185.8583                                                                                                                                                                         
+03-JAN-22 07-FEB-99  8366.85825                                                                                                                                                                         
+03-JAN-22 16-NOV-99  8084.85825                                                                                                                                                                         
+03-JAN-22 17-OCT-95  9575.85825                                                                                                                                                                         
+03-JAN-22 29-JAN-97  9105.85825                                                                                                                                                                         
+03-JAN-22 15-MAR-98  8695.85825                                                                                                                                                                         
+03-JAN-22 09-JUL-98  8579.85825                                                                                                                                                                         
+03-JAN-22 29-JAN-00  8010.85825                                                                                                                                                                         
+03-JAN-22 11-MAY-96  9368.85825                                                                                                                                                                         
+03-JAN-22 24-MAR-98  8686.85825                                                                                                                                                                         
+03-JAN-22 24-MAY-99  8260.85825                                                                                                                                                                         
+03-JAN-22 17-SEP-87  12527.8583                                                                                                                                                                         
+03-JAN-22 17-FEB-96  9452.85825                                                                                                                                                                         
+03-JAN-22 17-AUG-97  8905.85825                                                                                                                                                                         
+03-JAN-22 07-JUN-94  10072.8583                                                                                                                                                                         
+03-JAN-22 07-JUN-94  10072.8583                                                                                                                                                                         
+
+20 rows selected.
+
+SQL> REM DD-MON-RR
+SQL> 
+SQL> SELECT '13-MAR-73' - '15-JAN-71' DAYS FROM DUAL;
+SELECT '13-MAR-73' - '15-JAN-71' DAYS FROM DUAL
+       *
+ERROR at line 1:
+ORA-01722: invalid number 
+
+
+SQL> SELECT TO_DATE('13-MAR-73') - TO_DATE('15-JAN-71') DAYS FROM DUAL;
+
+      DAYS                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+       788                                                                                                                                                                                              
+
+SQL> SELECT TO_DATE('13-MAR-73') - TO_DATE('15-JANuary-71') DAYS FROM DUAL;
+
+      DAYS                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+       788                                                                                                                                                                                              
+
+SQL> SELECT TO_DATE('13-MAR-73') - TO_DATE('15-JANuary-1971') DAYS FROM DUAL;
+
+      DAYS                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+       788                                                                                                                                                                                              
+
+SQL> SELECT TO_DATE('13-MAR-73') - TO_DATE('15/JANuary\1971') DAYS FROM DUAL;
+
+      DAYS                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+       788                                                                                                                                                                                              
+
+SQL> SELECT TO_DATE('13-MAR-73') - TO_DATE('15/JANuary1971') DAYS FROM DUAL;
+
+      DAYS                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+       788                                                                                                                                                                                              
+
+SQL> SELECT TO_DATE('13-MAR-73') - TO_DATE('15JANuary1971') DAYS FROM DUAL;
+
+      DAYS                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+       788                                                                                                                                                                                              
+
+SQL> SELECT TO_DATE('13-MAR-73') - TO_DATE('15-01-1971') DAYS FROM DUAL;
+SELECT TO_DATE('13-MAR-73') - TO_DATE('15-01-1971') DAYS FROM DUAL
+                                      *
+ERROR at line 1:
+ORA-01843: not a valid month 
+
+
+SQL> SELECT TO_DATE('13-MAR-73') - TO_DATE('15-01-1971','dd-mm-rrrr') DAYS FROM DUAL;
+
+      DAYS                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+       788                                                                                                                                                                                              
+
+SQL> SELECT TO_DATE('13-MAR-73') - TO_DATE('15-01-1971','dd-mm-yyyy') DAYS FROM DUAL;
+
+      DAYS                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+       788                                                                                                                                                                                              
+
+SQL> SELECT TO_DATE('13-MAR-73') - TO_DATE('15-01-71','dd-mm-yy') DAYS FROM DUAL;
+
+      DAYS                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+    -35737                                                                                                                                                                                              
+
+SQL> SELECT TO_DATE('13-MAR-73') - TO_DATE('15-01-71','dd-mm-rr') DAYS FROM DUAL;
+
+      DAYS                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+       788                                                                                                                                                                                              
+
+SQL> REM YY : IT PICKS CURRENT CENTURY ONLY.
+SQL> 
+SQL> REM RR : IT MAY PICK CURRENT OR PREVIOUS CENTURY.
+SQL> 
+SQL> REM RR CENTURY : 2000 TO 2049 CURRENT 50 YEARS , 1950 TO 1999 PREVIOUS 50 YEARS
+SQL> 
+SQL> SELECT TO_DATE('13-MAR-73') - TO_DATE('15-01-71','dd-mm-rr') DAYS FROM DUAL;
+
+      DAYS                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+       788                                                                                                                                                                                              
+
+SQL> SELECT TO_DATE('5-AUG-05') - TO_DATE('23-06-03','dd-mm-rr') DAYS FROM DUAL;
+
+      DAYS                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+       774                                                                                                                                                                                              
+
+SQL> SELECT TO_DATE('5-AUG-05') - TO_DATE('23-06-03','dd-mm-YY') DAYS FROM DUAL;
+
+      DAYS                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+       774                                                                                                                                                                                              
+
+SQL> REM 1944 : 31-MAY-44
+SQL> 
+SQL> REM TO_DATE : FOR COMPARISON
+SQL> 
+SQL> SELECT FIRST_NAME , HIRE_DATE FROM EMPLOYEES WHERE HIRE_DATE > '31-DEC-95';
+
+FIRST_NAME HIRE_DATE                                                                                                                                                                                    
+---------- ---------                                                                                                                                                                                    
+Diana      07-FEB-99                                                                                                                                                                                    
+Kevin      16-NOV-99                                                                                                                                                                                    
+Curtis     29-JAN-97                                                                                                                                                                                    
+Randall    15-MAR-98                                                                                                                                                                                    
+Peter      09-JUL-98                                                                                                                                                                                    
+Eleni      29-JAN-00                                                                                                                                                                                    
+Ellen      11-MAY-96                                                                                                                                                                                    
+Jonathon   24-MAR-98                                                                                                                                                                                    
+Kimerely   24-MAY-99                                                                                                                                                                                    
+Michael    17-FEB-96                                                                                                                                                                                    
+Pat        17-AUG-97                                                                                                                                                                                    
+
+11 rows selected.
+
+SQL> SELECT FIRST_NAME , HIRE_DATE FROM EMPLOYEES WHERE HIRE_DATE > '31-12-95';
+SELECT FIRST_NAME , HIRE_DATE FROM EMPLOYEES WHERE HIRE_DATE > '31-12-95'
+                                                               *
+ERROR at line 1:
+ORA-01843: not a valid month 
+
+
+SQL> SELECT FIRST_NAME , HIRE_DATE FROM EMPLOYEES WHERE HIRE_DATE > TO_DATE('31-12-95');
+SELECT FIRST_NAME , HIRE_DATE FROM EMPLOYEES WHERE HIRE_DATE > TO_DATE('31-12-95')
+                                                                       *
+ERROR at line 1:
+ORA-01843: not a valid month 
+
+
+SQL> SELECT FIRST_NAME , HIRE_DATE FROM EMPLOYEES WHERE HIRE_DATE > TO_DATE('31-12-95','DD-MM-RR');
+
+FIRST_NAME HIRE_DATE                                                                                                                                                                                    
+---------- ---------                                                                                                                                                                                    
+Diana      07-FEB-99                                                                                                                                                                                    
+Kevin      16-NOV-99                                                                                                                                                                                    
+Curtis     29-JAN-97                                                                                                                                                                                    
+Randall    15-MAR-98                                                                                                                                                                                    
+Peter      09-JUL-98                                                                                                                                                                                    
+Eleni      29-JAN-00                                                                                                                                                                                    
+Ellen      11-MAY-96                                                                                                                                                                                    
+Jonathon   24-MAR-98                                                                                                                                                                                    
+Kimerely   24-MAY-99                                                                                                                                                                                    
+Michael    17-FEB-96                                                                                                                                                                                    
+Pat        17-AUG-97                                                                                                                                                                                    
+
+11 rows selected.
+
+SQL> SELECT FIRST_NAME , HIRE_DATE FROM EMPLOYEES WHERE HIRE_DATE > TO_DATE('31-12-95','DD-MM-YY');
+
+no rows selected
+
+SQL> REM TO_CHAR : YET TO BE DONE
+SQL> 
+SQL> SPOOL OFF

@@ -1,0 +1,857 @@
+SQL> 
+SQL> CL SCR
+
+SQL> REM FUNCTIONS : 1 SINGLE ROW 2 MULTI ROW
+SQL> 
+SQL> REM TYPES OF SINGLE ROW : CHARACTER NUMBER DATE CONVERSION GENERAL
+SQL> 
+SQL> REM CHAPTER 3 : CHARACTER NUMBER DATE
+SQL> 
+SQL> REM CHAPTER 4 : CONVERSION GENERAL
+SQL> 
+SQL> REM CHAPTER 5 : MULTI ROW
+SQL> 
+SQL> 
+SQL> 
+SQL> REM CHAPTER 3 : CHARACTER NUMBER DATE
+SQL> 
+SQL> REM TYPES OF CHARACTER FUNCTIONS : 1 CASE MANIPULATION 2 CHARACTER MANIPULATION
+SQL> 
+SQL> REM LIST OF CASE MANIPULATION FUNCTION : UPPER LOWER INITCAP
+SQL> 
+SQL> SELECT FIRST_NAME , UPPER(FIRST_NAME) FROM EMPLOYEES;
+
+FIRST_NAME UPPER(FIRS                                                                                                                                                                                   
+---------- ----------                                                                                                                                                                                   
+Steven     STEVEN                                                                                                                                                                                       
+Neena      NEENA                                                                                                                                                                                        
+Lex        LEX                                                                                                                                                                                          
+Alexander  ALEXANDER                                                                                                                                                                                    
+Bruce      BRUCE                                                                                                                                                                                        
+Diana      DIANA                                                                                                                                                                                        
+Kevin      KEVIN                                                                                                                                                                                        
+Trenna     TRENNA                                                                                                                                                                                       
+Curtis     CURTIS                                                                                                                                                                                       
+Randall    RANDALL                                                                                                                                                                                      
+Peter      PETER                                                                                                                                                                                        
+Eleni      ELENI                                                                                                                                                                                        
+Ellen      ELLEN                                                                                                                                                                                        
+Jonathon   JONATHON                                                                                                                                                                                     
+Kimerely   KIMERELY                                                                                                                                                                                     
+Jennifer   JENNIFER                                                                                                                                                                                     
+Michael    MICHAEL                                                                                                                                                                                      
+Pat        PAT                                                                                                                                                                                          
+Shelley    SHELLEY                                                                                                                                                                                      
+William    WILLIAM                                                                                                                                                                                      
+
+20 rows selected.
+
+SQL> SELECT FIRST_NAME , LOWER(FIRST_NAME) FROM EMPLOYEES;
+
+FIRST_NAME LOWER(FIRS                                                                                                                                                                                   
+---------- ----------                                                                                                                                                                                   
+Steven     steven                                                                                                                                                                                       
+Neena      neena                                                                                                                                                                                        
+Lex        lex                                                                                                                                                                                          
+Alexander  alexander                                                                                                                                                                                    
+Bruce      bruce                                                                                                                                                                                        
+Diana      diana                                                                                                                                                                                        
+Kevin      kevin                                                                                                                                                                                        
+Trenna     trenna                                                                                                                                                                                       
+Curtis     curtis                                                                                                                                                                                       
+Randall    randall                                                                                                                                                                                      
+Peter      peter                                                                                                                                                                                        
+Eleni      eleni                                                                                                                                                                                        
+Ellen      ellen                                                                                                                                                                                        
+Jonathon   jonathon                                                                                                                                                                                     
+Kimerely   kimerely                                                                                                                                                                                     
+Jennifer   jennifer                                                                                                                                                                                     
+Michael    michael                                                                                                                                                                                      
+Pat        pat                                                                                                                                                                                          
+Shelley    shelley                                                                                                                                                                                      
+William    william                                                                                                                                                                                      
+
+20 rows selected.
+
+SQL> SELECT EMAIL , LOWER(EMAIL) FROM EMPLOYEES;
+
+EMAIL      LOWER(EMAI                                                                                                                                                                                   
+---------- ----------                                                                                                                                                                                   
+SKING      sking                                                                                                                                                                                        
+NKOCHHAR   nkochhar                                                                                                                                                                                     
+LDEHAAN    ldehaan                                                                                                                                                                                      
+AHUNOLD    ahunold                                                                                                                                                                                      
+BERNST     bernst                                                                                                                                                                                       
+DLORENTZ   dlorentz                                                                                                                                                                                     
+KMOURGOS   kmourgos                                                                                                                                                                                     
+TRAJS      trajs                                                                                                                                                                                        
+CDAVIES    cdavies                                                                                                                                                                                      
+RMATOS     rmatos                                                                                                                                                                                       
+PVARGAS    pvargas                                                                                                                                                                                      
+EZLOTKEY   ezlotkey                                                                                                                                                                                     
+EABEL      eabel                                                                                                                                                                                        
+JTAYLOR    jtaylor                                                                                                                                                                                      
+KGRANT     kgrant                                                                                                                                                                                       
+JWAHLEN    jwahlen                                                                                                                                                                                      
+MHARTSTE   mhartste                                                                                                                                                                                     
+PFAY       pfay                                                                                                                                                                                         
+SHIGGINS   shiggins                                                                                                                                                                                     
+WGIETZ     wgietz                                                                                                                                                                                       
+
+20 rows selected.
+
+SQL> SELECT EMAIL , INITCAP(EMAIL) FROM EMPLOYEES;
+
+EMAIL      INITCAP(EM                                                                                                                                                                                   
+---------- ----------                                                                                                                                                                                   
+SKING      Sking                                                                                                                                                                                        
+NKOCHHAR   Nkochhar                                                                                                                                                                                     
+LDEHAAN    Ldehaan                                                                                                                                                                                      
+AHUNOLD    Ahunold                                                                                                                                                                                      
+BERNST     Bernst                                                                                                                                                                                       
+DLORENTZ   Dlorentz                                                                                                                                                                                     
+KMOURGOS   Kmourgos                                                                                                                                                                                     
+TRAJS      Trajs                                                                                                                                                                                        
+CDAVIES    Cdavies                                                                                                                                                                                      
+RMATOS     Rmatos                                                                                                                                                                                       
+PVARGAS    Pvargas                                                                                                                                                                                      
+EZLOTKEY   Ezlotkey                                                                                                                                                                                     
+EABEL      Eabel                                                                                                                                                                                        
+JTAYLOR    Jtaylor                                                                                                                                                                                      
+KGRANT     Kgrant                                                                                                                                                                                       
+JWAHLEN    Jwahlen                                                                                                                                                                                      
+MHARTSTE   Mhartste                                                                                                                                                                                     
+PFAY       Pfay                                                                                                                                                                                         
+SHIGGINS   Shiggins                                                                                                                                                                                     
+WGIETZ     Wgietz                                                                                                                                                                                       
+
+20 rows selected.
+
+SQL> REM Madhusudan Parshuram Soneji
+SQL> 
+SQL> REM INITCAP : INITIAL CAPITAL : PROPER CASE : CAMEL CASE
+SQL> 
+SQL> SELECT INITCAP('AMar akbAR ANthoNY') FROM DUAL;
+
+INITCAP('AMARAKBAR                                                                                                                                                                                      
+------------------                                                                                                                                                                                      
+Amar Akbar Anthony                                                                                                                                                                                      
+
+SQL> SELECT INITCAP('AMar$akbAR*ANthoNY') FROM DUAL;
+
+INITCAP('AMAR$AKBA                                                                                                                                                                                      
+------------------                                                                                                                                                                                      
+Amar$Akbar*Anthony                                                                                                                                                                                      
+
+SQL> SELECT INITCAP('AMar4akbAR6ANthoNY') FROM DUAL;
+
+INITCAP('AMAR4AKBA                                                                                                                                                                                      
+------------------                                                                                                                                                                                      
+Amar4akbar6anthony                                                                                                                                                                                      
+
+SQL> REM CHARACTER MANIPULATION FUNCTIONS : CONCAT LPAD RPAD LTRIM RTRIM TRIM LENGTH TRANSLATE REPLACE SUBSTR INSTR
+SQL> 
+SQL> REM CONCAT
+SQL> 
+SQL> SELECT FIRST_NAME || LAST_NAME FULLNAME FROM EMPLOYEES;
+
+FULLNAME                                                                                                                                                                                                
+--------------------                                                                                                                                                                                    
+StevenKing                                                                                                                                                                                              
+NeenaKochhar                                                                                                                                                                                            
+LexDe Haan                                                                                                                                                                                              
+AlexanderHunold                                                                                                                                                                                         
+BruceErnst                                                                                                                                                                                              
+DianaLorentz                                                                                                                                                                                            
+KevinMourgos                                                                                                                                                                                            
+TrennaRajs                                                                                                                                                                                              
+CurtisDavies                                                                                                                                                                                            
+RandallMatos                                                                                                                                                                                            
+PeterVargas                                                                                                                                                                                             
+EleniZlotkey                                                                                                                                                                                            
+EllenAbel                                                                                                                                                                                               
+JonathonTaylor                                                                                                                                                                                          
+KimerelyGrant                                                                                                                                                                                           
+JenniferWhalen                                                                                                                                                                                          
+MichaelHartstein                                                                                                                                                                                        
+PatFay                                                                                                                                                                                                  
+ShelleyHiggins                                                                                                                                                                                          
+WilliamGietz                                                                                                                                                                                            
+
+20 rows selected.
+
+SQL> SELECT CONCAT(FIRST_NAME,LAST_NAME) FULLNAME FROM EMPLOYEES;
+
+FULLNAME                                                                                                                                                                                                
+--------------------                                                                                                                                                                                    
+StevenKing                                                                                                                                                                                              
+NeenaKochhar                                                                                                                                                                                            
+LexDe Haan                                                                                                                                                                                              
+AlexanderHunold                                                                                                                                                                                         
+BruceErnst                                                                                                                                                                                              
+DianaLorentz                                                                                                                                                                                            
+KevinMourgos                                                                                                                                                                                            
+TrennaRajs                                                                                                                                                                                              
+CurtisDavies                                                                                                                                                                                            
+RandallMatos                                                                                                                                                                                            
+PeterVargas                                                                                                                                                                                             
+EleniZlotkey                                                                                                                                                                                            
+EllenAbel                                                                                                                                                                                               
+JonathonTaylor                                                                                                                                                                                          
+KimerelyGrant                                                                                                                                                                                           
+JenniferWhalen                                                                                                                                                                                          
+MichaelHartstein                                                                                                                                                                                        
+PatFay                                                                                                                                                                                                  
+ShelleyHiggins                                                                                                                                                                                          
+WilliamGietz                                                                                                                                                                                            
+
+20 rows selected.
+
+SQL> SELECT FIRST_NAME || ' ' || LAST_NAME FULLNAME FROM EMPLOYEES;
+
+FULLNAME                                                                                                                                                                                                
+---------------------                                                                                                                                                                                   
+Steven King                                                                                                                                                                                             
+Neena Kochhar                                                                                                                                                                                           
+Lex De Haan                                                                                                                                                                                             
+Alexander Hunold                                                                                                                                                                                        
+Bruce Ernst                                                                                                                                                                                             
+Diana Lorentz                                                                                                                                                                                           
+Kevin Mourgos                                                                                                                                                                                           
+Trenna Rajs                                                                                                                                                                                             
+Curtis Davies                                                                                                                                                                                           
+Randall Matos                                                                                                                                                                                           
+Peter Vargas                                                                                                                                                                                            
+Eleni Zlotkey                                                                                                                                                                                           
+Ellen Abel                                                                                                                                                                                              
+Jonathon Taylor                                                                                                                                                                                         
+Kimerely Grant                                                                                                                                                                                          
+Jennifer Whalen                                                                                                                                                                                         
+Michael Hartstein                                                                                                                                                                                       
+Pat Fay                                                                                                                                                                                                 
+Shelley Higgins                                                                                                                                                                                         
+William Gietz                                                                                                                                                                                           
+
+20 rows selected.
+
+SQL> SELECT CONCAT(FIRST_NAME,' ',LAST_NAME) FULLNAME FROM EMPLOYEES;
+SELECT CONCAT(FIRST_NAME,' ',LAST_NAME) FULLNAME FROM EMPLOYEES
+       *
+ERROR at line 1:
+ORA-00909: invalid number of arguments 
+
+
+SQL> SELECT CONCAT(FIRST_NAME||' ',LAST_NAME) FULLNAME FROM EMPLOYEES;
+
+FULLNAME                                                                                                                                                                                                
+---------------------                                                                                                                                                                                   
+Steven King                                                                                                                                                                                             
+Neena Kochhar                                                                                                                                                                                           
+Lex De Haan                                                                                                                                                                                             
+Alexander Hunold                                                                                                                                                                                        
+Bruce Ernst                                                                                                                                                                                             
+Diana Lorentz                                                                                                                                                                                           
+Kevin Mourgos                                                                                                                                                                                           
+Trenna Rajs                                                                                                                                                                                             
+Curtis Davies                                                                                                                                                                                           
+Randall Matos                                                                                                                                                                                           
+Peter Vargas                                                                                                                                                                                            
+Eleni Zlotkey                                                                                                                                                                                           
+Ellen Abel                                                                                                                                                                                              
+Jonathon Taylor                                                                                                                                                                                         
+Kimerely Grant                                                                                                                                                                                          
+Jennifer Whalen                                                                                                                                                                                         
+Michael Hartstein                                                                                                                                                                                       
+Pat Fay                                                                                                                                                                                                 
+Shelley Higgins                                                                                                                                                                                         
+William Gietz                                                                                                                                                                                           
+
+20 rows selected.
+
+SQL> SELECT CONCAT(FIRST_NAME,' '||LAST_NAME) FULLNAME FROM EMPLOYEES;
+
+FULLNAME                                                                                                                                                                                                
+---------------------                                                                                                                                                                                   
+Steven King                                                                                                                                                                                             
+Neena Kochhar                                                                                                                                                                                           
+Lex De Haan                                                                                                                                                                                             
+Alexander Hunold                                                                                                                                                                                        
+Bruce Ernst                                                                                                                                                                                             
+Diana Lorentz                                                                                                                                                                                           
+Kevin Mourgos                                                                                                                                                                                           
+Trenna Rajs                                                                                                                                                                                             
+Curtis Davies                                                                                                                                                                                           
+Randall Matos                                                                                                                                                                                           
+Peter Vargas                                                                                                                                                                                            
+Eleni Zlotkey                                                                                                                                                                                           
+Ellen Abel                                                                                                                                                                                              
+Jonathon Taylor                                                                                                                                                                                         
+Kimerely Grant                                                                                                                                                                                          
+Jennifer Whalen                                                                                                                                                                                         
+Michael Hartstein                                                                                                                                                                                       
+Pat Fay                                                                                                                                                                                                 
+Shelley Higgins                                                                                                                                                                                         
+William Gietz                                                                                                                                                                                           
+
+20 rows selected.
+
+SQL> SELECT CONCAT(FIRST_NAME,CONCAT(' ',LAST_NAME)) FULLNAME FROM EMPLOYEES;
+
+FULLNAME                                                                                                                                                                                                
+---------------------                                                                                                                                                                                   
+Steven King                                                                                                                                                                                             
+Neena Kochhar                                                                                                                                                                                           
+Lex De Haan                                                                                                                                                                                             
+Alexander Hunold                                                                                                                                                                                        
+Bruce Ernst                                                                                                                                                                                             
+Diana Lorentz                                                                                                                                                                                           
+Kevin Mourgos                                                                                                                                                                                           
+Trenna Rajs                                                                                                                                                                                             
+Curtis Davies                                                                                                                                                                                           
+Randall Matos                                                                                                                                                                                           
+Peter Vargas                                                                                                                                                                                            
+Eleni Zlotkey                                                                                                                                                                                           
+Ellen Abel                                                                                                                                                                                              
+Jonathon Taylor                                                                                                                                                                                         
+Kimerely Grant                                                                                                                                                                                          
+Jennifer Whalen                                                                                                                                                                                         
+Michael Hartstein                                                                                                                                                                                       
+Pat Fay                                                                                                                                                                                                 
+Shelley Higgins                                                                                                                                                                                         
+William Gietz                                                                                                                                                                                           
+
+20 rows selected.
+
+SQL> SELECT CONCAT(CONCAT(FIRST_NAME,' '),LAST_NAME) FULLNAME FROM EMPLOYEES;
+
+FULLNAME                                                                                                                                                                                                
+---------------------                                                                                                                                                                                   
+Steven King                                                                                                                                                                                             
+Neena Kochhar                                                                                                                                                                                           
+Lex De Haan                                                                                                                                                                                             
+Alexander Hunold                                                                                                                                                                                        
+Bruce Ernst                                                                                                                                                                                             
+Diana Lorentz                                                                                                                                                                                           
+Kevin Mourgos                                                                                                                                                                                           
+Trenna Rajs                                                                                                                                                                                             
+Curtis Davies                                                                                                                                                                                           
+Randall Matos                                                                                                                                                                                           
+Peter Vargas                                                                                                                                                                                            
+Eleni Zlotkey                                                                                                                                                                                           
+Ellen Abel                                                                                                                                                                                              
+Jonathon Taylor                                                                                                                                                                                         
+Kimerely Grant                                                                                                                                                                                          
+Jennifer Whalen                                                                                                                                                                                         
+Michael Hartstein                                                                                                                                                                                       
+Pat Fay                                                                                                                                                                                                 
+Shelley Higgins                                                                                                                                                                                         
+William Gietz                                                                                                                                                                                           
+
+20 rows selected.
+
+SQL> REM LPAD : LEFT PADDING
+SQL> 
+SQL> SELECT SALARY , LPAD(SALARY,10,'*') FROM EMPLOYEES;
+
+    SALARY LPAD(SALARY,10,'*')                                                                                                                                                                          
+---------- ----------------------------------------                                                                                                                                                     
+     24000 *****24000                                                                                                                                                                                   
+     17000 *****17000                                                                                                                                                                                   
+     17000 *****17000                                                                                                                                                                                   
+      9000 ******9000                                                                                                                                                                                   
+      6000 ******6000                                                                                                                                                                                   
+      4200 ******4200                                                                                                                                                                                   
+      5800 ******5800                                                                                                                                                                                   
+      3500 ******3500                                                                                                                                                                                   
+      3100 ******3100                                                                                                                                                                                   
+      2600 ******2600                                                                                                                                                                                   
+      2500 ******2500                                                                                                                                                                                   
+     10500 *****10500                                                                                                                                                                                   
+     11000 *****11000                                                                                                                                                                                   
+      8600 ******8600                                                                                                                                                                                   
+      7000 ******7000                                                                                                                                                                                   
+      4400 ******4400                                                                                                                                                                                   
+     13000 *****13000                                                                                                                                                                                   
+      6000 ******6000                                                                                                                                                                                   
+     12000 *****12000                                                                                                                                                                                   
+      8300 ******8300                                                                                                                                                                                   
+
+20 rows selected.
+
+SQL> SELECT SALARY , LPAD(SALARY,10,'+=') FROM EMPLOYEES;
+
+    SALARY LPAD(SALARY,10,'+=')                                                                                                                                                                         
+---------- ----------------------------------------                                                                                                                                                     
+     24000 +=+=+24000                                                                                                                                                                                   
+     17000 +=+=+17000                                                                                                                                                                                   
+     17000 +=+=+17000                                                                                                                                                                                   
+      9000 +=+=+=9000                                                                                                                                                                                   
+      6000 +=+=+=6000                                                                                                                                                                                   
+      4200 +=+=+=4200                                                                                                                                                                                   
+      5800 +=+=+=5800                                                                                                                                                                                   
+      3500 +=+=+=3500                                                                                                                                                                                   
+      3100 +=+=+=3100                                                                                                                                                                                   
+      2600 +=+=+=2600                                                                                                                                                                                   
+      2500 +=+=+=2500                                                                                                                                                                                   
+     10500 +=+=+10500                                                                                                                                                                                   
+     11000 +=+=+11000                                                                                                                                                                                   
+      8600 +=+=+=8600                                                                                                                                                                                   
+      7000 +=+=+=7000                                                                                                                                                                                   
+      4400 +=+=+=4400                                                                                                                                                                                   
+     13000 +=+=+13000                                                                                                                                                                                   
+      6000 +=+=+=6000                                                                                                                                                                                   
+     12000 +=+=+12000                                                                                                                                                                                   
+      8300 +=+=+=8300                                                                                                                                                                                   
+
+20 rows selected.
+
+SQL> SELECT SALARY , LPAD(SALARY,15) FROM EMPLOYEES;
+
+    SALARY LPAD(SALARY,15)                                                                                                                                                                              
+---------- ------------------------------------------------------------                                                                                                                                 
+     24000           24000                                                                                                                                                                              
+     17000           17000                                                                                                                                                                              
+     17000           17000                                                                                                                                                                              
+      9000            9000                                                                                                                                                                              
+      6000            6000                                                                                                                                                                              
+      4200            4200                                                                                                                                                                              
+      5800            5800                                                                                                                                                                              
+      3500            3500                                                                                                                                                                              
+      3100            3100                                                                                                                                                                              
+      2600            2600                                                                                                                                                                              
+      2500            2500                                                                                                                                                                              
+     10500           10500                                                                                                                                                                              
+     11000           11000                                                                                                                                                                              
+      8600            8600                                                                                                                                                                              
+      7000            7000                                                                                                                                                                              
+      4400            4400                                                                                                                                                                              
+     13000           13000                                                                                                                                                                              
+      6000            6000                                                                                                                                                                              
+     12000           12000                                                                                                                                                                              
+      8300            8300                                                                                                                                                                              
+
+20 rows selected.
+
+SQL> SELECT SALARY , LPAD(SALARY,4,'*') FROM EMPLOYEES;
+
+    SALARY LPAD(SALARY,4,'*                                                                                                                                                                             
+---------- ----------------                                                                                                                                                                             
+     24000 2400                                                                                                                                                                                         
+     17000 1700                                                                                                                                                                                         
+     17000 1700                                                                                                                                                                                         
+      9000 9000                                                                                                                                                                                         
+      6000 6000                                                                                                                                                                                         
+      4200 4200                                                                                                                                                                                         
+      5800 5800                                                                                                                                                                                         
+      3500 3500                                                                                                                                                                                         
+      3100 3100                                                                                                                                                                                         
+      2600 2600                                                                                                                                                                                         
+      2500 2500                                                                                                                                                                                         
+     10500 1050                                                                                                                                                                                         
+     11000 1100                                                                                                                                                                                         
+      8600 8600                                                                                                                                                                                         
+      7000 7000                                                                                                                                                                                         
+      4400 4400                                                                                                                                                                                         
+     13000 1300                                                                                                                                                                                         
+      6000 6000                                                                                                                                                                                         
+     12000 1200                                                                                                                                                                                         
+      8300 8300                                                                                                                                                                                         
+
+20 rows selected.
+
+SQL> REM RPAD : RIGHT PADDING
+SQL> 
+SQL> SELECT SALARY , RPAD(SALARY,10,'*') FROM EMPLOYEES;
+
+    SALARY RPAD(SALARY,10,'*')                                                                                                                                                                          
+---------- ----------------------------------------                                                                                                                                                     
+     24000 24000*****                                                                                                                                                                                   
+     17000 17000*****                                                                                                                                                                                   
+     17000 17000*****                                                                                                                                                                                   
+      9000 9000******                                                                                                                                                                                   
+      6000 6000******                                                                                                                                                                                   
+      4200 4200******                                                                                                                                                                                   
+      5800 5800******                                                                                                                                                                                   
+      3500 3500******                                                                                                                                                                                   
+      3100 3100******                                                                                                                                                                                   
+      2600 2600******                                                                                                                                                                                   
+      2500 2500******                                                                                                                                                                                   
+     10500 10500*****                                                                                                                                                                                   
+     11000 11000*****                                                                                                                                                                                   
+      8600 8600******                                                                                                                                                                                   
+      7000 7000******                                                                                                                                                                                   
+      4400 4400******                                                                                                                                                                                   
+     13000 13000*****                                                                                                                                                                                   
+      6000 6000******                                                                                                                                                                                   
+     12000 12000*****                                                                                                                                                                                   
+      8300 8300******                                                                                                                                                                                   
+
+20 rows selected.
+
+SQL> SELECT SALARY , RPAD(SALARY,10,'+_)(') FROM EMPLOYEES;
+
+    SALARY RPAD(SALARY,10,'+_)(')                                                                                                                                                                       
+---------- ----------------------------------------                                                                                                                                                     
+     24000 24000+_)(+                                                                                                                                                                                   
+     17000 17000+_)(+                                                                                                                                                                                   
+     17000 17000+_)(+                                                                                                                                                                                   
+      9000 9000+_)(+_                                                                                                                                                                                   
+      6000 6000+_)(+_                                                                                                                                                                                   
+      4200 4200+_)(+_                                                                                                                                                                                   
+      5800 5800+_)(+_                                                                                                                                                                                   
+      3500 3500+_)(+_                                                                                                                                                                                   
+      3100 3100+_)(+_                                                                                                                                                                                   
+      2600 2600+_)(+_                                                                                                                                                                                   
+      2500 2500+_)(+_                                                                                                                                                                                   
+     10500 10500+_)(+                                                                                                                                                                                   
+     11000 11000+_)(+                                                                                                                                                                                   
+      8600 8600+_)(+_                                                                                                                                                                                   
+      7000 7000+_)(+_                                                                                                                                                                                   
+      4400 4400+_)(+_                                                                                                                                                                                   
+     13000 13000+_)(+                                                                                                                                                                                   
+      6000 6000+_)(+_                                                                                                                                                                                   
+     12000 12000+_)(+                                                                                                                                                                                   
+      8300 8300+_)(+_                                                                                                                                                                                   
+
+20 rows selected.
+
+SQL> SELECT SALARY , RPAD(SALARY,15) FROM EMPLOYEES;
+
+    SALARY RPAD(SALARY,15)                                                                                                                                                                              
+---------- ------------------------------------------------------------                                                                                                                                 
+     24000 24000                                                                                                                                                                                        
+     17000 17000                                                                                                                                                                                        
+     17000 17000                                                                                                                                                                                        
+      9000 9000                                                                                                                                                                                         
+      6000 6000                                                                                                                                                                                         
+      4200 4200                                                                                                                                                                                         
+      5800 5800                                                                                                                                                                                         
+      3500 3500                                                                                                                                                                                         
+      3100 3100                                                                                                                                                                                         
+      2600 2600                                                                                                                                                                                         
+      2500 2500                                                                                                                                                                                         
+     10500 10500                                                                                                                                                                                        
+     11000 11000                                                                                                                                                                                        
+      8600 8600                                                                                                                                                                                         
+      7000 7000                                                                                                                                                                                         
+      4400 4400                                                                                                                                                                                         
+     13000 13000                                                                                                                                                                                        
+      6000 6000                                                                                                                                                                                         
+     12000 12000                                                                                                                                                                                        
+      8300 8300                                                                                                                                                                                         
+
+20 rows selected.
+
+SQL> SELECT SALARY , RPAD(SALARY,4) FROM EMPLOYEES;
+
+    SALARY RPAD(SALARY,4)                                                                                                                                                                               
+---------- ----------------                                                                                                                                                                             
+     24000 2400                                                                                                                                                                                         
+     17000 1700                                                                                                                                                                                         
+     17000 1700                                                                                                                                                                                         
+      9000 9000                                                                                                                                                                                         
+      6000 6000                                                                                                                                                                                         
+      4200 4200                                                                                                                                                                                         
+      5800 5800                                                                                                                                                                                         
+      3500 3500                                                                                                                                                                                         
+      3100 3100                                                                                                                                                                                         
+      2600 2600                                                                                                                                                                                         
+      2500 2500                                                                                                                                                                                         
+     10500 1050                                                                                                                                                                                         
+     11000 1100                                                                                                                                                                                         
+      8600 8600                                                                                                                                                                                         
+      7000 7000                                                                                                                                                                                         
+      4400 4400                                                                                                                                                                                         
+     13000 1300                                                                                                                                                                                         
+      6000 6000                                                                                                                                                                                         
+     12000 1200                                                                                                                                                                                         
+      8300 8300                                                                                                                                                                                         
+
+20 rows selected.
+
+SQL> REM LENGTH :
+SQL> 
+SQL> SELECT FIRST_NAME , LENGTH(FIRST_NAME) FROM EMPLOYES;
+SELECT FIRST_NAME , LENGTH(FIRST_NAME) FROM EMPLOYES
+                                            *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+SQL> SELECT FIRST_NAME , LENGTH(FIRST_NAME) FROM EMPLOYEES;
+
+FIRST_NAME LENGTH(FIRST_NAME)                                                                                                                                                                           
+---------- ------------------                                                                                                                                                                           
+Steven                      6                                                                                                                                                                           
+Neena                       5                                                                                                                                                                           
+Lex                         3                                                                                                                                                                           
+Alexander                   9                                                                                                                                                                           
+Bruce                       5                                                                                                                                                                           
+Diana                       5                                                                                                                                                                           
+Kevin                       5                                                                                                                                                                           
+Trenna                      6                                                                                                                                                                           
+Curtis                      6                                                                                                                                                                           
+Randall                     7                                                                                                                                                                           
+Peter                       5                                                                                                                                                                           
+Eleni                       5                                                                                                                                                                           
+Ellen                       5                                                                                                                                                                           
+Jonathon                    8                                                                                                                                                                           
+Kimerely                    8                                                                                                                                                                           
+Jennifer                    8                                                                                                                                                                           
+Michael                     7                                                                                                                                                                           
+Pat                         3                                                                                                                                                                           
+Shelley                     7                                                                                                                                                                           
+William                     7                                                                                                                                                                           
+
+20 rows selected.
+
+SQL> SELECT SALARY , LENGTH(SALARY) FROM EMPLOYEES;
+
+    SALARY LENGTH(SALARY)                                                                                                                                                                               
+---------- --------------                                                                                                                                                                               
+     24000              5                                                                                                                                                                               
+     17000              5                                                                                                                                                                               
+     17000              5                                                                                                                                                                               
+      9000              4                                                                                                                                                                               
+      6000              4                                                                                                                                                                               
+      4200              4                                                                                                                                                                               
+      5800              4                                                                                                                                                                               
+      3500              4                                                                                                                                                                               
+      3100              4                                                                                                                                                                               
+      2600              4                                                                                                                                                                               
+      2500              4                                                                                                                                                                               
+     10500              5                                                                                                                                                                               
+     11000              5                                                                                                                                                                               
+      8600              4                                                                                                                                                                               
+      7000              4                                                                                                                                                                               
+      4400              4                                                                                                                                                                               
+     13000              5                                                                                                                                                                               
+      6000              4                                                                                                                                                                               
+     12000              5                                                                                                                                                                               
+      8300              4                                                                                                                                                                               
+
+20 rows selected.
+
+SQL> SELECT HIRE_DATE , LENGTH(HIRE_DATE) FROM EMPLOYEES;
+
+HIRE_DATE LENGTH(HIRE_DATE)                                                                                                                                                                             
+--------- -----------------                                                                                                                                                                             
+17-JUL-87                 9                                                                                                                                                                             
+21-SEP-89                 9                                                                                                                                                                             
+13-JAN-93                 9                                                                                                                                                                             
+03-JAN-90                 9                                                                                                                                                                             
+21-MAY-91                 9                                                                                                                                                                             
+07-FEB-99                 9                                                                                                                                                                             
+16-NOV-99                 9                                                                                                                                                                             
+17-OCT-95                 9                                                                                                                                                                             
+29-JAN-97                 9                                                                                                                                                                             
+15-MAR-98                 9                                                                                                                                                                             
+09-JUL-98                 9                                                                                                                                                                             
+29-JAN-00                 9                                                                                                                                                                             
+11-MAY-96                 9                                                                                                                                                                             
+24-MAR-98                 9                                                                                                                                                                             
+24-MAY-99                 9                                                                                                                                                                             
+17-SEP-87                 9                                                                                                                                                                             
+17-FEB-96                 9                                                                                                                                                                             
+17-AUG-97                 9                                                                                                                                                                             
+07-JUN-94                 9                                                                                                                                                                             
+07-JUN-94                 9                                                                                                                                                                             
+
+20 rows selected.
+
+SQL> SELECT * FROM NLS_SESSION_PARAMATERS;
+SELECT * FROM NLS_SESSION_PARAMATERS
+              *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+SQL> SELECT * FROM NLS_SESSION_PARAMETERS;
+
+PARAMETER                                                                                                                                                                                               
+------------------------------------------------------------------------------------------------------------------------                                                                                
+VALUE                                                                                                                                                                                                   
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+NLS_LANGUAGE                                                                                                                                                                                            
+AMERICAN                                                                                                                                                                                                
+                                                                                                                                                                                                        
+NLS_TERRITORY                                                                                                                                                                                           
+AMERICA                                                                                                                                                                                                 
+                                                                                                                                                                                                        
+NLS_CURRENCY                                                                                                                                                                                            
+$                                                                                                                                                                                                       
+                                                                                                                                                                                                        
+NLS_ISO_CURRENCY                                                                                                                                                                                        
+AMERICA                                                                                                                                                                                                 
+                                                                                                                                                                                                        
+NLS_NUMERIC_CHARACTERS                                                                                                                                                                                  
+.,                                                                                                                                                                                                      
+                                                                                                                                                                                                        
+NLS_CALENDAR                                                                                                                                                                                            
+GREGORIAN                                                                                                                                                                                               
+                                                                                                                                                                                                        
+NLS_DATE_FORMAT                                                                                                                                                                                         
+
+PARAMETER                                                                                                                                                                                               
+------------------------------------------------------------------------------------------------------------------------                                                                                
+VALUE                                                                                                                                                                                                   
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+DD-MON-RR                                                                                                                                                                                               
+                                                                                                                                                                                                        
+NLS_DATE_LANGUAGE                                                                                                                                                                                       
+AMERICAN                                                                                                                                                                                                
+                                                                                                                                                                                                        
+NLS_SORT                                                                                                                                                                                                
+BINARY                                                                                                                                                                                                  
+                                                                                                                                                                                                        
+NLS_TIME_FORMAT                                                                                                                                                                                         
+HH.MI.SSXFF AM                                                                                                                                                                                          
+                                                                                                                                                                                                        
+NLS_TIMESTAMP_FORMAT                                                                                                                                                                                    
+DD-MON-RR HH.MI.SSXFF AM                                                                                                                                                                                
+                                                                                                                                                                                                        
+NLS_TIME_TZ_FORMAT                                                                                                                                                                                      
+HH.MI.SSXFF AM TZR                                                                                                                                                                                      
+                                                                                                                                                                                                        
+NLS_TIMESTAMP_TZ_FORMAT                                                                                                                                                                                 
+DD-MON-RR HH.MI.SSXFF AM TZR                                                                                                                                                                            
+
+PARAMETER                                                                                                                                                                                               
+------------------------------------------------------------------------------------------------------------------------                                                                                
+VALUE                                                                                                                                                                                                   
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+                                                                                                                                                                                                        
+NLS_DUAL_CURRENCY                                                                                                                                                                                       
+$                                                                                                                                                                                                       
+                                                                                                                                                                                                        
+NLS_COMP                                                                                                                                                                                                
+BINARY                                                                                                                                                                                                  
+                                                                                                                                                                                                        
+NLS_LENGTH_SEMANTICS                                                                                                                                                                                    
+BYTE                                                                                                                                                                                                    
+                                                                                                                                                                                                        
+NLS_NCHAR_CONV_EXCP                                                                                                                                                                                     
+FALSE                                                                                                                                                                                                   
+                                                                                                                                                                                                        
+
+17 rows selected.
+
+SQL> COL PARAMETER FORMAT A30
+SQL> COL VALUE FORMAT A30
+SQL> 
+SQL> R
+  1* SELECT * FROM NLS_SESSION_PARAMETERS
+
+PARAMETER                      VALUE                                                                                                                                                                    
+------------------------------ ------------------------------                                                                                                                                           
+NLS_LANGUAGE                   AMERICAN                                                                                                                                                                 
+NLS_TERRITORY                  AMERICA                                                                                                                                                                  
+NLS_CURRENCY                   $                                                                                                                                                                        
+NLS_ISO_CURRENCY               AMERICA                                                                                                                                                                  
+NLS_NUMERIC_CHARACTERS         .,                                                                                                                                                                       
+NLS_CALENDAR                   GREGORIAN                                                                                                                                                                
+NLS_DATE_FORMAT                DD-MON-RR                                                                                                                                                                
+NLS_DATE_LANGUAGE              AMERICAN                                                                                                                                                                 
+NLS_SORT                       BINARY                                                                                                                                                                   
+NLS_TIME_FORMAT                HH.MI.SSXFF AM                                                                                                                                                           
+NLS_TIMESTAMP_FORMAT           DD-MON-RR HH.MI.SSXFF AM                                                                                                                                                 
+NLS_TIME_TZ_FORMAT             HH.MI.SSXFF AM TZR                                                                                                                                                       
+NLS_TIMESTAMP_TZ_FORMAT        DD-MON-RR HH.MI.SSXFF AM TZR                                                                                                                                             
+NLS_DUAL_CURRENCY              $                                                                                                                                                                        
+NLS_COMP                       BINARY                                                                                                                                                                   
+NLS_LENGTH_SEMANTICS           BYTE                                                                                                                                                                     
+NLS_NCHAR_CONV_EXCP            FALSE                                                                                                                                                                    
+
+17 rows selected.
+
+SQL> ALTER SESSION SET NLS_DATE_FORMAT = 'DD-MONTH-RRRR';
+
+Session altered.
+
+SQL> SELECT * FROM NLS_SESSION_PARAMETERS;
+
+PARAMETER                      VALUE                                                                                                                                                                    
+------------------------------ ------------------------------                                                                                                                                           
+NLS_LANGUAGE                   AMERICAN                                                                                                                                                                 
+NLS_TERRITORY                  AMERICA                                                                                                                                                                  
+NLS_CURRENCY                   $                                                                                                                                                                        
+NLS_ISO_CURRENCY               AMERICA                                                                                                                                                                  
+NLS_NUMERIC_CHARACTERS         .,                                                                                                                                                                       
+NLS_CALENDAR                   GREGORIAN                                                                                                                                                                
+NLS_DATE_FORMAT                DD-MONTH-RRRR                                                                                                                                                            
+NLS_DATE_LANGUAGE              AMERICAN                                                                                                                                                                 
+NLS_SORT                       BINARY                                                                                                                                                                   
+NLS_TIME_FORMAT                HH.MI.SSXFF AM                                                                                                                                                           
+NLS_TIMESTAMP_FORMAT           DD-MON-RR HH.MI.SSXFF AM                                                                                                                                                 
+NLS_TIME_TZ_FORMAT             HH.MI.SSXFF AM TZR                                                                                                                                                       
+NLS_TIMESTAMP_TZ_FORMAT        DD-MON-RR HH.MI.SSXFF AM TZR                                                                                                                                             
+NLS_DUAL_CURRENCY              $                                                                                                                                                                        
+NLS_COMP                       BINARY                                                                                                                                                                   
+NLS_LENGTH_SEMANTICS           BYTE                                                                                                                                                                     
+NLS_NCHAR_CONV_EXCP            FALSE                                                                                                                                                                    
+
+17 rows selected.
+
+SQL> SELECT HIRE_DATE , LENGTH(HIRE_DATE) FROM EMPLOYEES;
+
+HIRE_DATE         LENGTH(HIRE_DATE)                                                                                                                                                                     
+----------------- -----------------                                                                                                                                                                     
+17-JULY     -1987                17                                                                                                                                                                     
+21-SEPTEMBER-1989                17                                                                                                                                                                     
+13-JANUARY  -1993                17                                                                                                                                                                     
+03-JANUARY  -1990                17                                                                                                                                                                     
+21-MAY      -1991                17                                                                                                                                                                     
+07-FEBRUARY -1999                17                                                                                                                                                                     
+16-NOVEMBER -1999                17                                                                                                                                                                     
+17-OCTOBER  -1995                17                                                                                                                                                                     
+29-JANUARY  -1997                17                                                                                                                                                                     
+15-MARCH    -1998                17                                                                                                                                                                     
+09-JULY     -1998                17                                                                                                                                                                     
+29-JANUARY  -2000                17                                                                                                                                                                     
+11-MAY      -1996                17                                                                                                                                                                     
+24-MARCH    -1998                17                                                                                                                                                                     
+24-MAY      -1999                17                                                                                                                                                                     
+17-SEPTEMBER-1987                17                                                                                                                                                                     
+17-FEBRUARY -1996                17                                                                                                                                                                     
+17-AUGUST   -1997                17                                                                                                                                                                     
+07-JUNE     -1994                17                                                                                                                                                                     
+07-JUNE     -1994                17                                                                                                                                                                     
+
+20 rows selected.
+
+SQL> ALTER SESSION SET NLS_DATE_FORMAT = 'DD-MON-RR DAY';
+
+Session altered.
+
+SQL> SELECT HIRE_DATE , LENGTH(HIRE_DATE) FROM EMPLOYEES;
+
+HIRE_DATE           LENGTH(HIRE_DATE)                                                                                                                                                                   
+------------------- -----------------                                                                                                                                                                   
+17-JUL-87 FRIDAY                   19                                                                                                                                                                   
+21-SEP-89 THURSDAY                 19                                                                                                                                                                   
+13-JAN-93 WEDNESDAY                19                                                                                                                                                                   
+03-JAN-90 WEDNESDAY                19                                                                                                                                                                   
+21-MAY-91 TUESDAY                  19                                                                                                                                                                   
+07-FEB-99 SUNDAY                   19                                                                                                                                                                   
+16-NOV-99 TUESDAY                  19                                                                                                                                                                   
+17-OCT-95 TUESDAY                  19                                                                                                                                                                   
+29-JAN-97 WEDNESDAY                19                                                                                                                                                                   
+15-MAR-98 SUNDAY                   19                                                                                                                                                                   
+09-JUL-98 THURSDAY                 19                                                                                                                                                                   
+29-JAN-00 SATURDAY                 19                                                                                                                                                                   
+11-MAY-96 SATURDAY                 19                                                                                                                                                                   
+24-MAR-98 TUESDAY                  19                                                                                                                                                                   
+24-MAY-99 MONDAY                   19                                                                                                                                                                   
+17-SEP-87 THURSDAY                 19                                                                                                                                                                   
+17-FEB-96 SATURDAY                 19                                                                                                                                                                   
+17-AUG-97 SUNDAY                   19                                                                                                                                                                   
+07-JUN-94 TUESDAY                  19                                                                                                                                                                   
+07-JUN-94 TUESDAY                  19                                                                                                                                                                   
+
+20 rows selected.
+
+SQL> REM UPPER LOWER INITCAP CONCAT LPAD RPAD LENGTH
+SQL> 
+SQL> REM LTRIM RTRIM TRIM TRANSLATE REPLACE SUBSTR INSTR : YET TO COMPLETE
+SQL> 
+SQL> SPOOL OFF

@@ -1,0 +1,1122 @@
+SQL> 
+SQL> CL SCR
+
+SQL> REM SPECIAL OPERATORS : IN , BETWEEN , LIKE , IS NULL
+SQL> 
+SQL> REM BETWEEN : IS USED TO CHECK VALUE WITHIN RANGE
+SQL> 
+SQL> REM SALARY BETWEEN 6000 AND 11000
+SQL> 
+SQL> REM SYNTAX : COLUMN NAME BETWEEN LOWER VALUE AND HIGHER VALUE
+SQL> 
+SQL> REM NUMBER EXAMPLES
+SQL> 
+SQL> SET LINES 200 PAGES 24
+SQL> 
+SQL> SELECT * FROM EMPLOYEES;
+
+EMPLOYEE_ID FIRST_NAME LAST_NAME  EMAIL      PHONE_NUMBER         HIRE_DATE JOB_ID         SALARY COMMISSION_PCT MANAGER_ID DEPARTMENT_ID                                                               
+----------- ---------- ---------- ---------- -------------------- --------- ---------- ---------- -------------- ---------- -------------                                                               
+        100 Steven     King       SKING      515.123.4567         17-JUL-87 AD_PRES         24000                                      90                                                               
+        101 Neena      Kochhar    NKOCHHAR   515.123.4568         21-SEP-89 AD_VP           17000                       100            90                                                               
+        102 Lex        De Haan    LDEHAAN    515.123.4569         13-JAN-93 AD_VP           17000                       100            90                                                               
+        103 Alexander  Hunold     AHUNOLD    590.423.4567         03-JAN-90 IT_PROG          9000                       102            60                                                               
+        104 Bruce      Ernst      BERNST     590.423.4568         21-MAY-91 IT_PROG          6000                       103            60                                                               
+        107 Diana      Lorentz    DLORENTZ   590.423.5567         07-FEB-99 IT_PROG          4200                       103            60                                                               
+        124 Kevin      Mourgos    KMOURGOS   650.123.5234         16-NOV-99 ST_MAN           5800                       100            50                                                               
+        141 Trenna     Rajs       TRAJS      650.121.8009         17-OCT-95 ST_CLERK         3500                       124            50                                                               
+        142 Curtis     Davies     CDAVIES    650.121.2994         29-JAN-97 ST_CLERK         3100                       124            50                                                               
+        143 Randall    Matos      RMATOS     650.121.2874         15-MAR-98 ST_CLERK         2600                       124            50                                                               
+        144 Peter      Vargas     PVARGAS    650.121.2004         09-JUL-98 ST_CLERK         2500                       124            50                                                               
+        149 Eleni      Zlotkey    EZLOTKEY   011.44.1344.429018   29-JAN-00 SA_MAN          10500             .2        100            80                                                               
+        174 Ellen      Abel       EABEL      011.44.1644.429267   11-MAY-96 SA_REP          11000             .3        149            80                                                               
+        176 Jonathon   Taylor     JTAYLOR    011.44.1644.429265   24-MAR-98 SA_REP           8600             .3        149            80                                                               
+        178 Kimerely   Grant      KGRANT     011.44.1644.429263   24-MAY-99 SA_REP           7000            .15        149                                                                             
+        200 Jennifer   Whalen     JWAHLEN    515.123.4444         17-SEP-87 AD_ASST          4400                       101            10                                                               
+        201 Michael    Hartstein  MHARTSTE   515.123.5555         17-FEB-96 MK_MAN          13000                       100            20                                                               
+        202 Pat        Fay        PFAY       603.123.6666         17-AUG-97 MK_REP           6000                       201            20                                                               
+        205 Shelley    Higgins    SHIGGINS   515.123.8080         07-JUN-94 AC_MGR          12000                       101           110                                                               
+        206 William    Gietz      WGIETZ     515.123.8181         07-JUN-94 AC_ACCOUNT       8300                       205           110                                                               
+
+20 rows selected.
+
+SQL> SELECT FIRST_NAME , SALARY FROM EMPLOYEES WHERE SALARY BETWEEN 6000 AND 11000;
+
+FIRST_NAME     SALARY                                                                                                                                                                                   
+---------- ----------                                                                                                                                                                                   
+Alexander        9000                                                                                                                                                                                   
+Bruce            6000                                                                                                                                                                                   
+Eleni           10500                                                                                                                                                                                   
+Ellen           11000                                                                                                                                                                                   
+Jonathon         8600                                                                                                                                                                                   
+Kimerely         7000                                                                                                                                                                                   
+Pat              6000                                                                                                                                                                                   
+William          8300                                                                                                                                                                                   
+
+8 rows selected.
+
+SQL> SELECT FIRST_NAME , SALARY FROM EMPLOYEES WHERE SALARY BETWEEN 6000 AND 11000 ORDER BY 2;
+
+FIRST_NAME     SALARY                                                                                                                                                                                   
+---------- ----------                                                                                                                                                                                   
+Bruce            6000                                                                                                                                                                                   
+Pat              6000                                                                                                                                                                                   
+Kimerely         7000                                                                                                                                                                                   
+William          8300                                                                                                                                                                                   
+Jonathon         8600                                                                                                                                                                                   
+Alexander        9000                                                                                                                                                                                   
+Eleni           10500                                                                                                                                                                                   
+Ellen           11000                                                                                                                                                                                   
+
+8 rows selected.
+
+SQL> SELECT FIRST_NAME , SALARY FROM EMPLOYEES WHERE SALARY NOT BETWEEN 6000 AND 11000 ORDER BY 2;
+
+FIRST_NAME     SALARY                                                                                                                                                                                   
+---------- ----------                                                                                                                                                                                   
+Peter            2500                                                                                                                                                                                   
+Randall          2600                                                                                                                                                                                   
+Curtis           3100                                                                                                                                                                                   
+Trenna           3500                                                                                                                                                                                   
+Diana            4200                                                                                                                                                                                   
+Jennifer         4400                                                                                                                                                                                   
+Kevin            5800                                                                                                                                                                                   
+Shelley         12000                                                                                                                                                                                   
+Michael         13000                                                                                                                                                                                   
+Lex             17000                                                                                                                                                                                   
+Neena           17000                                                                                                                                                                                   
+Steven          24000                                                                                                                                                                                   
+
+12 rows selected.
+
+SQL> REM DATE EXAMPLES
+SQL> 
+SQL> REM DISPLAY THOSE WHO WERE HIRED BETWEEN YEAR 91 AND 95
+SQL> 
+SQL> SELECT LAST_NAME , HIRE_DATE FROM EMPLOYEES WHERE HIRE_DATE BETWEEN 91 AND 95;
+SELECT LAST_NAME , HIRE_DATE FROM EMPLOYEES WHERE HIRE_DATE BETWEEN 91 AND 95
+                                                            *
+ERROR at line 1:
+ORA-00932: inconsistent datatypes: expected DATE got NUMBER 
+
+
+SQL> SELECT LAST_NAME , HIRE_DATE FROM EMPLOYEES WHERE HIRE_DATE BETWEEN '91' AND '95';
+SELECT LAST_NAME , HIRE_DATE FROM EMPLOYEES WHERE HIRE_DATE BETWEEN '91' AND '95'
+                                                                             *
+ERROR at line 1:
+ORA-01847: day of month must be between 1 and last day of month 
+
+
+SQL> SELECT LAST_NAME , HIRE_DATE FROM EMPLOYEES WHERE HIRE_DATE BETWEEN '01-JAN-91' AND '31-DEC-95';
+
+LAST_NAME  HIRE_DATE                                                                                                                                                                                    
+---------- ---------                                                                                                                                                                                    
+De Haan    13-JAN-93                                                                                                                                                                                    
+Ernst      21-MAY-91                                                                                                                                                                                    
+Rajs       17-OCT-95                                                                                                                                                                                    
+Higgins    07-JUN-94                                                                                                                                                                                    
+Gietz      07-JUN-94                                                                                                                                                                                    
+
+SQL> SELECT LAST_NAME , HIRE_DATE FROM EMPLOYEES WHERE HIRE_DATE BETWEEN '01-JAN-91' AND '31-DEC-95' ORDER BY 2;
+
+LAST_NAME  HIRE_DATE                                                                                                                                                                                    
+---------- ---------                                                                                                                                                                                    
+Ernst      21-MAY-91                                                                                                                                                                                    
+De Haan    13-JAN-93                                                                                                                                                                                    
+Gietz      07-JUN-94                                                                                                                                                                                    
+Higgins    07-JUN-94                                                                                                                                                                                    
+Rajs       17-OCT-95                                                                                                                                                                                    
+
+SQL> SELECT LAST_NAME , HIRE_DATE FROM EMPLOYEES WHERE HIRE_DATE BETWEEN '01-JANUARY-91' AND '31-DEC-1995' ORDER BY 2;
+
+LAST_NAME  HIRE_DATE                                                                                                                                                                                    
+---------- ---------                                                                                                                                                                                    
+Ernst      21-MAY-91                                                                                                                                                                                    
+De Haan    13-JAN-93                                                                                                                                                                                    
+Gietz      07-JUN-94                                                                                                                                                                                    
+Higgins    07-JUN-94                                                                                                                                                                                    
+Rajs       17-OCT-95                                                                                                                                                                                    
+
+SQL> SELECT LAST_NAME , HIRE_DATE FROM EMPLOYEES WHERE HIRE_DATE BETWEEN '01/JANUARY\91' AND '31dEC1995' ORDER BY 2;
+
+LAST_NAME  HIRE_DATE                                                                                                                                                                                    
+---------- ---------                                                                                                                                                                                    
+Ernst      21-MAY-91                                                                                                                                                                                    
+De Haan    13-JAN-93                                                                                                                                                                                    
+Gietz      07-JUN-94                                                                                                                                                                                    
+Higgins    07-JUN-94                                                                                                                                                                                    
+Rajs       17-OCT-95                                                                                                                                                                                    
+
+SQL> SELECT LAST_NAME , HIRE_DATE FROM EMPLOYEES WHERE HIRE_DATE BETWEEN '01/JANU\91' AND '31dEC1995' ORDER BY 2;
+SELECT LAST_NAME , HIRE_DATE FROM EMPLOYEES WHERE HIRE_DATE BETWEEN '01/JANU\91' AND '31dEC1995' ORDER BY 2
+                                                                    *
+ERROR at line 1:
+ORA-01861: literal does not match format string 
+
+
+SQL> SELECT LAST_NAME , HIRE_DATE FROM EMPLOYEES WHERE HIRE_DATE NOT BETWEEN '01/JANUARY\91' AND '31dEC1995' ORDER BY 2;
+
+LAST_NAME  HIRE_DATE                                                                                                                                                                                    
+---------- ---------                                                                                                                                                                                    
+King       17-JUL-87                                                                                                                                                                                    
+Whalen     17-SEP-87                                                                                                                                                                                    
+Kochhar    21-SEP-89                                                                                                                                                                                    
+Hunold     03-JAN-90                                                                                                                                                                                    
+Hartstein  17-FEB-96                                                                                                                                                                                    
+Abel       11-MAY-96                                                                                                                                                                                    
+Davies     29-JAN-97                                                                                                                                                                                    
+Fay        17-AUG-97                                                                                                                                                                                    
+Matos      15-MAR-98                                                                                                                                                                                    
+Taylor     24-MAR-98                                                                                                                                                                                    
+Vargas     09-JUL-98                                                                                                                                                                                    
+Lorentz    07-FEB-99                                                                                                                                                                                    
+Grant      24-MAY-99                                                                                                                                                                                    
+Mourgos    16-NOV-99                                                                                                                                                                                    
+Zlotkey    29-JAN-00                                                                                                                                                                                    
+
+15 rows selected.
+
+SQL> REM CHARACTER COMPARISONS
+SQL> 
+SQL> SELECT FIRST_NAME FROM EMPLOYEES ORDER BY 1;
+
+FIRST_NAME                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+Alexander                                                                                                                                                                                               
+Bruce                                                                                                                                                                                                   
+Curtis                                                                                                                                                                                                  
+Diana                                                                                                                                                                                                   
+Eleni                                                                                                                                                                                                   
+Ellen                                                                                                                                                                                                   
+Jennifer                                                                                                                                                                                                
+Jonathon                                                                                                                                                                                                
+Kevin                                                                                                                                                                                                   
+Kimerely                                                                                                                                                                                                
+Lex                                                                                                                                                                                                     
+Michael                                                                                                                                                                                                 
+Neena                                                                                                                                                                                                   
+Pat                                                                                                                                                                                                     
+Peter                                                                                                                                                                                                   
+Randall                                                                                                                                                                                                 
+Shelley                                                                                                                                                                                                 
+Steven                                                                                                                                                                                                  
+Trenna                                                                                                                                                                                                  
+William                                                                                                                                                                                                 
+
+20 rows selected.
+
+SQL> SELECT FIRST_NAME FROM EMPLOYEES WHERE FIRST_NAME BETWEEN 'J' AND 'P' ORDER BY 1;
+
+FIRST_NAME                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+Jennifer                                                                                                                                                                                                
+Jonathon                                                                                                                                                                                                
+Kevin                                                                                                                                                                                                   
+Kimerely                                                                                                                                                                                                
+Lex                                                                                                                                                                                                     
+Michael                                                                                                                                                                                                 
+Neena                                                                                                                                                                                                   
+
+7 rows selected.
+
+SQL> SELECT FIRST_NAME FROM EMPLOYEES ORDER BY 1;
+
+FIRST_NAME                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+Alexander                                                                                                                                                                                               
+Bruce                                                                                                                                                                                                   
+Curtis                                                                                                                                                                                                  
+Diana                                                                                                                                                                                                   
+Eleni                                                                                                                                                                                                   
+Ellen                                                                                                                                                                                                   
+Jennifer                                                                                                                                                                                                
+Jonathon                                                                                                                                                                                                
+Kevin                                                                                                                                                                                                   
+Kimerely                                                                                                                                                                                                
+Lex                                                                                                                                                                                                     
+Michael                                                                                                                                                                                                 
+Neena                                                                                                                                                                                                   
+Pat                                                                                                                                                                                                     
+Peter                                                                                                                                                                                                   
+Randall                                                                                                                                                                                                 
+Shelley                                                                                                                                                                                                 
+Steven                                                                                                                                                                                                  
+Trenna                                                                                                                                                                                                  
+William                                                                                                                                                                                                 
+
+20 rows selected.
+
+SQL> SELECT FIRST_NAME FROM EMPLOYEES WHERE FIRST_NAME BETWEEN 'Jo' AND 'Pe' ORDER BY 1;
+
+FIRST_NAME                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+Jonathon                                                                                                                                                                                                
+Kevin                                                                                                                                                                                                   
+Kimerely                                                                                                                                                                                                
+Lex                                                                                                                                                                                                     
+Michael                                                                                                                                                                                                 
+Neena                                                                                                                                                                                                   
+Pat                                                                                                                                                                                                     
+
+7 rows selected.
+
+SQL> REM LIKE : IS USED FOR PATTERN MATCHING
+SQL> 
+SQL> REM LIKE SUPPORTS TWO WILD CARD CHARACTERS : _ %
+SQL> 
+SQL> REM _ IS USED FOR SINGLE CHARACTER
+SQL> 
+SQL> REM % IS USED FOR ZERO OR MORE CHARACTERS
+SQL> 
+SQL> REM 1 EXAMPLES WITH ONLY WILD CARDS 2 EXAMPLES WITH WILD CARDS + OTHER CHARACTERS
+SQL> 
+SQL> REM 1 EXAMPLES WITH ONLY WILD CARDS
+SQL> 
+SQL> SELECT FIRST_NAME FROM EMPLOYEES WHERE FIRST_NAME LIKE '_____';
+
+FIRST_NAME                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+Neena                                                                                                                                                                                                   
+Bruce                                                                                                                                                                                                   
+Diana                                                                                                                                                                                                   
+Kevin                                                                                                                                                                                                   
+Peter                                                                                                                                                                                                   
+Eleni                                                                                                                                                                                                   
+Ellen                                                                                                                                                                                                   
+
+7 rows selected.
+
+SQL> SELECT FIRST_NAME FROM EMPLOYEES WHERE FIRST_NAME LIKE '______';
+
+FIRST_NAME                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+Steven                                                                                                                                                                                                  
+Trenna                                                                                                                                                                                                  
+Curtis                                                                                                                                                                                                  
+
+SQL> SELECT FIRST_NAME FROM EMPLOYEES WHERE FIRST_NAME LIKE '_______';
+
+FIRST_NAME                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+Randall                                                                                                                                                                                                 
+Michael                                                                                                                                                                                                 
+Shelley                                                                                                                                                                                                 
+William                                                                                                                                                                                                 
+
+SQL> SELECT FIRST_NAME FROM EMPLOYEES WHERE FIRST_NAME NOT LIKE '_______';
+
+FIRST_NAME                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+Steven                                                                                                                                                                                                  
+Neena                                                                                                                                                                                                   
+Lex                                                                                                                                                                                                     
+Alexander                                                                                                                                                                                               
+Bruce                                                                                                                                                                                                   
+Diana                                                                                                                                                                                                   
+Kevin                                                                                                                                                                                                   
+Trenna                                                                                                                                                                                                  
+Curtis                                                                                                                                                                                                  
+Peter                                                                                                                                                                                                   
+Eleni                                                                                                                                                                                                   
+Ellen                                                                                                                                                                                                   
+Jonathon                                                                                                                                                                                                
+Kimerely                                                                                                                                                                                                
+Jennifer                                                                                                                                                                                                
+Pat                                                                                                                                                                                                     
+
+16 rows selected.
+
+SQL> SELECT FIRST_NAME FROM EMPLOYEES WHERE FIRST_NAME LIKE '_______%';
+
+FIRST_NAME                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+Alexander                                                                                                                                                                                               
+Randall                                                                                                                                                                                                 
+Jonathon                                                                                                                                                                                                
+Kimerely                                                                                                                                                                                                
+Jennifer                                                                                                                                                                                                
+Michael                                                                                                                                                                                                 
+Shelley                                                                                                                                                                                                 
+William                                                                                                                                                                                                 
+
+8 rows selected.
+
+SQL> SELECT FIRST_NAME FROM EMPLOYEES WHERE FIRST_NAME LIKE '______%';
+
+FIRST_NAME                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+Steven                                                                                                                                                                                                  
+Alexander                                                                                                                                                                                               
+Trenna                                                                                                                                                                                                  
+Curtis                                                                                                                                                                                                  
+Randall                                                                                                                                                                                                 
+Jonathon                                                                                                                                                                                                
+Kimerely                                                                                                                                                                                                
+Jennifer                                                                                                                                                                                                
+Michael                                                                                                                                                                                                 
+Shelley                                                                                                                                                                                                 
+William                                                                                                                                                                                                 
+
+11 rows selected.
+
+SQL> SELECT FIRST_NAME FROM EMPLOYEES WHERE FIRST_NAME LIKE '%______';
+
+FIRST_NAME                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+Steven                                                                                                                                                                                                  
+Alexander                                                                                                                                                                                               
+Trenna                                                                                                                                                                                                  
+Curtis                                                                                                                                                                                                  
+Randall                                                                                                                                                                                                 
+Jonathon                                                                                                                                                                                                
+Kimerely                                                                                                                                                                                                
+Jennifer                                                                                                                                                                                                
+Michael                                                                                                                                                                                                 
+Shelley                                                                                                                                                                                                 
+William                                                                                                                                                                                                 
+
+11 rows selected.
+
+SQL> SELECT FIRST_NAME FROM EMPLOYEES WHERE FIRST_NAME LIKE '__%____';
+
+FIRST_NAME                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+Steven                                                                                                                                                                                                  
+Alexander                                                                                                                                                                                               
+Trenna                                                                                                                                                                                                  
+Curtis                                                                                                                                                                                                  
+Randall                                                                                                                                                                                                 
+Jonathon                                                                                                                                                                                                
+Kimerely                                                                                                                                                                                                
+Jennifer                                                                                                                                                                                                
+Michael                                                                                                                                                                                                 
+Shelley                                                                                                                                                                                                 
+William                                                                                                                                                                                                 
+
+11 rows selected.
+
+SQL> SELECT FIRST_NAME FROM EMPLOYEES WHERE FIRST_NAME LIKE '__%__%__';
+
+FIRST_NAME                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+Steven                                                                                                                                                                                                  
+Alexander                                                                                                                                                                                               
+Trenna                                                                                                                                                                                                  
+Curtis                                                                                                                                                                                                  
+Randall                                                                                                                                                                                                 
+Jonathon                                                                                                                                                                                                
+Kimerely                                                                                                                                                                                                
+Jennifer                                                                                                                                                                                                
+Michael                                                                                                                                                                                                 
+Shelley                                                                                                                                                                                                 
+William                                                                                                                                                                                                 
+
+11 rows selected.
+
+SQL> SELECT FIRST_NAME FROM EMPLOYEES WHERE FIRST_NAME LIKE '______%';
+
+FIRST_NAME                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+Steven                                                                                                                                                                                                  
+Alexander                                                                                                                                                                                               
+Trenna                                                                                                                                                                                                  
+Curtis                                                                                                                                                                                                  
+Randall                                                                                                                                                                                                 
+Jonathon                                                                                                                                                                                                
+Kimerely                                                                                                                                                                                                
+Jennifer                                                                                                                                                                                                
+Michael                                                                                                                                                                                                 
+Shelley                                                                                                                                                                                                 
+William                                                                                                                                                                                                 
+
+11 rows selected.
+
+SQL> SELECT FIRST_NAME FROM EMPLOYEES WHERE FIRST_NAME NOT LIKE '______%';
+
+FIRST_NAME                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+Neena                                                                                                                                                                                                   
+Lex                                                                                                                                                                                                     
+Bruce                                                                                                                                                                                                   
+Diana                                                                                                                                                                                                   
+Kevin                                                                                                                                                                                                   
+Peter                                                                                                                                                                                                   
+Eleni                                                                                                                                                                                                   
+Ellen                                                                                                                                                                                                   
+Pat                                                                                                                                                                                                     
+
+9 rows selected.
+
+SQL> REM EXAMPLES OF WILD CARD WITH OTHER CHARACTERS
+SQL> 
+SQL> REM POSITION/PLACE OF OTHER CHARACTER MATTERS
+SQL> 
+SQL> REM 'P%' : STARTS WITH P
+SQL> 
+SQL> REM '%n' : ENDS WITH n
+SQL> 
+SQL> REM '%e%' : CONTAINS e
+SQL> 
+SQL> SELECT FIRST_NAME FROM EMPLOYES WHERE FIRST_NAME LIKE 'P%';
+SELECT FIRST_NAME FROM EMPLOYES WHERE FIRST_NAME LIKE 'P%'
+                       *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+SQL> SELECT FIRST_NAME FROM EMPLOYEES WHERE FIRST_NAME LIKE 'P%';
+
+FIRST_NAME                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+Peter                                                                                                                                                                                                   
+Pat                                                                                                                                                                                                     
+
+SQL> SELECT FIRST_NAME FROM EMPLOYEES WHERE FIRST_NAME LIKE '%n';
+
+FIRST_NAME                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+Steven                                                                                                                                                                                                  
+Kevin                                                                                                                                                                                                   
+Ellen                                                                                                                                                                                                   
+Jonathon                                                                                                                                                                                                
+
+SQL> SELECT FIRST_NAME FROM EMPLOYEES WHERE FIRST_NAME LIKE '%e%';
+
+FIRST_NAME                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+Steven                                                                                                                                                                                                  
+Neena                                                                                                                                                                                                   
+Lex                                                                                                                                                                                                     
+Alexander                                                                                                                                                                                               
+Bruce                                                                                                                                                                                                   
+Kevin                                                                                                                                                                                                   
+Trenna                                                                                                                                                                                                  
+Peter                                                                                                                                                                                                   
+Eleni                                                                                                                                                                                                   
+Ellen                                                                                                                                                                                                   
+Kimerely                                                                                                                                                                                                
+Jennifer                                                                                                                                                                                                
+Michael                                                                                                                                                                                                 
+Shelley                                                                                                                                                                                                 
+
+14 rows selected.
+
+SQL> SELECT FIRST_NAME FROM EMPLOYEES WHERE FIRST_NAME LIKE '%ee%';
+
+FIRST_NAME                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+Neena                                                                                                                                                                                                   
+
+SQL> SELECT FIRST_NAME FROM EMPLOYEES WHERE FIRST_NAME LIKE '%e_e%';
+
+FIRST_NAME                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+Steven                                                                                                                                                                                                  
+Peter                                                                                                                                                                                                   
+Kimerely                                                                                                                                                                                                
+
+SQL> SELECT FIRST_NAME FROM EMPLOYEES WHERE FIRST_NAME LIKE '%e__e%';
+
+FIRST_NAME                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+Shelley                                                                                                                                                                                                 
+
+SQL> SELECT FIRST_NAME FROM EMPLOYEES WHERE FIRST_NAME LIKE '%e%e%';
+
+FIRST_NAME                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+Steven                                                                                                                                                                                                  
+Neena                                                                                                                                                                                                   
+Alexander                                                                                                                                                                                               
+Peter                                                                                                                                                                                                   
+Kimerely                                                                                                                                                                                                
+Jennifer                                                                                                                                                                                                
+Shelley                                                                                                                                                                                                 
+
+7 rows selected.
+
+SQL> SELECT FIRST_NAME FROM EMPLOYEES WHERE FIRST_NAME LIKE '_e%';
+
+FIRST_NAME                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+Neena                                                                                                                                                                                                   
+Lex                                                                                                                                                                                                     
+Kevin                                                                                                                                                                                                   
+Peter                                                                                                                                                                                                   
+Jennifer                                                                                                                                                                                                
+
+SQL> SELECT FIRST_NAME FROM EMPLOYEES WHERE FIRST_NAME LIKE '%e_';
+
+FIRST_NAME                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+Steven                                                                                                                                                                                                  
+Lex                                                                                                                                                                                                     
+Alexander                                                                                                                                                                                               
+Peter                                                                                                                                                                                                   
+Ellen                                                                                                                                                                                                   
+Jennifer                                                                                                                                                                                                
+Michael                                                                                                                                                                                                 
+Shelley                                                                                                                                                                                                 
+
+8 rows selected.
+
+SQL> SELECT FIRST_NAME FROM EMPLOYEES WHERE FIRST_NAME LIKE '_e%e_';
+
+FIRST_NAME                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+Peter                                                                                                                                                                                                   
+Jennifer                                                                                                                                                                                                
+
+SQL> SELECT FIRST_NAME FROM EMPLOYEES WHERE FIRST_NAME LIKE '_o%o_';
+
+FIRST_NAME                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+Jonathon                                                                                                                                                                                                
+
+SQL> SELECT FIRST_NAME FROM EMPLOYEES WHERE FIRST_NAME LIKE '%ll%';
+
+FIRST_NAME                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+Randall                                                                                                                                                                                                 
+Ellen                                                                                                                                                                                                   
+Shelley                                                                                                                                                                                                 
+William                                                                                                                                                                                                 
+
+SQL> SELECT FIRST_NAME FROM EMPLOYEES WHERE FIRST_NAME NOT LIKE '%ll%';
+
+FIRST_NAME                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+Steven                                                                                                                                                                                                  
+Neena                                                                                                                                                                                                   
+Lex                                                                                                                                                                                                     
+Alexander                                                                                                                                                                                               
+Bruce                                                                                                                                                                                                   
+Diana                                                                                                                                                                                                   
+Kevin                                                                                                                                                                                                   
+Trenna                                                                                                                                                                                                  
+Curtis                                                                                                                                                                                                  
+Peter                                                                                                                                                                                                   
+Eleni                                                                                                                                                                                                   
+Jonathon                                                                                                                                                                                                
+Kimerely                                                                                                                                                                                                
+Jennifer                                                                                                                                                                                                
+Michael                                                                                                                                                                                                 
+Pat                                                                                                                                                                                                     
+
+16 rows selected.
+
+SQL> SELECT * FROM MPSLIKETBL;
+
+NAME                                                                                                                                                                                                    
+------------------------------                                                                                                                                                                          
+AMIT PATEL                                                                                                                                                                                              
+AMIT_PATEL                                                                                                                                                                                              
+AMIT%PATEL                                                                                                                                                                                              
+AMIT_%PATEL                                                                                                                                                                                             
+AMIT  PATEL                                                                                                                                                                                             
+TAPAN PATEL                                                                                                                                                                                             
+PARMAR TARAK                                                                                                                                                                                            
+
+7 rows selected.
+
+SQL> REM DISPLAY NAMES WHICH CONTAIN T_P
+SQL> 
+SQL> SELECT * FROM MPSLIKETBL WHERE NAME LIKE '%T_P%';
+
+NAME                                                                                                                                                                                                    
+------------------------------                                                                                                                                                                          
+AMIT PATEL                                                                                                                                                                                              
+AMIT_PATEL                                                                                                                                                                                              
+AMIT%PATEL                                                                                                                                                                                              
+TAPAN PATEL                                                                                                                                                                                             
+
+SQL> SELECT * FROM MPSLIKETBL WHERE NAME LIKE '%T\_P%' ESCAPE '\';
+
+NAME                                                                                                                                                                                                    
+------------------------------                                                                                                                                                                          
+AMIT_PATEL                                                                                                                                                                                              
+
+SQL> SELECT * FROM MPSLIKETBL WHERE NAME LIKE '%T/_P%' ESCAPE '/';
+
+NAME                                                                                                                                                                                                    
+------------------------------                                                                                                                                                                          
+AMIT_PATEL                                                                                                                                                                                              
+
+SQL> SELECT * FROM MPSLIKETBL WHERE NAME LIKE '%T7_P%' ESCAPE '7';
+
+NAME                                                                                                                                                                                                    
+------------------------------                                                                                                                                                                          
+AMIT_PATEL                                                                                                                                                                                              
+
+SQL> SELECT * FROM MPSLIKETBL WHERE NAME LIKE '%TJ_P%' ESCAPE 'J';
+
+NAME                                                                                                                                                                                                    
+------------------------------                                                                                                                                                                          
+AMIT_PATEL                                                                                                                                                                                              
+
+SQL> SELECT * FROM MPSLIKETBL WHERE NAME LIKE '%TT_P%' ESCAPE 'T';
+
+NAME                                                                                                                                                                                                    
+------------------------------                                                                                                                                                                          
+AMIT PATEL                                                                                                                                                                                              
+AMIT_PATEL                                                                                                                                                                                              
+AMIT%PATEL                                                                                                                                                                                              
+TAPAN PATEL                                                                                                                                                                                             
+
+SQL> SELECT * FROM MPSLIKETBL WHERE NAME LIKE '%PT_P%' ESCAPE 'P';
+SELECT * FROM MPSLIKETBL WHERE NAME LIKE '%PT_P%' ESCAPE 'P'
+                                         *
+ERROR at line 1:
+ORA-01424: missing or illegal character following the escape character 
+
+
+SQL> SELECT * FROM MPSLIKETBL WHERE NAME LIKE '%TP_P%' ESCAPE 'P';
+
+no rows selected
+
+SQL> SELECT * FROM MPSLIKETBL WHERE NAME LIKE '%TP P%' ESCAPE ' ';
+SELECT * FROM MPSLIKETBL WHERE NAME LIKE '%TP P%' ESCAPE ' '
+                                         *
+ERROR at line 1:
+ORA-01424: missing or illegal character following the escape character 
+
+
+SQL> SELECT * FROM MPSLIKETBL WHERE NAME LIKE '%T _P%' ESCAPE ' ';
+
+NAME                                                                                                                                                                                                    
+------------------------------                                                                                                                                                                          
+AMIT_PATEL                                                                                                                                                                                              
+
+SQL> SELECT * FROM MPSLIKETBL WHERE NAME LIKE '%T''_P%' ESCAPE '''';
+
+NAME                                                                                                                                                                                                    
+------------------------------                                                                                                                                                                          
+AMIT_PATEL                                                                                                                                                                                              
+
+SQL> SELECT * FROM MPSLIKETBL WHERE NAME LIKE '%T__P%' ESCAPE '_';
+
+NAME                                                                                                                                                                                                    
+------------------------------                                                                                                                                                                          
+AMIT_PATEL                                                                                                                                                                                              
+
+SQL> SELECT * FROM MPSLIKETBL WHERE NAME LIKE '%T%_P%' ESCAPE '%';
+SELECT * FROM MPSLIKETBL WHERE NAME LIKE '%T%_P%' ESCAPE '%'
+                                         *
+ERROR at line 1:
+ORA-01424: missing or illegal character following the escape character 
+
+
+SQL> REM % , & , ANY CHARCTER WHICH ARE ALREADY USED IN COMPARISON
+SQL> 
+SQL> REM IF WE USE ' IT MUST BE USED TWO TIMES
+SQL> 
+SQL> SELECT * FROM MPSLIKETBL WHERE NAME LIKE '%TM_P%' ESCAPE 'M';
+
+NAME                                                                                                                                                                                                    
+------------------------------                                                                                                                                                                          
+AMIT_PATEL                                                                                                                                                                                              
+
+SQL> SELECT * FROM MPSLIKETBL WHERE NAME LIKE '%TI_P%' ESCAPE 'I';
+
+NAME                                                                                                                                                                                                    
+------------------------------                                                                                                                                                                          
+AMIT_PATEL                                                                                                                                                                                              
+
+SQL> REM IS NULL : FOR COMPARING NULL VALUES
+SQL> 
+SQL> REM DISPLAY THOSE WHO DOESN'T GET COMMISSION
+SQL> 
+SQL> SELECT FIRST_NAME , COMMISSION_PCT FROM EMPLOYEES WHERE COMMISSION_PCT = 0;
+
+no rows selected
+
+SQL> SELECT FIRST_NAME , COMMISSION_PCT FROM EMPLOYEES WHERE COMMISSION_PCT = NULL;
+
+no rows selected
+
+SQL> SELECT FIRST_NAME , COMMISSION_PCT FROM EMPLOYEES WHERE COMMISSION_PCT IS NULL;
+
+FIRST_NAME COMMISSION_PCT                                                                                                                                                                               
+---------- --------------                                                                                                                                                                               
+Steven                                                                                                                                                                                                  
+Neena                                                                                                                                                                                                   
+Lex                                                                                                                                                                                                     
+Alexander                                                                                                                                                                                               
+Bruce                                                                                                                                                                                                   
+Diana                                                                                                                                                                                                   
+Kevin                                                                                                                                                                                                   
+Trenna                                                                                                                                                                                                  
+Curtis                                                                                                                                                                                                  
+Randall                                                                                                                                                                                                 
+Peter                                                                                                                                                                                                   
+Jennifer                                                                                                                                                                                                
+Michael                                                                                                                                                                                                 
+Pat                                                                                                                                                                                                     
+Shelley                                                                                                                                                                                                 
+William                                                                                                                                                                                                 
+
+16 rows selected.
+
+SQL> SELECT FIRST_NAME , COMMISSION_PCT FROM EMPLOYEES WHERE COMMISSION_PCT IS NOT NULL;
+
+FIRST_NAME COMMISSION_PCT                                                                                                                                                                               
+---------- --------------                                                                                                                                                                               
+Eleni                  .2                                                                                                                                                                               
+Ellen                  .3                                                                                                                                                                               
+Jonathon               .3                                                                                                                                                                               
+Kimerely              .15                                                                                                                                                                               
+
+SQL> SELECT FIRST_NAME , COMMISSION_PCT FROM EMPLOYEES WHERE COMMISSION_PCT > 0;
+
+FIRST_NAME COMMISSION_PCT                                                                                                                                                                               
+---------- --------------                                                                                                                                                                               
+Eleni                  .2                                                                                                                                                                               
+Ellen                  .3                                                                                                                                                                               
+Jonathon               .3                                                                                                                                                                               
+Kimerely              .15                                                                                                                                                                               
+
+SQL> SELECT FIRST_NAME , COMMISSION_PCT FROM EMPLOYEES WHERE COMMISSION_PCT < 1;
+
+FIRST_NAME COMMISSION_PCT                                                                                                                                                                               
+---------- --------------                                                                                                                                                                               
+Eleni                  .2                                                                                                                                                                               
+Ellen                  .3                                                                                                                                                                               
+Jonathon               .3                                                                                                                                                                               
+Kimerely              .15                                                                                                                                                                               
+
+SQL> SELECT FIRST_NAME , COMMISSION_PCT FROM EMPLOYEES WHERE COMMISSION_PCT LIKE '%';
+
+FIRST_NAME COMMISSION_PCT                                                                                                                                                                               
+---------- --------------                                                                                                                                                                               
+Eleni                  .2                                                                                                                                                                               
+Ellen                  .3                                                                                                                                                                               
+Jonathon               .3                                                                                                                                                                               
+Kimerely              .15                                                                                                                                                                               
+
+SQL> SELECT FIRST_NAME , COMMISSION_PCT FROM EMPLOYEES WHERE COMMISSION_PCT BETWEEN 0 AND 1;
+
+FIRST_NAME COMMISSION_PCT                                                                                                                                                                               
+---------- --------------                                                                                                                                                                               
+Eleni                  .2                                                                                                                                                                               
+Ellen                  .3                                                                                                                                                                               
+Jonathon               .3                                                                                                                                                                               
+Kimerely              .15                                                                                                                                                                               
+
+SQL> SELECT FIRST_NAME , COMMISSION_PCT FROM EMPLOYEES WHERE COMMISSION_PCT <> 0;
+
+FIRST_NAME COMMISSION_PCT                                                                                                                                                                               
+---------- --------------                                                                                                                                                                               
+Eleni                  .2                                                                                                                                                                               
+Ellen                  .3                                                                                                                                                                               
+Jonathon               .3                                                                                                                                                                               
+Kimerely              .15                                                                                                                                                                               
+
+SQL> REM SPECIAL OPERATORS : IN , BETWEEN , LIKE , IS NULL
+SQL> 
+SQL> REM SPECIAL OPERATORS : NOT IN , NOT BETWEEN , NOT LIKE , IS NOT NULL
+SQL> 
+SQL> REM 1 SINGLE ROW 2 MULTI ROW 3 SPECIAL 4 LOGICAL
+SQL> 
+SQL> 
+SQL> 
+SQL> SELECT FIRST_NAME , COMMISSION_PCT FROM EMPLOYEES WHERE COMMISSION_PCT = ' ';
+SELECT FIRST_NAME , COMMISSION_PCT FROM EMPLOYEES WHERE COMMISSION_PCT = ' '
+                                                                         *
+ERROR at line 1:
+ORA-01722: invalid number 
+
+
+SQL> SELECT FIRST_NAME , COMMISSION_PCT FROM EMPLOYEES WHERE COMMISSION_PCT = '';
+
+no rows selected
+
+SQL> REM LOGICAL OPERATORS
+SQL> 
+SQL> REM LOGICAL OPERATORS : NOT AND OR
+SQL> 
+SQL> REM LOGICAL OPERATORS : () -> NOT -> AND -> OR
+SQL> 
+SQL> REM NOT : IS PLACED BEFORE CONDITION
+SQL> 
+SQL> REM AND & OR : ARE PLACED BETWEEN TWO CONDITIONS
+SQL> 
+SQL> 
+SQL> 
+SQL> REM NOT IS USED TO REVERSE THE RESULT OF CONDITION
+SQL> 
+SQL> REM AND & OR ARE USED TO JOIN TWO CONDITIONS
+SQL> 
+SQL> REM AND : IS USED WHEN WE WANT TO PROCESS ROWS WHICH SATISFIES BOTH CONDITIONS
+SQL> 
+SQL> REM OR : IS USED WHEN WE WANT TO PROCESS ROWS WHICH SATISFIES ATLEAST ONE CONDITION
+SQL> 
+SQL> 
+SQL> 
+SQL> SELECT * FROM EXAM;
+
+       RNO    ENGLISH      MATHS                                                                                                                                                                        
+---------- ---------- ----------                                                                                                                                                                        
+         1         30         70                                                                                                                                                                        
+         2         70         20                                                                                                                                                                        
+         3         30         10                                                                                                                                                                        
+         4         60         70                                                                                                                                                                        
+
+SQL> REM PASSING : 33/100
+SQL> 
+SQL> REM DISPLAY THOSE WHO HAVE PASS THE ENGLISH SUBJECT
+SQL> 
+SQL> SELECT * FROM EXAM WHERE ENGLISH >= 33;
+
+       RNO    ENGLISH      MATHS                                                                                                                                                                        
+---------- ---------- ----------                                                                                                                                                                        
+         2         70         20                                                                                                                                                                        
+         4         60         70                                                                                                                                                                        
+
+SQL> REM DISPLAY THOSE WHO HAVE FAILED IN MATHS SUBJECT
+SQL> 
+SQL> SELECT * FROM EXAM WHERE MATHS < 33;
+
+       RNO    ENGLISH      MATHS                                                                                                                                                                        
+---------- ---------- ----------                                                                                                                                                                        
+         2         70         20                                                                                                                                                                        
+         3         30         10                                                                                                                                                                        
+
+SQL> REM DISPLAY THOSE WHO HAVE FAILED IN ENGLISH SUBJECT
+SQL> 
+SQL> SELECT * FROM EXAM WHERE NOT ENGLISH >= 33;
+
+       RNO    ENGLISH      MATHS                                                                                                                                                                        
+---------- ---------- ----------                                                                                                                                                                        
+         1         30         70                                                                                                                                                                        
+         3         30         10                                                                                                                                                                        
+
+SQL> REM DISPLAY THOSE WHO HAVE PASS THE MATHS SUBJECT
+SQL> 
+SQL> SELECT * FROM EXAM WHERE NOT MATHS < 33;
+
+       RNO    ENGLISH      MATHS                                                                                                                                                                        
+---------- ---------- ----------                                                                                                                                                                        
+         1         30         70                                                                                                                                                                        
+         4         60         70                                                                                                                                                                        
+
+SQL> REM DISPLAY THOSE WHOSE RESULT IS PASS
+SQL> 
+SQL> SELECT * FROM EXAM WHERE ENGLISH >= 33 AND MATHS >= 33;
+
+       RNO    ENGLISH      MATHS                                                                                                                                                                        
+---------- ---------- ----------                                                                                                                                                                        
+         4         60         70                                                                                                                                                                        
+
+SQL> REM DISPLAY THOSE WHOSE RESULT IS FAIL
+SQL> 
+SQL> SELECT * FROM EXAM WHERE NOT ENGLISH >= 33 AND MATHS >= 33;
+
+       RNO    ENGLISH      MATHS                                                                                                                                                                        
+---------- ---------- ----------                                                                                                                                                                        
+         1         30         70                                                                                                                                                                        
+
+SQL> SELECT * FROM EXAM WHERE NOT ENGLISH >= 33 AND NOT MATHS >= 33;
+
+       RNO    ENGLISH      MATHS                                                                                                                                                                        
+---------- ---------- ----------                                                                                                                                                                        
+         3         30         10                                                                                                                                                                        
+
+SQL> SELECT * FROM EXAM WHERE ENGLISH >= 33 AND NOT MATHS >= 33;
+
+       RNO    ENGLISH      MATHS                                                                                                                                                                        
+---------- ---------- ----------                                                                                                                                                                        
+         2         70         20                                                                                                                                                                        
+
+SQL> SELECT * FROM EXAM WHERE NOT (ENGLISH >= 33 OR MATHS >= 33);
+
+       RNO    ENGLISH      MATHS                                                                                                                                                                        
+---------- ---------- ----------                                                                                                                                                                        
+         3         30         10                                                                                                                                                                        
+
+SQL> SELECT * FROM EXAM WHERE ENGLISH < 33 AND MATHS < 33;
+
+       RNO    ENGLISH      MATHS                                                                                                                                                                        
+---------- ---------- ----------                                                                                                                                                                        
+         3         30         10                                                                                                                                                                        
+
+SQL> SELECT FIRST_NAME , JOB_ID , SALARY FROM EMPLOYEES ORDER BY 3;
+
+FIRST_NAME JOB_ID         SALARY                                                                                                                                                                        
+---------- ---------- ----------                                                                                                                                                                        
+Peter      ST_CLERK         2500                                                                                                                                                                        
+Randall    ST_CLERK         2600                                                                                                                                                                        
+Curtis     ST_CLERK         3100                                                                                                                                                                        
+Trenna     ST_CLERK         3500                                                                                                                                                                        
+Diana      IT_PROG          4200                                                                                                                                                                        
+Jennifer   AD_ASST          4400                                                                                                                                                                        
+Kevin      ST_MAN           5800                                                                                                                                                                        
+Bruce      IT_PROG          6000                                                                                                                                                                        
+Pat        MK_REP           6000                                                                                                                                                                        
+Kimerely   SA_REP           7000                                                                                                                                                                        
+William    AC_ACCOUNT       8300                                                                                                                                                                        
+Jonathon   SA_REP           8600                                                                                                                                                                        
+Alexander  IT_PROG          9000                                                                                                                                                                        
+Eleni      SA_MAN          10500                                                                                                                                                                        
+Ellen      SA_REP          11000                                                                                                                                                                        
+Shelley    AC_MGR          12000                                                                                                                                                                        
+Michael    MK_MAN          13000                                                                                                                                                                        
+Neena      AD_VP           17000                                                                                                                                                                        
+Lex        AD_VP           17000                                                                                                                                                                        
+Steven     AD_PRES         24000                                                                                                                                                                        
+
+20 rows selected.
+
+SQL> SELECT FIRST_NAME , JOB_ID , SALARY FROM EMPLOYEES WHERE SALARY BETWEEN 6000 AND 11000 AND JOB_ID LIKE '%REP' ORDER BY 3;
+
+FIRST_NAME JOB_ID         SALARY                                                                                                                                                                        
+---------- ---------- ----------                                                                                                                                                                        
+Pat        MK_REP           6000                                                                                                                                                                        
+Kimerely   SA_REP           7000                                                                                                                                                                        
+Jonathon   SA_REP           8600                                                                                                                                                                        
+Ellen      SA_REP          11000                                                                                                                                                                        
+
+SQL> SELECT FIRST_NAME , JOB_ID , SALARY FROM EMPLOYEES WHERE SALARY BETWEEN 6000 AND 11000 OR JOB_ID LIKE '%MAN' ORDER BY 3;
+
+FIRST_NAME JOB_ID         SALARY                                                                                                                                                                        
+---------- ---------- ----------                                                                                                                                                                        
+Kevin      ST_MAN           5800                                                                                                                                                                        
+Bruce      IT_PROG          6000                                                                                                                                                                        
+Pat        MK_REP           6000                                                                                                                                                                        
+Kimerely   SA_REP           7000                                                                                                                                                                        
+William    AC_ACCOUNT       8300                                                                                                                                                                        
+Jonathon   SA_REP           8600                                                                                                                                                                        
+Alexander  IT_PROG          9000                                                                                                                                                                        
+Eleni      SA_MAN          10500                                                                                                                                                                        
+Ellen      SA_REP          11000                                                                                                                                                                        
+Michael    MK_MAN          13000                                                                                                                                                                        
+
+10 rows selected.
+
+SQL> SELECT FIRST_NAME , DEPARTMENT_ID , SALARY FROM EMPLOYEES ORDER BY 3;
+
+FIRST_NAME DEPARTMENT_ID     SALARY                                                                                                                                                                     
+---------- ------------- ----------                                                                                                                                                                     
+Peter                 50       2500                                                                                                                                                                     
+Randall               50       2600                                                                                                                                                                     
+Curtis                50       3100                                                                                                                                                                     
+Trenna                50       3500                                                                                                                                                                     
+Diana                 60       4200                                                                                                                                                                     
+Jennifer              10       4400                                                                                                                                                                     
+Kevin                 50       5800                                                                                                                                                                     
+Bruce                 60       6000                                                                                                                                                                     
+Pat                   20       6000                                                                                                                                                                     
+Kimerely                       7000                                                                                                                                                                     
+William              110       8300                                                                                                                                                                     
+Jonathon              80       8600                                                                                                                                                                     
+Alexander             60       9000                                                                                                                                                                     
+Eleni                 80      10500                                                                                                                                                                     
+Ellen                 80      11000                                                                                                                                                                     
+Shelley              110      12000                                                                                                                                                                     
+Michael               20      13000                                                                                                                                                                     
+Neena                 90      17000                                                                                                                                                                     
+Lex                   90      17000                                                                                                                                                                     
+Steven                90      24000                                                                                                                                                                     
+
+20 rows selected.
+
+SQL> REM DISPLAY THOSE WHO WORKS IN ANY OF DEPARTMENT 60 OR 80 AND GETS SALARY HIGHER THAN 8800
+SQL> 
+SQL> SELECT FIRST_NAME , DEPARTMENT_ID , SALARY FROM EMPLOYEES WHERE DEPARTMENT_ID = 60 OR DEPARTMENT_ID = 80 AND SALARY > 8800 ORDER BY 3;
+
+FIRST_NAME DEPARTMENT_ID     SALARY                                                                                                                                                                     
+---------- ------------- ----------                                                                                                                                                                     
+Diana                 60       4200                                                                                                                                                                     
+Bruce                 60       6000                                                                                                                                                                     
+Alexander             60       9000                                                                                                                                                                     
+Eleni                 80      10500                                                                                                                                                                     
+Ellen                 80      11000                                                                                                                                                                     
+
+SQL> SELECT FIRST_NAME , DEPARTMENT_ID , SALARY FROM EMPLOYEES WHERE (DEPARTMENT_ID = 60 OR DEPARTMENT_ID = 80) AND SALARY > 8800 ORDER BY 3;
+
+FIRST_NAME DEPARTMENT_ID     SALARY                                                                                                                                                                     
+---------- ------------- ----------                                                                                                                                                                     
+Alexander             60       9000                                                                                                                                                                     
+Eleni                 80      10500                                                                                                                                                                     
+Ellen                 80      11000                                                                                                                                                                     
+
+SQL> REM 1 SORTING : ORDER BY
+SQL> 
+SQL> REM 2 TOP n ANALYSIS : OFFSET , FETCH
+SQL> 
+SQL> REM 3 RESTRICTION/SELECTION : WHERE : CONDITION : SINGLE ROW , MULTI ROW , SPECIAL , LOGICAL
+SQL> 
+SQL> SELECT * FROM EMPLOYEES;
+
+EMPLOYEE_ID FIRST_NAME LAST_NAME  EMAIL      PHONE_NUMBER         HIRE_DATE JOB_ID         SALARY COMMISSION_PCT MANAGER_ID DEPARTMENT_ID                                                               
+----------- ---------- ---------- ---------- -------------------- --------- ---------- ---------- -------------- ---------- -------------                                                               
+        100 Steven     King       SKING      515.123.4567         17-JUL-87 AD_PRES         24000                                      90                                                               
+        101 Neena      Kochhar    NKOCHHAR   515.123.4568         21-SEP-89 AD_VP           17000                       100            90                                                               
+        102 Lex        De Haan    LDEHAAN    515.123.4569         13-JAN-93 AD_VP           17000                       100            90                                                               
+        103 Alexander  Hunold     AHUNOLD    590.423.4567         03-JAN-90 IT_PROG          9000                       102            60                                                               
+        104 Bruce      Ernst      BERNST     590.423.4568         21-MAY-91 IT_PROG          6000                       103            60                                                               
+        107 Diana      Lorentz    DLORENTZ   590.423.5567         07-FEB-99 IT_PROG          4200                       103            60                                                               
+        124 Kevin      Mourgos    KMOURGOS   650.123.5234         16-NOV-99 ST_MAN           5800                       100            50                                                               
+        141 Trenna     Rajs       TRAJS      650.121.8009         17-OCT-95 ST_CLERK         3500                       124            50                                                               
+        142 Curtis     Davies     CDAVIES    650.121.2994         29-JAN-97 ST_CLERK         3100                       124            50                                                               
+        143 Randall    Matos      RMATOS     650.121.2874         15-MAR-98 ST_CLERK         2600                       124            50                                                               
+        144 Peter      Vargas     PVARGAS    650.121.2004         09-JUL-98 ST_CLERK         2500                       124            50                                                               
+        149 Eleni      Zlotkey    EZLOTKEY   011.44.1344.429018   29-JAN-00 SA_MAN          10500             .2        100            80                                                               
+        174 Ellen      Abel       EABEL      011.44.1644.429267   11-MAY-96 SA_REP          11000             .3        149            80                                                               
+        176 Jonathon   Taylor     JTAYLOR    011.44.1644.429265   24-MAR-98 SA_REP           8600             .3        149            80                                                               
+        178 Kimerely   Grant      KGRANT     011.44.1644.429263   24-MAY-99 SA_REP           7000            .15        149                                                                             
+        200 Jennifer   Whalen     JWAHLEN    515.123.4444         17-SEP-87 AD_ASST          4400                       101            10                                                               
+        201 Michael    Hartstein  MHARTSTE   515.123.5555         17-FEB-96 MK_MAN          13000                       100            20                                                               
+        202 Pat        Fay        PFAY       603.123.6666         17-AUG-97 MK_REP           6000                       201            20                                                               
+        205 Shelley    Higgins    SHIGGINS   515.123.8080         07-JUN-94 AC_MGR          12000                       101           110                                                               
+        206 William    Gietz      WGIETZ     515.123.8181         07-JUN-94 AC_ACCOUNT       8300                       205           110                                                               
+
+20 rows selected.
+
+SQL> REM 10-15
+SQL> 
+SQL> SELECT * FROM EMPLOYEES OFFSET 9 ROWS FETCH FIRST 6 ROWS ONLY;
+
+EMPLOYEE_ID FIRST_NAME LAST_NAME  EMAIL      PHONE_NUMBER         HIRE_DATE JOB_ID         SALARY COMMISSION_PCT MANAGER_ID DEPARTMENT_ID                                                               
+----------- ---------- ---------- ---------- -------------------- --------- ---------- ---------- -------------- ---------- -------------                                                               
+        143 Randall    Matos      RMATOS     650.121.2874         15-MAR-98 ST_CLERK         2600                       124            50                                                               
+        144 Peter      Vargas     PVARGAS    650.121.2004         09-JUL-98 ST_CLERK         2500                       124            50                                                               
+        149 Eleni      Zlotkey    EZLOTKEY   011.44.1344.429018   29-JAN-00 SA_MAN          10500             .2        100            80                                                               
+        174 Ellen      Abel       EABEL      011.44.1644.429267   11-MAY-96 SA_REP          11000             .3        149            80                                                               
+        176 Jonathon   Taylor     JTAYLOR    011.44.1644.429265   24-MAR-98 SA_REP           8600             .3        149            80                                                               
+        178 Kimerely   Grant      KGRANT     011.44.1644.429263   24-MAY-99 SA_REP           7000            .15        149                                                                             
+
+6 rows selected.
+
+SQL> SELECT * FROM EMPLOYEES OFFSET 9 ROWS FETCH FIRST 6 ROW ONLY;
+
+EMPLOYEE_ID FIRST_NAME LAST_NAME  EMAIL      PHONE_NUMBER         HIRE_DATE JOB_ID         SALARY COMMISSION_PCT MANAGER_ID DEPARTMENT_ID                                                               
+----------- ---------- ---------- ---------- -------------------- --------- ---------- ---------- -------------- ---------- -------------                                                               
+        143 Randall    Matos      RMATOS     650.121.2874         15-MAR-98 ST_CLERK         2600                       124            50                                                               
+        144 Peter      Vargas     PVARGAS    650.121.2004         09-JUL-98 ST_CLERK         2500                       124            50                                                               
+        149 Eleni      Zlotkey    EZLOTKEY   011.44.1344.429018   29-JAN-00 SA_MAN          10500             .2        100            80                                                               
+        174 Ellen      Abel       EABEL      011.44.1644.429267   11-MAY-96 SA_REP          11000             .3        149            80                                                               
+        176 Jonathon   Taylor     JTAYLOR    011.44.1644.429265   24-MAR-98 SA_REP           8600             .3        149            80                                                               
+        178 Kimerely   Grant      KGRANT     011.44.1644.429263   24-MAY-99 SA_REP           7000            .15        149                                                                             
+
+6 rows selected.
+
+SQL> SELECT * FROM EMPLOYEES OFFSET 9 ROWS FETCH NEXT 6 ROW ONLY;
+
+EMPLOYEE_ID FIRST_NAME LAST_NAME  EMAIL      PHONE_NUMBER         HIRE_DATE JOB_ID         SALARY COMMISSION_PCT MANAGER_ID DEPARTMENT_ID                                                               
+----------- ---------- ---------- ---------- -------------------- --------- ---------- ---------- -------------- ---------- -------------                                                               
+        143 Randall    Matos      RMATOS     650.121.2874         15-MAR-98 ST_CLERK         2600                       124            50                                                               
+        144 Peter      Vargas     PVARGAS    650.121.2004         09-JUL-98 ST_CLERK         2500                       124            50                                                               
+        149 Eleni      Zlotkey    EZLOTKEY   011.44.1344.429018   29-JAN-00 SA_MAN          10500             .2        100            80                                                               
+        174 Ellen      Abel       EABEL      011.44.1644.429267   11-MAY-96 SA_REP          11000             .3        149            80                                                               
+        176 Jonathon   Taylor     JTAYLOR    011.44.1644.429265   24-MAR-98 SA_REP           8600             .3        149            80                                                               
+        178 Kimerely   Grant      KGRANT     011.44.1644.429263   24-MAY-99 SA_REP           7000            .15        149                                                                             
+
+6 rows selected.
+
+SQL> SELECT * FROM EMPLOYEES OFFSET 9 ROWS FETCH NEXT ROW ONLY;
+
+EMPLOYEE_ID FIRST_NAME LAST_NAME  EMAIL      PHONE_NUMBER         HIRE_DATE JOB_ID         SALARY COMMISSION_PCT MANAGER_ID DEPARTMENT_ID                                                               
+----------- ---------- ---------- ---------- -------------------- --------- ---------- ---------- -------------- ---------- -------------                                                               
+        143 Randall    Matos      RMATOS     650.121.2874         15-MAR-98 ST_CLERK         2600                       124            50                                                               
+
+SQL> SPOOL OFF

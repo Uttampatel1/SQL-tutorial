@@ -1,0 +1,1020 @@
+SQL> 
+SQL> REM 1 SORTING 2 TOP n ANALYSIS 3 RESTRICTION/SELECTION
+SQL> 
+SQL> REM SYNTAX : COMPUTER LANGUAGE GRAMMER
+SQL> 
+SQL> REM SELECT SYNTAX : SELECT ... FROM ... WHERE ... ORDER BY ... OFFSET ... FETCH ...;
+SQL> 
+SQL> REM SELECT SYNTAX : SELECT ... FROM ...;  ARE MANDATORY
+SQL> 
+SQL> REM SELECT SYNTAX : SELECT ... FROM ... WHERE ... ORDER BY ... OFFSET ... FETCH ...;
+SQL> 
+SQL> REM                 1          2        3         4            5          6
+SQL> 
+SQL> 
+SQL> REM LEFT TO RIGHT SEQUENCE OF CLAUSES ARE MANDATORY
+SQL> 
+SQL> REM SORTING :
+SQL> 
+SQL> REM SORTING : TO ARRANGE VALUES IN EITHER ASCENDING/DESCENDING ORDER
+SQL> 
+SQL> REM ASCENDING : LOWEST VALUE FIRST , HIGHEST VALUE LAST
+SQL> 
+SQL> REM DESCENDING : HIGHEST VALUE FIRST , LOWEST VALUE LAST
+SQL> 
+SQL> REM NUMBER : ASC : -9 ... 0 .. 9 , DESC : 9 ... 0 ... -9
+SQL> 
+SQL> REM ALPHABETS : ASC : A ... Z , a ... z , DESC : z .. a , Z .. A
+SQL> 
+SQL> REM DATE : ASC : EARLIEST DATE FIRST , LATEST DATE LAST  , DESC : LATEST DATE FIRST , EARLIEST DATE LAST
+SQL> 
+SQL> 
+SQL> 
+SQL> REM ASCII : AMERICAN STANDARD CODE FOR INFORMATION INTERCHANGE
+SQL> 
+SQL> REM A -> 65 , B -> 66 ... Z -> 90
+SQL> 
+SQL> REM a -> 97 , b -> 98 ... z -> 122
+SQL> 
+SQL> 
+SQL> 
+SQL> SELECT * FROM DEPARTMENTS;
+
+DEPARTMENT_ID DEPARTMENT_NAME                MANAGER_ID LOCATION_ID                                                                                                                                     
+------------- ------------------------------ ---------- -----------                                                                                                                                     
+           10 Administration                        200        1700                                                                                                                                     
+           20 Marketing                             201        1800                                                                                                                                     
+           50 Shiping                               124        1500                                                                                                                                     
+           60 IT                                    103        1400                                                                                                                                     
+           80 Sales                                 149        2500                                                                                                                                     
+           90 Executive                             100        1700                                                                                                                                     
+          110 Accounting                            205        1700                                                                                                                                     
+          190 Contracting                                      1700                                                                                                                                     
+
+8 rows selected.
+
+SQL> SELECT ROWID , DEPARTMENTS.* FROM DEPARTMENTS;
+
+ROWID              DEPARTMENT_ID DEPARTMENT_NAME                MANAGER_ID LOCATION_ID                                                                                                                  
+------------------ ------------- ------------------------------ ---------- -----------                                                                                                                  
+AAASQqAAHAAAAGbAAA            10 Administration                        200        1700                                                                                                                  
+AAASQqAAHAAAAGbAAB            20 Marketing                             201        1800                                                                                                                  
+AAASQqAAHAAAAGbAAC            50 Shiping                               124        1500                                                                                                                  
+AAASQqAAHAAAAGbAAD            60 IT                                    103        1400                                                                                                                  
+AAASQqAAHAAAAGbAAE            80 Sales                                 149        2500                                                                                                                  
+AAASQqAAHAAAAGbAAF            90 Executive                             100        1700                                                                                                                  
+AAASQqAAHAAAAGbAAG           110 Accounting                            205        1700                                                                                                                  
+AAASQqAAHAAAAGbAAH           190 Contracting                                      1700                                                                                                                  
+
+8 rows selected.
+
+SQL> REM ROWID : OFBR : OBJECT (6) FILE(3)  BLOCK(6) RECORD(3) = 18 CHARACTERS
+SQL> 
+SQL> SELECT * FROM DEPARTMENTS;
+
+DEPARTMENT_ID DEPARTMENT_NAME                MANAGER_ID LOCATION_ID                                                                                                                                     
+------------- ------------------------------ ---------- -----------                                                                                                                                     
+           10 Administration                        200        1700                                                                                                                                     
+           20 Marketing                             201        1800                                                                                                                                     
+           50 Shiping                               124        1500                                                                                                                                     
+           60 IT                                    103        1400                                                                                                                                     
+           80 Sales                                 149        2500                                                                                                                                     
+           90 Executive                             100        1700                                                                                                                                     
+          110 Accounting                            205        1700                                                                                                                                     
+          190 Contracting                                      1700                                                                                                                                     
+
+8 rows selected.
+
+SQL> REM ORDER BY : IS USED FOR SORTING PURPOSE, WE CAN SORT IN ASC/DESC ON SINGLE COLUMN OR MULTIPLE COLUMNS
+SQL> 
+SQL> REM KEEPING NULLS AT THE TOP OR BOTTOM
+SQL> 
+SQL> SELECT * FROM DEPARTMENTS ORDER BY DEPARTMENT_NAME;
+
+DEPARTMENT_ID DEPARTMENT_NAME                MANAGER_ID LOCATION_ID                                                                                                                                     
+------------- ------------------------------ ---------- -----------                                                                                                                                     
+          110 Accounting                            205        1700                                                                                                                                     
+           10 Administration                        200        1700                                                                                                                                     
+          190 Contracting                                      1700                                                                                                                                     
+           90 Executive                             100        1700                                                                                                                                     
+           60 IT                                    103        1400                                                                                                                                     
+           20 Marketing                             201        1800                                                                                                                                     
+           80 Sales                                 149        2500                                                                                                                                     
+           50 Shiping                               124        1500                                                                                                                                     
+
+8 rows selected.
+
+SQL> REM DEFAULT SORTING ORDER IS ASCENDING
+SQL> 
+SQL> SELECT * FROM DEPARTMENTS ORDER BY DEPARTMENT_NAME ASC;
+
+DEPARTMENT_ID DEPARTMENT_NAME                MANAGER_ID LOCATION_ID                                                                                                                                     
+------------- ------------------------------ ---------- -----------                                                                                                                                     
+          110 Accounting                            205        1700                                                                                                                                     
+           10 Administration                        200        1700                                                                                                                                     
+          190 Contracting                                      1700                                                                                                                                     
+           90 Executive                             100        1700                                                                                                                                     
+           60 IT                                    103        1400                                                                                                                                     
+           20 Marketing                             201        1800                                                                                                                                     
+           80 Sales                                 149        2500                                                                                                                                     
+           50 Shiping                               124        1500                                                                                                                                     
+
+8 rows selected.
+
+SQL> SELECT ROWID , DEPARTMENTS.* FROM DEPARTMENTS;
+
+ROWID              DEPARTMENT_ID DEPARTMENT_NAME                MANAGER_ID LOCATION_ID                                                                                                                  
+------------------ ------------- ------------------------------ ---------- -----------                                                                                                                  
+AAASQqAAHAAAAGbAAA            10 Administration                        200        1700                                                                                                                  
+AAASQqAAHAAAAGbAAB            20 Marketing                             201        1800                                                                                                                  
+AAASQqAAHAAAAGbAAC            50 Shiping                               124        1500                                                                                                                  
+AAASQqAAHAAAAGbAAD            60 IT                                    103        1400                                                                                                                  
+AAASQqAAHAAAAGbAAE            80 Sales                                 149        2500                                                                                                                  
+AAASQqAAHAAAAGbAAF            90 Executive                             100        1700                                                                                                                  
+AAASQqAAHAAAAGbAAG           110 Accounting                            205        1700                                                                                                                  
+AAASQqAAHAAAAGbAAH           190 Contracting                                      1700                                                                                                                  
+
+8 rows selected.
+
+SQL> SELECT ROWID , DEPARTMENTS.* FROM DEPARTMENTS ORDER BY DEPARTMENT_NAME;
+
+ROWID              DEPARTMENT_ID DEPARTMENT_NAME                MANAGER_ID LOCATION_ID                                                                                                                  
+------------------ ------------- ------------------------------ ---------- -----------                                                                                                                  
+AAASQqAAHAAAAGbAAG           110 Accounting                            205        1700                                                                                                                  
+AAASQqAAHAAAAGbAAA            10 Administration                        200        1700                                                                                                                  
+AAASQqAAHAAAAGbAAH           190 Contracting                                      1700                                                                                                                  
+AAASQqAAHAAAAGbAAF            90 Executive                             100        1700                                                                                                                  
+AAASQqAAHAAAAGbAAD            60 IT                                    103        1400                                                                                                                  
+AAASQqAAHAAAAGbAAB            20 Marketing                             201        1800                                                                                                                  
+AAASQqAAHAAAAGbAAE            80 Sales                                 149        2500                                                                                                                  
+AAASQqAAHAAAAGbAAC            50 Shiping                               124        1500                                                                                                                  
+
+8 rows selected.
+
+SQL> SELECT * FROM DEPARTMENTS ORDER BY DEPARTMENT_NAME DESC;
+
+DEPARTMENT_ID DEPARTMENT_NAME                MANAGER_ID LOCATION_ID                                                                                                                                     
+------------- ------------------------------ ---------- -----------                                                                                                                                     
+           50 Shiping                               124        1500                                                                                                                                     
+           80 Sales                                 149        2500                                                                                                                                     
+           20 Marketing                             201        1800                                                                                                                                     
+           60 IT                                    103        1400                                                                                                                                     
+           90 Executive                             100        1700                                                                                                                                     
+          190 Contracting                                      1700                                                                                                                                     
+           10 Administration                        200        1700                                                                                                                                     
+          110 Accounting                            205        1700                                                                                                                                     
+
+8 rows selected.
+
+SQL> REM META CHARACTER
+SQL> 
+SQL> SELECT * FROM DEPARTMENTS ORDER BY 2;
+
+DEPARTMENT_ID DEPARTMENT_NAME                MANAGER_ID LOCATION_ID                                                                                                                                     
+------------- ------------------------------ ---------- -----------                                                                                                                                     
+          110 Accounting                            205        1700                                                                                                                                     
+           10 Administration                        200        1700                                                                                                                                     
+          190 Contracting                                      1700                                                                                                                                     
+           90 Executive                             100        1700                                                                                                                                     
+           60 IT                                    103        1400                                                                                                                                     
+           20 Marketing                             201        1800                                                                                                                                     
+           80 Sales                                 149        2500                                                                                                                                     
+           50 Shiping                               124        1500                                                                                                                                     
+
+8 rows selected.
+
+SQL> SELECT * FROM DEPARTMENTS ORDER BY 2 ASC;
+
+DEPARTMENT_ID DEPARTMENT_NAME                MANAGER_ID LOCATION_ID                                                                                                                                     
+------------- ------------------------------ ---------- -----------                                                                                                                                     
+          110 Accounting                            205        1700                                                                                                                                     
+           10 Administration                        200        1700                                                                                                                                     
+          190 Contracting                                      1700                                                                                                                                     
+           90 Executive                             100        1700                                                                                                                                     
+           60 IT                                    103        1400                                                                                                                                     
+           20 Marketing                             201        1800                                                                                                                                     
+           80 Sales                                 149        2500                                                                                                                                     
+           50 Shiping                               124        1500                                                                                                                                     
+
+8 rows selected.
+
+SQL> SELECT * FROM DEPARTMENTS ORDER BY 2 DESC;
+
+DEPARTMENT_ID DEPARTMENT_NAME                MANAGER_ID LOCATION_ID                                                                                                                                     
+------------- ------------------------------ ---------- -----------                                                                                                                                     
+           50 Shiping                               124        1500                                                                                                                                     
+           80 Sales                                 149        2500                                                                                                                                     
+           20 Marketing                             201        1800                                                                                                                                     
+           60 IT                                    103        1400                                                                                                                                     
+           90 Executive                             100        1700                                                                                                                                     
+          190 Contracting                                      1700                                                                                                                                     
+           10 Administration                        200        1700                                                                                                                                     
+          110 Accounting                            205        1700                                                                                                                                     
+
+8 rows selected.
+
+SQL> REM WHEN WE USE * AS META CHARACTER, WE CAN REFER COLUMN IN ORDER BY CLAUSE IN TWO WAYS : 1 COLUNM NAME 2 COLUMN POSITION IN RESULT SET
+SQL> 
+SQL> SELECT * FROM DEPARTMENTS ORDER BY MANAGER_ID;
+
+DEPARTMENT_ID DEPARTMENT_NAME                MANAGER_ID LOCATION_ID                                                                                                                                     
+------------- ------------------------------ ---------- -----------                                                                                                                                     
+           90 Executive                             100        1700                                                                                                                                     
+           60 IT                                    103        1400                                                                                                                                     
+           50 Shiping                               124        1500                                                                                                                                     
+           80 Sales                                 149        2500                                                                                                                                     
+           10 Administration                        200        1700                                                                                                                                     
+           20 Marketing                             201        1800                                                                                                                                     
+          110 Accounting                            205        1700                                                                                                                                     
+          190 Contracting                                      1700                                                                                                                                     
+
+8 rows selected.
+
+SQL>     REM NULL IS CONSIDERED AS BIGGEST VALUE
+SQL> 
+SQL> SELECT * FROM DEPARTMENTS ORDER BY MANAGER_ID DESC;
+
+DEPARTMENT_ID DEPARTMENT_NAME                MANAGER_ID LOCATION_ID                                                                                                                                     
+------------- ------------------------------ ---------- -----------                                                                                                                                     
+          190 Contracting                                      1700                                                                                                                                     
+          110 Accounting                            205        1700                                                                                                                                     
+           20 Marketing                             201        1800                                                                                                                                     
+           10 Administration                        200        1700                                                                                                                                     
+           80 Sales                                 149        2500                                                                                                                                     
+           50 Shiping                               124        1500                                                                                                                                     
+           60 IT                                    103        1400                                                                                                                                     
+           90 Executive                             100        1700                                                                                                                                     
+
+8 rows selected.
+
+SQL> SELECT * FROM DEPARTMENTS ORDER BY MANAGER_ID;
+
+DEPARTMENT_ID DEPARTMENT_NAME                MANAGER_ID LOCATION_ID                                                                                                                                     
+------------- ------------------------------ ---------- -----------                                                                                                                                     
+           90 Executive                             100        1700                                                                                                                                     
+           60 IT                                    103        1400                                                                                                                                     
+           50 Shiping                               124        1500                                                                                                                                     
+           80 Sales                                 149        2500                                                                                                                                     
+           10 Administration                        200        1700                                                                                                                                     
+           20 Marketing                             201        1800                                                                                                                                     
+          110 Accounting                            205        1700                                                                                                                                     
+          190 Contracting                                      1700                                                                                                                                     
+
+8 rows selected.
+
+SQL> SELECT * FROM DEPARTMENTS ORDER BY MANAGER_ID NULLS FIRST;
+
+DEPARTMENT_ID DEPARTMENT_NAME                MANAGER_ID LOCATION_ID                                                                                                                                     
+------------- ------------------------------ ---------- -----------                                                                                                                                     
+          190 Contracting                                      1700                                                                                                                                     
+           90 Executive                             100        1700                                                                                                                                     
+           60 IT                                    103        1400                                                                                                                                     
+           50 Shiping                               124        1500                                                                                                                                     
+           80 Sales                                 149        2500                                                                                                                                     
+           10 Administration                        200        1700                                                                                                                                     
+           20 Marketing                             201        1800                                                                                                                                     
+          110 Accounting                            205        1700                                                                                                                                     
+
+8 rows selected.
+
+SQL> SELECT * FROM DEPARTMENTS ORDER BY MANAGER_ID DESC;
+
+DEPARTMENT_ID DEPARTMENT_NAME                MANAGER_ID LOCATION_ID                                                                                                                                     
+------------- ------------------------------ ---------- -----------                                                                                                                                     
+          190 Contracting                                      1700                                                                                                                                     
+          110 Accounting                            205        1700                                                                                                                                     
+           20 Marketing                             201        1800                                                                                                                                     
+           10 Administration                        200        1700                                                                                                                                     
+           80 Sales                                 149        2500                                                                                                                                     
+           50 Shiping                               124        1500                                                                                                                                     
+           60 IT                                    103        1400                                                                                                                                     
+           90 Executive                             100        1700                                                                                                                                     
+
+8 rows selected.
+
+SQL> SELECT * FROM DEPARTMENTS ORDER BY MANAGER_ID DESC NULLS LAST;
+
+DEPARTMENT_ID DEPARTMENT_NAME                MANAGER_ID LOCATION_ID                                                                                                                                     
+------------- ------------------------------ ---------- -----------                                                                                                                                     
+          110 Accounting                            205        1700                                                                                                                                     
+           20 Marketing                             201        1800                                                                                                                                     
+           10 Administration                        200        1700                                                                                                                                     
+           80 Sales                                 149        2500                                                                                                                                     
+           50 Shiping                               124        1500                                                                                                                                     
+           60 IT                                    103        1400                                                                                                                                     
+           90 Executive                             100        1700                                                                                                                                     
+          190 Contracting                                      1700                                                                                                                                     
+
+8 rows selected.
+
+SQL> SELECT * FROM DEPARTMENTS ORDER BY 5;
+SELECT * FROM DEPARTMENTS ORDER BY 5
+                                   *
+ERROR at line 1:
+ORA-01785: ORDER BY item must be the number of a SELECT-list expression 
+
+
+SQL> SELECT * FROM DEPARTMENTS ORDER BY 0;
+SELECT * FROM DEPARTMENTS ORDER BY 0
+                                   *
+ERROR at line 1:
+ORA-01785: ORDER BY item must be the number of a SELECT-list expression 
+
+
+SQL> SELECT * FROM DEPARTMENTS ORDER BY -1;
+
+DEPARTMENT_ID DEPARTMENT_NAME                MANAGER_ID LOCATION_ID                                                                                                                                     
+------------- ------------------------------ ---------- -----------                                                                                                                                     
+           10 Administration                        200        1700                                                                                                                                     
+           20 Marketing                             201        1800                                                                                                                                     
+           50 Shiping                               124        1500                                                                                                                                     
+           60 IT                                    103        1400                                                                                                                                     
+           80 Sales                                 149        2500                                                                                                                                     
+           90 Executive                             100        1700                                                                                                                                     
+          110 Accounting                            205        1700                                                                                                                                     
+          190 Contracting                                      1700                                                                                                                                     
+
+8 rows selected.
+
+SQL> REM ORDER BY WITH PROJECTION
+SQL> 
+SQL> SELECT FIRST_NAME , SALARY , HIRE_DATE FROM EMPLOYEES;
+
+FIRST_NAME     SALARY HIRE_DATE                                                                                                                                                                         
+---------- ---------- ---------                                                                                                                                                                         
+Steven          24000 17-JUL-87                                                                                                                                                                         
+Neena           17000 21-SEP-89                                                                                                                                                                         
+Lex             17000 13-JAN-93                                                                                                                                                                         
+Alexander        9000 03-JAN-90                                                                                                                                                                         
+Bruce            6000 21-MAY-91                                                                                                                                                                         
+Diana            4200 07-FEB-99                                                                                                                                                                         
+Kevin            5800 16-NOV-99                                                                                                                                                                         
+Trenna           3500 17-OCT-95                                                                                                                                                                         
+Curtis           3100 29-JAN-97                                                                                                                                                                         
+Randall          2600 15-MAR-98                                                                                                                                                                         
+Peter            2500 09-JUL-98                                                                                                                                                                         
+Eleni           10500 29-JAN-00                                                                                                                                                                         
+Ellen           11000 11-MAY-96                                                                                                                                                                         
+Jonathon         8600 24-MAR-98                                                                                                                                                                         
+Kimerely         7000 24-MAY-99                                                                                                                                                                         
+Jennifer         4400 17-SEP-87                                                                                                                                                                         
+Michael         13000 17-FEB-96                                                                                                                                                                         
+Pat              6000 17-AUG-97                                                                                                                                                                         
+Shelley         12000 07-JUN-94                                                                                                                                                                         
+William          8300 07-JUN-94                                                                                                                                                                         
+
+20 rows selected.
+
+SQL> SELECT FIRST_NAME , SALARY , HIRE_DATE FROM EMPLOYEES ORDER BY FIRST_NAME;
+
+FIRST_NAME     SALARY HIRE_DATE                                                                                                                                                                         
+---------- ---------- ---------                                                                                                                                                                         
+Alexander        9000 03-JAN-90                                                                                                                                                                         
+Bruce            6000 21-MAY-91                                                                                                                                                                         
+Curtis           3100 29-JAN-97                                                                                                                                                                         
+Diana            4200 07-FEB-99                                                                                                                                                                         
+Eleni           10500 29-JAN-00                                                                                                                                                                         
+Ellen           11000 11-MAY-96                                                                                                                                                                         
+Jennifer         4400 17-SEP-87                                                                                                                                                                         
+Jonathon         8600 24-MAR-98                                                                                                                                                                         
+Kevin            5800 16-NOV-99                                                                                                                                                                         
+Kimerely         7000 24-MAY-99                                                                                                                                                                         
+Lex             17000 13-JAN-93                                                                                                                                                                         
+Michael         13000 17-FEB-96                                                                                                                                                                         
+Neena           17000 21-SEP-89                                                                                                                                                                         
+Pat              6000 17-AUG-97                                                                                                                                                                         
+Peter            2500 09-JUL-98                                                                                                                                                                         
+Randall          2600 15-MAR-98                                                                                                                                                                         
+Shelley         12000 07-JUN-94                                                                                                                                                                         
+Steven          24000 17-JUL-87                                                                                                                                                                         
+Trenna           3500 17-OCT-95                                                                                                                                                                         
+William          8300 07-JUN-94                                                                                                                                                                         
+
+20 rows selected.
+
+SQL> SELECT FIRST_NAME , SALARY , HIRE_DATE FROM EMPLOYEES ORDER BY 1;
+
+FIRST_NAME     SALARY HIRE_DATE                                                                                                                                                                         
+---------- ---------- ---------                                                                                                                                                                         
+Alexander        9000 03-JAN-90                                                                                                                                                                         
+Bruce            6000 21-MAY-91                                                                                                                                                                         
+Curtis           3100 29-JAN-97                                                                                                                                                                         
+Diana            4200 07-FEB-99                                                                                                                                                                         
+Eleni           10500 29-JAN-00                                                                                                                                                                         
+Ellen           11000 11-MAY-96                                                                                                                                                                         
+Jennifer         4400 17-SEP-87                                                                                                                                                                         
+Jonathon         8600 24-MAR-98                                                                                                                                                                         
+Kevin            5800 16-NOV-99                                                                                                                                                                         
+Kimerely         7000 24-MAY-99                                                                                                                                                                         
+Lex             17000 13-JAN-93                                                                                                                                                                         
+Michael         13000 17-FEB-96                                                                                                                                                                         
+Neena           17000 21-SEP-89                                                                                                                                                                         
+Pat              6000 17-AUG-97                                                                                                                                                                         
+Peter            2500 09-JUL-98                                                                                                                                                                         
+Randall          2600 15-MAR-98                                                                                                                                                                         
+Shelley         12000 07-JUN-94                                                                                                                                                                         
+Steven          24000 17-JUL-87                                                                                                                                                                         
+Trenna           3500 17-OCT-95                                                                                                                                                                         
+William          8300 07-JUN-94                                                                                                                                                                         
+
+20 rows selected.
+
+SQL> SELECT FIRST_NAME NAME, SALARY , HIRE_DATE FROM EMPLOYEES ORDER BY FIRST_NAME;
+
+NAME           SALARY HIRE_DATE                                                                                                                                                                         
+---------- ---------- ---------                                                                                                                                                                         
+Alexander        9000 03-JAN-90                                                                                                                                                                         
+Bruce            6000 21-MAY-91                                                                                                                                                                         
+Curtis           3100 29-JAN-97                                                                                                                                                                         
+Diana            4200 07-FEB-99                                                                                                                                                                         
+Eleni           10500 29-JAN-00                                                                                                                                                                         
+Ellen           11000 11-MAY-96                                                                                                                                                                         
+Jennifer         4400 17-SEP-87                                                                                                                                                                         
+Jonathon         8600 24-MAR-98                                                                                                                                                                         
+Kevin            5800 16-NOV-99                                                                                                                                                                         
+Kimerely         7000 24-MAY-99                                                                                                                                                                         
+Lex             17000 13-JAN-93                                                                                                                                                                         
+Michael         13000 17-FEB-96                                                                                                                                                                         
+Neena           17000 21-SEP-89                                                                                                                                                                         
+Pat              6000 17-AUG-97                                                                                                                                                                         
+Peter            2500 09-JUL-98                                                                                                                                                                         
+Randall          2600 15-MAR-98                                                                                                                                                                         
+Shelley         12000 07-JUN-94                                                                                                                                                                         
+Steven          24000 17-JUL-87                                                                                                                                                                         
+Trenna           3500 17-OCT-95                                                                                                                                                                         
+William          8300 07-JUN-94                                                                                                                                                                         
+
+20 rows selected.
+
+SQL> SELECT FIRST_NAME NAME, SALARY , HIRE_DATE FROM EMPLOYEES ORDER BY 1;
+
+NAME           SALARY HIRE_DATE                                                                                                                                                                         
+---------- ---------- ---------                                                                                                                                                                         
+Alexander        9000 03-JAN-90                                                                                                                                                                         
+Bruce            6000 21-MAY-91                                                                                                                                                                         
+Curtis           3100 29-JAN-97                                                                                                                                                                         
+Diana            4200 07-FEB-99                                                                                                                                                                         
+Eleni           10500 29-JAN-00                                                                                                                                                                         
+Ellen           11000 11-MAY-96                                                                                                                                                                         
+Jennifer         4400 17-SEP-87                                                                                                                                                                         
+Jonathon         8600 24-MAR-98                                                                                                                                                                         
+Kevin            5800 16-NOV-99                                                                                                                                                                         
+Kimerely         7000 24-MAY-99                                                                                                                                                                         
+Lex             17000 13-JAN-93                                                                                                                                                                         
+Michael         13000 17-FEB-96                                                                                                                                                                         
+Neena           17000 21-SEP-89                                                                                                                                                                         
+Pat              6000 17-AUG-97                                                                                                                                                                         
+Peter            2500 09-JUL-98                                                                                                                                                                         
+Randall          2600 15-MAR-98                                                                                                                                                                         
+Shelley         12000 07-JUN-94                                                                                                                                                                         
+Steven          24000 17-JUL-87                                                                                                                                                                         
+Trenna           3500 17-OCT-95                                                                                                                                                                         
+William          8300 07-JUN-94                                                                                                                                                                         
+
+20 rows selected.
+
+SQL> SELECT FIRST_NAME NAME, SALARY , HIRE_DATE FROM EMPLOYEES ORDER BY NAME;
+
+NAME           SALARY HIRE_DATE                                                                                                                                                                         
+---------- ---------- ---------                                                                                                                                                                         
+Alexander        9000 03-JAN-90                                                                                                                                                                         
+Bruce            6000 21-MAY-91                                                                                                                                                                         
+Curtis           3100 29-JAN-97                                                                                                                                                                         
+Diana            4200 07-FEB-99                                                                                                                                                                         
+Eleni           10500 29-JAN-00                                                                                                                                                                         
+Ellen           11000 11-MAY-96                                                                                                                                                                         
+Jennifer         4400 17-SEP-87                                                                                                                                                                         
+Jonathon         8600 24-MAR-98                                                                                                                                                                         
+Kevin            5800 16-NOV-99                                                                                                                                                                         
+Kimerely         7000 24-MAY-99                                                                                                                                                                         
+Lex             17000 13-JAN-93                                                                                                                                                                         
+Michael         13000 17-FEB-96                                                                                                                                                                         
+Neena           17000 21-SEP-89                                                                                                                                                                         
+Pat              6000 17-AUG-97                                                                                                                                                                         
+Peter            2500 09-JUL-98                                                                                                                                                                         
+Randall          2600 15-MAR-98                                                                                                                                                                         
+Shelley         12000 07-JUN-94                                                                                                                                                                         
+Steven          24000 17-JUL-87                                                                                                                                                                         
+Trenna           3500 17-OCT-95                                                                                                                                                                         
+William          8300 07-JUN-94                                                                                                                                                                         
+
+20 rows selected.
+
+SQL> SELECT FIRST_NAME NAME, SALARY , HIRE_DATE FROM EMPLOYEES ORDER BY SALARY;
+
+NAME           SALARY HIRE_DATE                                                                                                                                                                         
+---------- ---------- ---------                                                                                                                                                                         
+Peter            2500 09-JUL-98                                                                                                                                                                         
+Randall          2600 15-MAR-98                                                                                                                                                                         
+Curtis           3100 29-JAN-97                                                                                                                                                                         
+Trenna           3500 17-OCT-95                                                                                                                                                                         
+Diana            4200 07-FEB-99                                                                                                                                                                         
+Jennifer         4400 17-SEP-87                                                                                                                                                                         
+Kevin            5800 16-NOV-99                                                                                                                                                                         
+Bruce            6000 21-MAY-91                                                                                                                                                                         
+Pat              6000 17-AUG-97                                                                                                                                                                         
+Kimerely         7000 24-MAY-99                                                                                                                                                                         
+William          8300 07-JUN-94                                                                                                                                                                         
+Jonathon         8600 24-MAR-98                                                                                                                                                                         
+Alexander        9000 03-JAN-90                                                                                                                                                                         
+Eleni           10500 29-JAN-00                                                                                                                                                                         
+Ellen           11000 11-MAY-96                                                                                                                                                                         
+Shelley         12000 07-JUN-94                                                                                                                                                                         
+Michael         13000 17-FEB-96                                                                                                                                                                         
+Neena           17000 21-SEP-89                                                                                                                                                                         
+Lex             17000 13-JAN-93                                                                                                                                                                         
+Steven          24000 17-JUL-87                                                                                                                                                                         
+
+20 rows selected.
+
+SQL> SELECT FIRST_NAME NAME, SALARY , HIRE_DATE FROM EMPLOYEES ORDER BY 3 DESC;
+
+NAME           SALARY HIRE_DATE                                                                                                                                                                         
+---------- ---------- ---------                                                                                                                                                                         
+Eleni           10500 29-JAN-00                                                                                                                                                                         
+Kevin            5800 16-NOV-99                                                                                                                                                                         
+Kimerely         7000 24-MAY-99                                                                                                                                                                         
+Diana            4200 07-FEB-99                                                                                                                                                                         
+Peter            2500 09-JUL-98                                                                                                                                                                         
+Jonathon         8600 24-MAR-98                                                                                                                                                                         
+Randall          2600 15-MAR-98                                                                                                                                                                         
+Pat              6000 17-AUG-97                                                                                                                                                                         
+Curtis           3100 29-JAN-97                                                                                                                                                                         
+Ellen           11000 11-MAY-96                                                                                                                                                                         
+Michael         13000 17-FEB-96                                                                                                                                                                         
+Trenna           3500 17-OCT-95                                                                                                                                                                         
+Shelley         12000 07-JUN-94                                                                                                                                                                         
+William          8300 07-JUN-94                                                                                                                                                                         
+Lex             17000 13-JAN-93                                                                                                                                                                         
+Bruce            6000 21-MAY-91                                                                                                                                                                         
+Alexander        9000 03-JAN-90                                                                                                                                                                         
+Neena           17000 21-SEP-89                                                                                                                                                                         
+Jennifer         4400 17-SEP-87                                                                                                                                                                         
+Steven          24000 17-JUL-87                                                                                                                                                                         
+
+20 rows selected.
+
+SQL> REM MULTI COLUMN SORTING
+SQL> 
+SQL> SELECT DEPARTMENT_ID , FIRST_NAME FROM EMPLOYEES;
+
+DEPARTMENT_ID FIRST_NAME                                                                                                                                                                                
+------------- ----------                                                                                                                                                                                
+           90 Steven                                                                                                                                                                                    
+           90 Neena                                                                                                                                                                                     
+           90 Lex                                                                                                                                                                                       
+           60 Alexander                                                                                                                                                                                 
+           60 Bruce                                                                                                                                                                                     
+           60 Diana                                                                                                                                                                                     
+           50 Kevin                                                                                                                                                                                     
+           50 Trenna                                                                                                                                                                                    
+           50 Curtis                                                                                                                                                                                    
+           50 Randall                                                                                                                                                                                   
+           50 Peter                                                                                                                                                                                     
+           80 Eleni                                                                                                                                                                                     
+           80 Ellen                                                                                                                                                                                     
+           80 Jonathon                                                                                                                                                                                  
+              Kimerely                                                                                                                                                                                  
+           10 Jennifer                                                                                                                                                                                  
+           20 Michael                                                                                                                                                                                   
+           20 Pat                                                                                                                                                                                       
+          110 Shelley                                                                                                                                                                                   
+          110 William                                                                                                                                                                                   
+
+20 rows selected.
+
+SQL> SELECT DEPARTMENT_ID , FIRST_NAME FROM EMPLOYEES ORDER BY 1;
+
+DEPARTMENT_ID FIRST_NAME                                                                                                                                                                                
+------------- ----------                                                                                                                                                                                
+           10 Jennifer                                                                                                                                                                                  
+           20 Michael                                                                                                                                                                                   
+           20 Pat                                                                                                                                                                                       
+           50 Kevin                                                                                                                                                                                     
+           50 Peter                                                                                                                                                                                     
+           50 Randall                                                                                                                                                                                   
+           50 Curtis                                                                                                                                                                                    
+           50 Trenna                                                                                                                                                                                    
+           60 Diana                                                                                                                                                                                     
+           60 Bruce                                                                                                                                                                                     
+           60 Alexander                                                                                                                                                                                 
+           80 Ellen                                                                                                                                                                                     
+           80 Eleni                                                                                                                                                                                     
+           80 Jonathon                                                                                                                                                                                  
+           90 Lex                                                                                                                                                                                       
+           90 Steven                                                                                                                                                                                    
+           90 Neena                                                                                                                                                                                     
+          110 William                                                                                                                                                                                   
+          110 Shelley                                                                                                                                                                                   
+              Kimerely                                                                                                                                                                                  
+
+20 rows selected.
+
+SQL> SELECT DEPARTMENT_ID , FIRST_NAME FROM EMPLOYEES ORDER BY 1,2;
+
+DEPARTMENT_ID FIRST_NAME                                                                                                                                                                                
+------------- ----------                                                                                                                                                                                
+           10 Jennifer                                                                                                                                                                                  
+           20 Michael                                                                                                                                                                                   
+           20 Pat                                                                                                                                                                                       
+           50 Curtis                                                                                                                                                                                    
+           50 Kevin                                                                                                                                                                                     
+           50 Peter                                                                                                                                                                                     
+           50 Randall                                                                                                                                                                                   
+           50 Trenna                                                                                                                                                                                    
+           60 Alexander                                                                                                                                                                                 
+           60 Bruce                                                                                                                                                                                     
+           60 Diana                                                                                                                                                                                     
+           80 Eleni                                                                                                                                                                                     
+           80 Ellen                                                                                                                                                                                     
+           80 Jonathon                                                                                                                                                                                  
+           90 Lex                                                                                                                                                                                       
+           90 Neena                                                                                                                                                                                     
+           90 Steven                                                                                                                                                                                    
+          110 Shelley                                                                                                                                                                                   
+          110 William                                                                                                                                                                                   
+              Kimerely                                                                                                                                                                                  
+
+20 rows selected.
+
+SQL> SELECT DEPARTMENT_ID , FIRST_NAME FROM EMPLOYEES ORDER BY 2;
+
+DEPARTMENT_ID FIRST_NAME                                                                                                                                                                                
+------------- ----------                                                                                                                                                                                
+           60 Alexander                                                                                                                                                                                 
+           60 Bruce                                                                                                                                                                                     
+           50 Curtis                                                                                                                                                                                    
+           60 Diana                                                                                                                                                                                     
+           80 Eleni                                                                                                                                                                                     
+           80 Ellen                                                                                                                                                                                     
+           10 Jennifer                                                                                                                                                                                  
+           80 Jonathon                                                                                                                                                                                  
+           50 Kevin                                                                                                                                                                                     
+              Kimerely                                                                                                                                                                                  
+           90 Lex                                                                                                                                                                                       
+           20 Michael                                                                                                                                                                                   
+           90 Neena                                                                                                                                                                                     
+           20 Pat                                                                                                                                                                                       
+           50 Peter                                                                                                                                                                                     
+           50 Randall                                                                                                                                                                                   
+          110 Shelley                                                                                                                                                                                   
+           90 Steven                                                                                                                                                                                    
+           50 Trenna                                                                                                                                                                                    
+          110 William                                                                                                                                                                                   
+
+20 rows selected.
+
+SQL> SELECT DEPARTMENT_ID , FIRST_NAME FROM EMPLOYEES ORDER BY 2,1;
+
+DEPARTMENT_ID FIRST_NAME                                                                                                                                                                                
+------------- ----------                                                                                                                                                                                
+           60 Alexander                                                                                                                                                                                 
+           60 Bruce                                                                                                                                                                                     
+           50 Curtis                                                                                                                                                                                    
+           60 Diana                                                                                                                                                                                     
+           80 Eleni                                                                                                                                                                                     
+           80 Ellen                                                                                                                                                                                     
+           10 Jennifer                                                                                                                                                                                  
+           80 Jonathon                                                                                                                                                                                  
+           50 Kevin                                                                                                                                                                                     
+              Kimerely                                                                                                                                                                                  
+           90 Lex                                                                                                                                                                                       
+           20 Michael                                                                                                                                                                                   
+           90 Neena                                                                                                                                                                                     
+           20 Pat                                                                                                                                                                                       
+           50 Peter                                                                                                                                                                                     
+           50 Randall                                                                                                                                                                                   
+          110 Shelley                                                                                                                                                                                   
+           90 Steven                                                                                                                                                                                    
+           50 Trenna                                                                                                                                                                                    
+          110 William                                                                                                                                                                                   
+
+20 rows selected.
+
+SQL> SELECT JOB_ID , LAST_NAME FROM EMPLOYEES;
+
+JOB_ID     LAST_NAME                                                                                                                                                                                    
+---------- ----------                                                                                                                                                                                   
+AD_PRES    King                                                                                                                                                                                         
+AD_VP      Kochhar                                                                                                                                                                                      
+AD_VP      De Haan                                                                                                                                                                                      
+IT_PROG    Hunold                                                                                                                                                                                       
+IT_PROG    Ernst                                                                                                                                                                                        
+IT_PROG    Lorentz                                                                                                                                                                                      
+ST_MAN     Mourgos                                                                                                                                                                                      
+ST_CLERK   Rajs                                                                                                                                                                                         
+ST_CLERK   Davies                                                                                                                                                                                       
+ST_CLERK   Matos                                                                                                                                                                                        
+ST_CLERK   Vargas                                                                                                                                                                                       
+SA_MAN     Zlotkey                                                                                                                                                                                      
+SA_REP     Abel                                                                                                                                                                                         
+SA_REP     Taylor                                                                                                                                                                                       
+SA_REP     Grant                                                                                                                                                                                        
+AD_ASST    Whalen                                                                                                                                                                                       
+MK_MAN     Hartstein                                                                                                                                                                                    
+MK_REP     Fay                                                                                                                                                                                          
+AC_MGR     Higgins                                                                                                                                                                                      
+AC_ACCOUNT Gietz                                                                                                                                                                                        
+
+20 rows selected.
+
+SQL> SELECT JOB_ID , LAST_NAME FROM EMPLOYEES ORDER BY JOB_ID;
+
+JOB_ID     LAST_NAME                                                                                                                                                                                    
+---------- ----------                                                                                                                                                                                   
+AC_ACCOUNT Gietz                                                                                                                                                                                        
+AC_MGR     Higgins                                                                                                                                                                                      
+AD_ASST    Whalen                                                                                                                                                                                       
+AD_PRES    King                                                                                                                                                                                         
+AD_VP      De Haan                                                                                                                                                                                      
+AD_VP      Kochhar                                                                                                                                                                                      
+IT_PROG    Hunold                                                                                                                                                                                       
+IT_PROG    Ernst                                                                                                                                                                                        
+IT_PROG    Lorentz                                                                                                                                                                                      
+MK_MAN     Hartstein                                                                                                                                                                                    
+MK_REP     Fay                                                                                                                                                                                          
+SA_MAN     Zlotkey                                                                                                                                                                                      
+SA_REP     Abel                                                                                                                                                                                         
+SA_REP     Grant                                                                                                                                                                                        
+SA_REP     Taylor                                                                                                                                                                                       
+ST_CLERK   Matos                                                                                                                                                                                        
+ST_CLERK   Davies                                                                                                                                                                                       
+ST_CLERK   Rajs                                                                                                                                                                                         
+ST_CLERK   Vargas                                                                                                                                                                                       
+ST_MAN     Mourgos                                                                                                                                                                                      
+
+20 rows selected.
+
+SQL> SELECT JOB_ID , LAST_NAME SURNAME FROM EMPLOYEES ORDER BY JOB_ID , 2;
+
+JOB_ID     SURNAME                                                                                                                                                                                      
+---------- ----------                                                                                                                                                                                   
+AC_ACCOUNT Gietz                                                                                                                                                                                        
+AC_MGR     Higgins                                                                                                                                                                                      
+AD_ASST    Whalen                                                                                                                                                                                       
+AD_PRES    King                                                                                                                                                                                         
+AD_VP      De Haan                                                                                                                                                                                      
+AD_VP      Kochhar                                                                                                                                                                                      
+IT_PROG    Ernst                                                                                                                                                                                        
+IT_PROG    Hunold                                                                                                                                                                                       
+IT_PROG    Lorentz                                                                                                                                                                                      
+MK_MAN     Hartstein                                                                                                                                                                                    
+MK_REP     Fay                                                                                                                                                                                          
+SA_MAN     Zlotkey                                                                                                                                                                                      
+SA_REP     Abel                                                                                                                                                                                         
+SA_REP     Grant                                                                                                                                                                                        
+SA_REP     Taylor                                                                                                                                                                                       
+ST_CLERK   Davies                                                                                                                                                                                       
+ST_CLERK   Matos                                                                                                                                                                                        
+ST_CLERK   Rajs                                                                                                                                                                                         
+ST_CLERK   Vargas                                                                                                                                                                                       
+ST_MAN     Mourgos                                                                                                                                                                                      
+
+20 rows selected.
+
+SQL> SELECT JOB_ID , LAST_NAME SURNAME FROM EMPLOYEES ORDER BY JOB_ID , SURNAME DESC;
+
+JOB_ID     SURNAME                                                                                                                                                                                      
+---------- ----------                                                                                                                                                                                   
+AC_ACCOUNT Gietz                                                                                                                                                                                        
+AC_MGR     Higgins                                                                                                                                                                                      
+AD_ASST    Whalen                                                                                                                                                                                       
+AD_PRES    King                                                                                                                                                                                         
+AD_VP      Kochhar                                                                                                                                                                                      
+AD_VP      De Haan                                                                                                                                                                                      
+IT_PROG    Lorentz                                                                                                                                                                                      
+IT_PROG    Hunold                                                                                                                                                                                       
+IT_PROG    Ernst                                                                                                                                                                                        
+MK_MAN     Hartstein                                                                                                                                                                                    
+MK_REP     Fay                                                                                                                                                                                          
+SA_MAN     Zlotkey                                                                                                                                                                                      
+SA_REP     Taylor                                                                                                                                                                                       
+SA_REP     Grant                                                                                                                                                                                        
+SA_REP     Abel                                                                                                                                                                                         
+ST_CLERK   Vargas                                                                                                                                                                                       
+ST_CLERK   Rajs                                                                                                                                                                                         
+ST_CLERK   Matos                                                                                                                                                                                        
+ST_CLERK   Davies                                                                                                                                                                                       
+ST_MAN     Mourgos                                                                                                                                                                                      
+
+20 rows selected.
+
+SQL> SELECT MANAGER_ID , DEPARTMENT_ID , JOB_ID , LAST_NAME FROM EMPLOYEES;
+
+MANAGER_ID DEPARTMENT_ID JOB_ID     LAST_NAME                                                                                                                                                           
+---------- ------------- ---------- ----------                                                                                                                                                          
+                      90 AD_PRES    King                                                                                                                                                                
+       100            90 AD_VP      Kochhar                                                                                                                                                             
+       100            90 AD_VP      De Haan                                                                                                                                                             
+       102            60 IT_PROG    Hunold                                                                                                                                                              
+       103            60 IT_PROG    Ernst                                                                                                                                                               
+       103            60 IT_PROG    Lorentz                                                                                                                                                             
+       100            50 ST_MAN     Mourgos                                                                                                                                                             
+       124            50 ST_CLERK   Rajs                                                                                                                                                                
+       124            50 ST_CLERK   Davies                                                                                                                                                              
+       124            50 ST_CLERK   Matos                                                                                                                                                               
+       124            50 ST_CLERK   Vargas                                                                                                                                                              
+       100            80 SA_MAN     Zlotkey                                                                                                                                                             
+       149            80 SA_REP     Abel                                                                                                                                                                
+       149            80 SA_REP     Taylor                                                                                                                                                              
+       149               SA_REP     Grant                                                                                                                                                               
+       101            10 AD_ASST    Whalen                                                                                                                                                              
+       100            20 MK_MAN     Hartstein                                                                                                                                                           
+       201            20 MK_REP     Fay                                                                                                                                                                 
+       101           110 AC_MGR     Higgins                                                                                                                                                             
+       205           110 AC_ACCOUNT Gietz                                                                                                                                                               
+
+20 rows selected.
+
+SQL> SELECT MANAGER_ID , DEPARTMENT_ID DID , JOB_ID , LAST_NAME FROM EMPLOYEES ORDER BY 1 NULLS LAST,DID DESC,JOB_ID ASC,4 DESC;
+
+MANAGER_ID        DID JOB_ID     LAST_NAME                                                                                                                                                              
+---------- ---------- ---------- ----------                                                                                                                                                             
+       100         90 AD_VP      Kochhar                                                                                                                                                                
+       100         90 AD_VP      De Haan                                                                                                                                                                
+       100         80 SA_MAN     Zlotkey                                                                                                                                                                
+       100         50 ST_MAN     Mourgos                                                                                                                                                                
+       100         20 MK_MAN     Hartstein                                                                                                                                                              
+       101        110 AC_MGR     Higgins                                                                                                                                                                
+       101         10 AD_ASST    Whalen                                                                                                                                                                 
+       102         60 IT_PROG    Hunold                                                                                                                                                                 
+       103         60 IT_PROG    Lorentz                                                                                                                                                                
+       103         60 IT_PROG    Ernst                                                                                                                                                                  
+       124         50 ST_CLERK   Vargas                                                                                                                                                                 
+       124         50 ST_CLERK   Rajs                                                                                                                                                                   
+       124         50 ST_CLERK   Matos                                                                                                                                                                  
+       124         50 ST_CLERK   Davies                                                                                                                                                                 
+       149            SA_REP     Grant                                                                                                                                                                  
+       149         80 SA_REP     Taylor                                                                                                                                                                 
+       149         80 SA_REP     Abel                                                                                                                                                                   
+       201         20 MK_REP     Fay                                                                                                                                                                    
+       205        110 AC_ACCOUNT Gietz                                                                                                                                                                  
+                   90 AD_PRES    King                                                                                                                                                                   
+
+20 rows selected.
+
+SQL> REM COLUMN NAME/NUMBER/ALIAS ASC/DESC NULLS FIRST/LAST
+SQL> 
+SQL> SELECT  FIRST_NAME FROM EMPLOYEES ORDER BY FIRST_NAME , FIRST_NAME DESC;
+
+FIRST_NAME                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+Alexander                                                                                                                                                                                               
+Bruce                                                                                                                                                                                                   
+Curtis                                                                                                                                                                                                  
+Diana                                                                                                                                                                                                   
+Eleni                                                                                                                                                                                                   
+Ellen                                                                                                                                                                                                   
+Jennifer                                                                                                                                                                                                
+Jonathon                                                                                                                                                                                                
+Kevin                                                                                                                                                                                                   
+Kimerely                                                                                                                                                                                                
+Lex                                                                                                                                                                                                     
+Michael                                                                                                                                                                                                 
+Neena                                                                                                                                                                                                   
+Pat                                                                                                                                                                                                     
+Peter                                                                                                                                                                                                   
+Randall                                                                                                                                                                                                 
+Shelley                                                                                                                                                                                                 
+Steven                                                                                                                                                                                                  
+Trenna                                                                                                                                                                                                  
+William                                                                                                                                                                                                 
+
+20 rows selected.
+
+SQL> SELECT  FIRST_NAME FROM EMPLOYEES ORDER BY FIRST_NAME DESC, FIRST_NAME;
+
+FIRST_NAME                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+William                                                                                                                                                                                                 
+Trenna                                                                                                                                                                                                  
+Steven                                                                                                                                                                                                  
+Shelley                                                                                                                                                                                                 
+Randall                                                                                                                                                                                                 
+Peter                                                                                                                                                                                                   
+Pat                                                                                                                                                                                                     
+Neena                                                                                                                                                                                                   
+Michael                                                                                                                                                                                                 
+Lex                                                                                                                                                                                                     
+Kimerely                                                                                                                                                                                                
+Kevin                                                                                                                                                                                                   
+Jonathon                                                                                                                                                                                                
+Jennifer                                                                                                                                                                                                
+Ellen                                                                                                                                                                                                   
+Eleni                                                                                                                                                                                                   
+Diana                                                                                                                                                                                                   
+Curtis                                                                                                                                                                                                  
+Bruce                                                                                                                                                                                                   
+Alexander                                                                                                                                                                                               
+
+20 rows selected.
+
+SQL> SELECT  FIRST_NAME , FIRST_NAME FROM EMPLOYEES ORDER BY 1 DESC, 2;
+
+FIRST_NAME FIRST_NAME                                                                                                                                                                                   
+---------- ----------                                                                                                                                                                                   
+William    William                                                                                                                                                                                      
+Trenna     Trenna                                                                                                                                                                                       
+Steven     Steven                                                                                                                                                                                       
+Shelley    Shelley                                                                                                                                                                                      
+Randall    Randall                                                                                                                                                                                      
+Peter      Peter                                                                                                                                                                                        
+Pat        Pat                                                                                                                                                                                          
+Neena      Neena                                                                                                                                                                                        
+Michael    Michael                                                                                                                                                                                      
+Lex        Lex                                                                                                                                                                                          
+Kimerely   Kimerely                                                                                                                                                                                     
+Kevin      Kevin                                                                                                                                                                                        
+Jonathon   Jonathon                                                                                                                                                                                     
+Jennifer   Jennifer                                                                                                                                                                                     
+Ellen      Ellen                                                                                                                                                                                        
+Eleni      Eleni                                                                                                                                                                                        
+Diana      Diana                                                                                                                                                                                        
+Curtis     Curtis                                                                                                                                                                                       
+Bruce      Bruce                                                                                                                                                                                        
+Alexander  Alexander                                                                                                                                                                                    
+
+20 rows selected.
+
+SQL> SELECT  DEPARTMENT_ID , DEPARTMENT_ID FROM EMPLOYEES ORDER BY 1 DESC, 2;
+
+DEPARTMENT_ID DEPARTMENT_ID                                                                                                                                                                             
+------------- -------------                                                                                                                                                                             
+                                                                                                                                                                                                        
+          110           110                                                                                                                                                                             
+          110           110                                                                                                                                                                             
+           90            90                                                                                                                                                                             
+           90            90                                                                                                                                                                             
+           90            90                                                                                                                                                                             
+           80            80                                                                                                                                                                             
+           80            80                                                                                                                                                                             
+           80            80                                                                                                                                                                             
+           60            60                                                                                                                                                                             
+           60            60                                                                                                                                                                             
+           60            60                                                                                                                                                                             
+           50            50                                                                                                                                                                             
+           50            50                                                                                                                                                                             
+           50            50                                                                                                                                                                             
+           50            50                                                                                                                                                                             
+           50            50                                                                                                                                                                             
+           20            20                                                                                                                                                                             
+           20            20                                                                                                                                                                             
+           10            10                                                                                                                                                                             
+
+20 rows selected.
+
+SQL> SELECT ROWID, DEPARTMENT_ID , DEPARTMENT_ID FROM EMPLOYEES ORDER BY 1 DESC, 2;
+
+ROWID              DEPARTMENT_ID DEPARTMENT_ID                                                                                                                                                          
+------------------ ------------- -------------                                                                                                                                                          
+AAASQsAAHAAAAGrAAT           110           110                                                                                                                                                          
+AAASQsAAHAAAAGrAAS           110           110                                                                                                                                                          
+AAASQsAAHAAAAGrAAR            20            20                                                                                                                                                          
+AAASQsAAHAAAAGrAAQ            20            20                                                                                                                                                          
+AAASQsAAHAAAAGrAAP            10            10                                                                                                                                                          
+AAASQsAAHAAAAGrAAO                                                                                                                                                                                      
+AAASQsAAHAAAAGrAAN            80            80                                                                                                                                                          
+AAASQsAAHAAAAGrAAM            80            80                                                                                                                                                          
+AAASQsAAHAAAAGrAAL            80            80                                                                                                                                                          
+AAASQsAAHAAAAGrAAK            50            50                                                                                                                                                          
+AAASQsAAHAAAAGrAAJ            50            50                                                                                                                                                          
+AAASQsAAHAAAAGrAAI            50            50                                                                                                                                                          
+AAASQsAAHAAAAGrAAH            50            50                                                                                                                                                          
+AAASQsAAHAAAAGrAAG            50            50                                                                                                                                                          
+AAASQsAAHAAAAGrAAF            60            60                                                                                                                                                          
+AAASQsAAHAAAAGrAAE            60            60                                                                                                                                                          
+AAASQsAAHAAAAGrAAD            60            60                                                                                                                                                          
+AAASQsAAHAAAAGrAAC            90            90                                                                                                                                                          
+AAASQsAAHAAAAGrAAB            90            90                                                                                                                                                          
+AAASQsAAHAAAAGrAAA            90            90                                                                                                                                                          
+
+20 rows selected.
+
+SQL> SELECT ROWID, DEPARTMENT_ID , DEPARTMENT_ID FROM EMPLOYEES ORDER BY 1 DESC;
+
+ROWID              DEPARTMENT_ID DEPARTMENT_ID                                                                                                                                                          
+------------------ ------------- -------------                                                                                                                                                          
+AAASQsAAHAAAAGrAAT           110           110                                                                                                                                                          
+AAASQsAAHAAAAGrAAS           110           110                                                                                                                                                          
+AAASQsAAHAAAAGrAAR            20            20                                                                                                                                                          
+AAASQsAAHAAAAGrAAQ            20            20                                                                                                                                                          
+AAASQsAAHAAAAGrAAP            10            10                                                                                                                                                          
+AAASQsAAHAAAAGrAAO                                                                                                                                                                                      
+AAASQsAAHAAAAGrAAN            80            80                                                                                                                                                          
+AAASQsAAHAAAAGrAAM            80            80                                                                                                                                                          
+AAASQsAAHAAAAGrAAL            80            80                                                                                                                                                          
+AAASQsAAHAAAAGrAAK            50            50                                                                                                                                                          
+AAASQsAAHAAAAGrAAJ            50            50                                                                                                                                                          
+AAASQsAAHAAAAGrAAI            50            50                                                                                                                                                          
+AAASQsAAHAAAAGrAAH            50            50                                                                                                                                                          
+AAASQsAAHAAAAGrAAG            50            50                                                                                                                                                          
+AAASQsAAHAAAAGrAAF            60            60                                                                                                                                                          
+AAASQsAAHAAAAGrAAE            60            60                                                                                                                                                          
+AAASQsAAHAAAAGrAAD            60            60                                                                                                                                                          
+AAASQsAAHAAAAGrAAC            90            90                                                                                                                                                          
+AAASQsAAHAAAAGrAAB            90            90                                                                                                                                                          
+AAASQsAAHAAAAGrAAA            90            90                                                                                                                                                          
+
+20 rows selected.
+
+SQL> SPOOL OFF
